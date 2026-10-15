@@ -1,0 +1,987 @@
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"key","i":0,"v":1}
+{"t":"log","tag":"mode","msg":"switch 0 -> 1"}
+{"t":"log","tag":"voice","msg":"play id=1 '试听模式'"}
+{"t":"key","i":0,"v":0}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"key","i":0,"v":1}
+{"t":"log","tag":"play","msg":"start pool=audition slot=0 notes=42 intro=840000us"}
+{"t":"log","tag":"voice","msg":"play id=5 '小星星'"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"key","i":0,"v":0}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=64"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":64,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":64,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"log","tag":"enc","msg":"volume=68"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":68,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=72"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":72,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":72,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=76"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":76,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=80"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":80,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":80,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=84"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":84,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":84,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=88"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":88,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=92"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":92,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=96"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":96,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":96,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=100"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":100,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=104"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":104,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=108"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":108,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":108,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=112"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":112,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=116"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":116,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=120"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":120,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":120,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=124"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":124,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=127"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":127,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":127,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=123"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":123,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=119"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":119,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":119,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":119,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":119,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"log","tag":"enc","msg":"volume=123"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":123,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=127"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":127,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":127,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":127,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":127,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":127,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":127,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":127,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=123"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":123,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=119"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":119,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=115"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":115,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=111"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":111,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=107"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":107,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=103"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":103,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":103,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=99"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":99,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=95"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":95,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=91"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":91,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=87"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=83"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":83,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=79"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":79,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=75"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"log","tag":"play","msg":"pause slot=0"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"key","i":1,"v":1}
+{"t":"log","tag":"play","msg":"start pool=audition slot=1 notes=32 intro=1035000us"}
+{"t":"log","tag":"voice","msg":"play id=6 '两只老虎'"}
+{"t":"key","i":1,"v":0}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"log","tag":"play","msg":"pause slot=1"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"log","tag":"play","msg":"resume slot=1"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"log","tag":"enc","msg":"long>=5s -> main menu"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"log","tag":"voice","msg":"play id=13 '回到主目录'"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"key","i":1,"v":1}
+{"t":"log","tag":"mode","msg":"switch 0 -> 2"}
+{"t":"log","tag":"voice","msg":"play id=2 '自弹模式'"}
+{"t":"key","i":1,"v":0}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"key","i":0,"v":1}
+{"t":"log","tag":"pad","msg":"note key=0 note=0"}
+{"t":"key","i":0,"v":0}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"key","i":5,"v":1}
+{"t":"log","tag":"pad","msg":"note key=5 note=5"}
+{"t":"key","i":5,"v":0}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":75,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=79"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":79,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=83"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":83,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":83,"bri":8}
+{"t":"log","tag":"enc","msg":"volume=87"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"log","tag":"rec","msg":"start 自弹 (回放池)"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"log","tag":"voice","msg":"play id=8 '开始记谱'"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"key","i":1,"v":1}
+{"t":"log","tag":"pad","msg":"note key=1 note=1"}
+{"t":"key","i":1,"v":0}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"key","i":5,"v":1}
+{"t":"log","tag":"pad","msg":"note key=5 note=5"}
+{"t":"key","i":5,"v":0}
+{"t":"key","i":5,"v":1}
+{"t":"log","tag":"pad","msg":"note key=5 note=5"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"key","i":5,"v":0}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"key","i":0,"v":1}
+{"t":"log","tag":"pad","msg":"note key=0 note=0"}
+{"t":"key","i":0,"v":0}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"key","i":0,"v":1}
+{"t":"log","tag":"pad","msg":"note key=0 note=0"}
+{"t":"key","i":0,"v":0}
+{"t":"key","i":4,"v":1}
+{"t":"log","tag":"pad","msg":"note key=4 note=4"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"key","i":4,"v":0}
+{"t":"key","i":4,"v":1}
+{"t":"log","tag":"pad","msg":"note key=4 note=4"}
+{"t":"key","i":4,"v":0}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"key","i":1,"v":1}
+{"t":"log","tag":"pad","msg":"note key=1 note=1"}
+{"t":"key","i":1,"v":0}
+{"t":"key","i":4,"v":1}
+{"t":"log","tag":"pad","msg":"note key=4 note=4"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"key","i":4,"v":0}
+{"t":"key","i":4,"v":1}
+{"t":"log","tag":"pad","msg":"note key=4 note=4"}
+{"t":"key","i":4,"v":0}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"key","i":5,"v":1}
+{"t":"log","tag":"pad","msg":"note key=5 note=5"}
+{"t":"key","i":5,"v":0}
+{"t":"key","i":5,"v":1}
+{"t":"log","tag":"pad","msg":"note key=5 note=5"}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"key","i":5,"v":0}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"key","i":1,"v":1}
+{"t":"log","tag":"pad","msg":"note key=1 note=1"}
+{"t":"key","i":1,"v":0}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"key","i":0,"v":1}
+{"t":"log","tag":"pad","msg":"note key=0 note=0"}
+{"t":"key","i":0,"v":0}
+{"t":"key","i":4,"v":1}
+{"t":"log","tag":"pad","msg":"note key=4 note=4"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"key","i":4,"v":0}
+{"t":"key","i":4,"v":1}
+{"t":"log","tag":"pad","msg":"note key=4 note=4"}
+{"t":"key","i":4,"v":0}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"key","i":1,"v":1}
+{"t":"log","tag":"pad","msg":"note key=1 note=1"}
+{"t":"key","i":1,"v":0}
+{"t":"key","i":5,"v":1}
+{"t":"log","tag":"pad","msg":"note key=5 note=5"}
+{"t":"key","i":5,"v":0}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"key","i":6,"v":1}
+{"t":"log","tag":"pad","msg":"note key=6 note=6"}
+{"t":"key","i":6,"v":0}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"key","i":6,"v":1}
+{"t":"log","tag":"pad","msg":"note key=6 note=6"}
+{"t":"key","i":6,"v":0}
+{"t":"key","i":1,"v":1}
+{"t":"log","tag":"pad","msg":"note key=1 note=1"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"key","i":1,"v":0}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"log","tag":"rec","msg":"end 自弹 -> 回放池 slot=0 notes=21"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"log","tag":"voice","msg":"play id=9 '已保存'"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"key","i":1,"v":1}
+{"t":"log","tag":"pad","msg":"note key=1 note=1"}
+{"t":"key","i":1,"v":0}
+{"t":"key","i":1,"v":1}
+{"t":"log","tag":"pad","msg":"note key=1 note=1"}
+{"t":"key","i":1,"v":0}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"key","i":4,"v":1}
+{"t":"log","tag":"pad","msg":"note key=4 note=4"}
+{"t":"key","i":4,"v":0}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"key","i":5,"v":1}
+{"t":"log","tag":"pad","msg":"note key=5 note=5"}
+{"t":"key","i":5,"v":0}
+{"t":"key","i":6,"v":1}
+{"t":"log","tag":"pad","msg":"note key=6 note=6"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"key","i":6,"v":0}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"key","i":7,"v":1}
+{"t":"log","tag":"pad","msg":"note key=7 note=7"}
+{"t":"key","i":7,"v":0}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"log","tag":"enc","msg":"long>=5s -> main menu"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"log","tag":"voice","msg":"play id=13 '回到主目录'"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"key","i":3,"v":1}
+{"t":"log","tag":"mode","msg":"switch 0 -> 4"}
+{"t":"log","tag":"voice","msg":"play id=4 '回放模式'"}
+{"t":"key","i":3,"v":0}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"key","i":0,"v":1}
+{"t":"log","tag":"play","msg":"start pool=playback slot=0 notes=21 intro=0us"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"key","i":0,"v":0}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":87,"bri":8}

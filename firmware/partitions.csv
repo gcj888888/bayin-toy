@@ -1,0 +1,32 @@
+﻿# ESP32-S3 16MB 分区表 —— 四固件一键切换 · 统一定稿（6 槽直选版）
+# 对应 docs/07-NVS与分区冲突审计.md 第 3 节
+#
+# ★ 铁律：
+#   - sound_a/sound_b 钉死在 0x310000/0x3A0000（HostAction/Codex 声库硬校验）
+#   - nvs/phy_init/otadata 原地保留，绝不擦除（配网信息不丢）
+#   - switch_voice 是四固件共享切换语音，由 tools/pack_switch_voice.py 打包烧录
+#
+# ★ gen_esp32part.py 不支持行尾注释（会把 "# ..." 整段当成 Flags 列报错），
+#   所以槽位说明只能写成下面的整行注释，不能跟在数据行后面：
+#   ota_0 = HostAction（1.56MB）      ota_2 = Beatbox（0.36MB）
+#   ota_1 = Codex 电台（2.06MB）      ota_3 = 电子琴（0.92MB）★ 本工程
+#   sound_a/sound_b = 声库 A/B ★钉死原址
+#   voice/rec = 电子琴音色/录音（按 label 查找，subtype 0x43/0x44）
+#   ota_4/ota_5 = 预留扩展槽          switch_voice = 共享切换语音
+#
+# Name,     Type, SubType,  Offset,    Size,       Flags
+nvs,        data, nvs,      0x9000,    0x6000,
+phy_init,   data, phy,      0xf000,    0x1000,
+otadata,    data, ota,      0x10000,   0x2000,
+ota_0,      app,  ota_0,    0x20000,   0x200000,
+ota_2,      app,  ota_2,    0x220000,  0x80000,
+sound_a,    data, 0x40,     0x310000,  0x90000,
+sound_b,    data, 0x41,     0x3a0000,  0x90000,
+ota_1,      app,  ota_1,    0x430000,  0x280000,
+ota_3,      app,  ota_3,    0x6b0000,  0x100000,
+voice,      data, 0x43,     0x7b0000,  0x200000,
+rec,        data, 0x44,     0x9b0000,  0x100000,
+ota_4,      app,  ota_4,    0xab0000,  0x200000,
+ota_5,      app,  ota_5,    0xcb0000,  0x200000,
+switch_voice, data, 0x42,   0xeb0000,  0x100000,
+# spare:    0xfb0000 ~316K 空闲余量

@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>八音琴控制台</title>
+<style>
+  :root { --bg:#05070a; --card:#12161d; --acc:#5ad1c0; --txt:#e8eef7; --sub:#8b93a2; --warn:#ffce6b; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: system-ui, "PingFang SC", "Microsoft YaHei", sans-serif;
+         background:var(--bg); color:var(--txt); padding:0; }
+  h1 { font-size:22px; margin:0 0 4px; }
+  .hint { color:var(--sub); font-size:13px; margin:0 0 18px; line-height:1.6; }
+  .bar { display:flex; align-items:center; gap:12px; margin-bottom:18px; flex-wrap:wrap; }
+  button { background:var(--acc); color:#06231f; border:0; border-radius:10px;
+           padding:10px 18px; font-size:15px; font-weight:600; cursor:pointer; }
+  button:disabled { opacity:.5; cursor:default; }
+  select { background:var(--card); color:var(--txt); border:1px solid #2c3850;
+           border-radius:10px; padding:9px 12px; font-size:15px; }
+  input[type=text] { background:var(--card); color:var(--txt); border:1px solid #2c3850;
+                     border-radius:10px; padding:9px 12px; font-size:15px; }
+  #status { font-size:14px; color:var(--sub); }
+  #status.ok { color:var(--acc); }
+  .panel { background:var(--card); border-radius:14px; padding:16px 18px; margin-bottom:14px;
+           max-width:560px; }
+  .panel h2 { font-size:16px; margin:0 0 12px; }
+  .row { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  input[type=range] { flex:1; accent-color:var(--acc); }
+  .val { min-width:38px; text-align:right; font-variant-numeric:tabular-nums; font-weight:600; }
+  .ack { margin-left:10px; font-size:13px; color:var(--acc); opacity:0; transition:opacity .15s; }
+  .ack.show { opacity:1; }
+  .warnbar { display:none; background:#3a2a12; color:var(--warn); border:1px solid var(--warn);
+             border-radius:10px; padding:10px 14px; margin-bottom:16px; font-size:13px; line-height:1.6; }
+  .warnbar.show { display:block; }
+  .note { color:var(--sub); font-size:12px; margin:10px 0 0; line-height:1.5; }
+  .note.warn { color:var(--warn); }
+  pre { background:#0b101a; border-radius:10px; padding:12px; height:200px; overflow:auto;
+        font-size:12px; color:#bfe; white-space:pre-wrap; word-break:break-all; margin:0; }
+  .caps { color:var(--acc); }
+  .progress { height:8px; background:#0b101a; border-radius:6px; overflow:hidden; margin-top:10px; }
+  .progress > i { display:block; height:100%; width:0; background:var(--acc); transition:width .1s; }
+  .filebtn { background:#2c3850; color:var(--txt); }
+
+  /* ---- 顶栏 + 右上角圆形菜单 + 右侧抽屉 ---- */
+  .topbar { position:fixed; top:14px; left:18px; right:18px; z-index:60;
+            display:flex; align-items:center; justify-content:space-between; pointer-events:none; }
+  .topbar > * { pointer-events:auto; }
+  .topbar h1 { margin:0; font-size:15px; font-weight:600; color:#8b93a2; letter-spacing:.4px; }
+  .menubtn { height:34px; padding:0 14px; border-radius:999px;
+             background:rgba(255,255,255,.06); color:var(--txt);
+             border:1px solid rgba(255,255,255,.18); font-size:13px; font-weight:500;
+             letter-spacing:1px; cursor:pointer; backdrop-filter:blur(6px);
+             display:inline-flex; align-items:center; gap:5px;
+             transition:background .15s,border-color .15s; }
+  .menubtn:hover { background:rgba(255,255,255,.12); border-color:rgba(255,255,255,.32); color:var(--txt); }
+  .workspace { min-height:100vh; display:flex; flex-direction:column;
+               align-items:center; justify-content:center; gap:14px; padding:76px 16px 28px; }
+  .note code { background:#0a0e14; border-radius:4px; padding:1px 5px; color:#cfe; }
+  .drawer-mask { position:fixed; inset:0; background:rgba(4,8,14,.55); opacity:0; visibility:hidden;
+                 transition:opacity .2s; z-index:70; }
+  .drawer-mask.open { opacity:1; visibility:visible; }
+  .drawer { position:fixed; top:0; right:0; height:100%; width:min(430px,92vw);
+            background:#0f131a; border-left:1px solid #232c3a; padding:18px; overflow:auto;
+            transform:translateX(102%); transition:transform .24s ease; z-index:80;
+            box-shadow:-18px 0 40px rgba(0,0,0,.6); }
+  .drawer.open { transform:translateX(0); }
+  .drawer-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+  .drawer-head h2 { font-size:17px; margin:0; }
+  .iconbtn { background:#1c2432; color:var(--txt); border:0; border-radius:10px; padding:6px 12px;
+             font-size:15px; cursor:pointer; }
+  .drawer-body .panel { max-width:none; }
+  .pb { margin-left:10px; font-size:13px; color:var(--acc); font-weight:600; white-space:nowrap; }
+  .tips { margin:0; padding-left:20px; font-size:13px; line-height:1.75; color:var(--sub); }
+  .tips b { color:var(--txt); }
+
+  /* ---- 菜单：玻璃质感 + 分组 + 统一控件 ---- */
+  .drawer { background:rgba(18,22,30,.86); backdrop-filter:blur(14px) saturate(140%);
+            -webkit-backdrop-filter:blur(14px) saturate(140%);
+            border-left:1px solid rgba(255,255,255,.07); }
+  .group-title { margin:20px 2px 8px; font-size:12px; font-weight:700; letter-spacing:1px;
+                 color:#7b8497; text-transform:uppercase; }
+  .drawer-body > .group-title:first-child, .drawer > .group-title:first-of-type { margin-top:6px; }
+  .panel { background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.055);
+           border-radius:14px; padding:14px 16px; margin:0 0 12px; max-width:none; }
+  .panel h2 { font-size:14px; margin:0 0 10px; color:#cfd6e4; font-weight:600; }
+  .panel .row { gap:10px; }
+  .drawer select, .drawer input[type=text] { font-size:14px; padding:9px 11px; border-radius:10px;
+            background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09); }
+  .drawer button { font-size:14px; padding:9px 14px; border-radius:10px; }
+  .logbox { background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.055);
+            border-radius:14px; padding:12px 16px; }
+  .logbox > summary { cursor:pointer; list-style:none; display:flex; align-items:center; gap:8px;
+                      font-size:14px; color:#cfd6e4; font-weight:600; }
+  .logbox > summary::-webkit-details-marker { display:none; }
+  .logbox > summary::before { content:"▸"; color:#7b8497; font-size:12px; }
+  .logbox[open] > summary::before { content:"▾"; }
+  .logbox pre { margin-top:10px; }
+
+  /* ---- 🎮 跟弹闯关：窄版竖画布 + 四周大片留白 ---- */
+  .stage { position:relative; width:min(420px, 88vw); border-radius:16px; overflow:hidden;
+           background:#080b10; box-shadow:0 0 0 1px #1a2230, 0 24px 60px rgba(0,0,0,.6); }
+  .stage canvas { display:block; width:100%; height:auto; }
+  .stage .overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+                    text-align:center; padding:20px; font-size:14px; line-height:1.6; color:var(--sub);
+                    background:rgba(5,7,10,.68); }
+  .stage .overlay.hide { display:none; }
+  .gamebar { display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:center; }
+  .gamebar .ghost { background:#1c2432; color:var(--txt); padding:10px 14px; font-size:14px; }
+  .startbig { font-size:17px; padding:12px 26px; border-radius:999px; }
+  .start-card { background:rgba(20,28,44,.92); border:1px solid rgba(255,255,255,.14); border-radius:18px;
+                padding:26px 30px; display:flex; flex-direction:column; gap:16px; align-items:center; max-width:340px; }
+  .start-title { font-size:22px; font-weight:700; letter-spacing:2px; }
+  .mode-row { display:flex; flex-direction:column; gap:10px; width:100%; }
+  .mode-opt { display:block; cursor:pointer; }
+  .mode-opt input { margin-right:8px; }
+  .mode-opt span { font-size:16px; font-weight:600; }
+  .mode-opt small { display:block; margin-left:26px; margin-top:2px; font-size:12px; font-weight:400; color:var(--sub); }
+  .mode-opt:has(input:checked) span { color:var(--acc); }
+  .mini { margin:0; min-height:14px; font-size:12px; color:#6b7486; text-align:center; }
+  .game-stats { display:flex; gap:16px; font-size:12px; color:#6b7486; font-variant-numeric:tabular-nums; }
+  .game-stats b { color:var(--txt); }
+  .banner { display:none; border-radius:12px; padding:10px 16px; margin:0; font-size:14px; line-height:1.6;
+            max-width:420px; text-align:center; }
+  .banner.win  { display:block; background:#10301f; border:1px solid var(--acc); color:var(--acc); }
+  .banner.over { display:block; background:#3a1a1a; border:1px solid #ff6b6b; color:#ff9b9b; }
+
+</style>
+</head>
+<body>
+  <header class="topbar">
+    <h1>🎹 八音琴</h1>
+    <button id="menuBtn" class="menubtn" aria-expanded="false" aria-controls="drawer">☰ 菜单</button>
+  </header>
+
+  <main class="workspace">
+    <div class="gamebar">
+      <select id="gameSel" aria-label="选择曲目">
+        <option value="0">小星星</option>
+        <option value="1">两只老虎</option>
+        <option value="2">欢乐颂</option>
+      </select>
+      <button id="gameRetryBtn" class="ghost">↻ 重来</button>
+      <button id="gameHearBtn" class="ghost" disabled>🎧 再听一遍</button>
+      <button id="gameExitBtn" class="ghost" title="退出本局（Esc）">✕ 退出</button>
+    </div>
+
+    <div class="stage">
+      <canvas id="gameCanvas"></canvas>
+      <div class="overlay" id="gameOverlay"></div>
+    </div>
+
+    <div class="banner" id="gameBanner"></div>
+
+    <div class="game-stats">
+      <span>进度 <b id="gameProg">0/0</b></span>
+      <span>连击 <b id="gameCombo">0</b></span>
+      <span>得分 <b id="gameScore">0</b></span>
+    </div>
+
+    <p class="mini" id="gameMeta">按 1–8 弹音 · 点「▶ 开始」闯关</p>
+  </main>
+
+  <div class="drawer-mask" id="drawerMask"></div>
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-head">
+      <h2>⚙️ 菜单 / 设置</h2>
+      <button id="drawerClose" class="iconbtn" aria-label="关闭菜单">✕</button>
+    </div>
+    <p class="hint">
+      用 <b>Chrome 或 Edge</b> 打开本页（须经 http://localhost 或 https 访问）。点“连接键盘”，在弹窗里选
+      <b>USB 串行设备</b>；连上后拖滑块可改灯亮度 / 音量，断电也记住。<br>
+      开始游戏前可在主界面选择「简单模式 / 专家模式」，玩法见下方「📖 游戏说明」。
+    </p>
+
+    <div class="warnbar" id="warnbar">
+      ⚠️ <b>检测到你是用“双击文件”直接打开本页</b>（网址以 <code>file://</code> 开头）。
+      Chrome 的 Web Serial（连键盘用的）在 <code>file://</code> 下经常连不上，滑块就会“没反应”。<br>
+      请改为通过本地服务器打开：在终端里 <code>python -m http.server 8765</code>，
+      然后浏览器访问 <b>http://127.0.0.1:8765/index.html</b> 再点“连接键盘”。
+    </div>
+
+    <div class="group-title">🔌 连接</div>
+    <div class="bar">
+      <button id="connect">连接键盘</button>
+      <span id="status">未连接</span>
+    </div>
+
+    <div class="drawer-body">
+
+    <div class="group-title">💡 亮度 · 音量</div>
+  <div class="panel">
+    <h2>💡 灯亮度（D1–D5 五灯）</h2>
+    <div class="row">
+      <input type="range" id="brightness" min="0" max="255" value="80" />
+      <span class="val" id="brightnessVal">80</span>
+      <span class="ack" id="brightnessAck">✅ 板子已收到</span>
+    </div>
+    <p class="note">往左拖 = 更柔和，往右拖 = 更亮。默认 80 已经调柔过了。</p>
+  </div>
+
+  <div class="panel">
+    <h2>🔊 音量</h2>
+    <div class="row">
+      <input type="range" id="volume" min="0" max="100" value="100" />
+      <span class="val" id="volumeVal">100</span>
+      <span class="ack" id="volumeAck">✅ 板子已收到</span>
+    </div>
+    <p class="note">旋钮也能调音量，这里和旋钮是同一个值。</p>
+  </div>
+
+  <div class="group-title">🎮 游戏</div>
+  <div class="panel">
+    <h2>📖 游戏说明</h2>
+    <p class="note" style="line-height:1.7">
+      ① 开始前选 <b>简单模式</b>（音符慢慢落，约原曲 0.25 倍速）或 <b>专家模式</b>（按原曲速度）。<br>
+      ② 音符会<b>一个接一个</b>从上面落下来，落到虚线处会<b>停下来等你按</b>。<br>
+      ③ 用电脑键盘 <b>1~8</b>（或板子 <b>S1~S8</b>）按对应的音；<b>按对</b>才出下一个，<b>按错</b>只闪红、不前进，再按即可。<br>
+      ④ 音符下落的快慢来自曲子本身两个音之间的间隔：专家模式按原速，简单模式给你四倍反应时间。<br>
+      ⑤ <b>通关后</b>这首曲子自动存进板子的<b>回放池</b>（最多 5 首，满了覆盖最旧的）；<b>中途退出或失败不会存</b>。
+    </p>
+  </div>
+
+  <div class="panel">
+    <h2>⏹ 退出本局</h2>
+    <div class="row">
+      <button id="gameQuitBtn">⏹ 退出本局（丢弃本次记谱）</button>
+    </div>
+    <p class="note">退出会停动画 / 停背景音，并发 <code>record:0</code> 丢弃这次记谱，<b>不会进回放池</b>，界面回到初始态。想回板子主目录？<b>长按旋钮 ≥5 秒</b>。</p>
+  </div>
+
+  <div class="group-title">🔈 音源与声音</div>
+  <div class="panel">
+    <h2>🔊 音源</h2>
+    <div class="row">
+      <label>发声来自</label>
+      <select id="audioSrc" title="选择发声来源">
+        <option value="board">板子响（默认）</option>
+        <option value="pc">电脑响（没接板子也能听）</option>
+      </select>
+      <label style="display:flex; align-items:center; gap:6px; margin-left:16px;">
+        <input type="checkbox" id="bgmToggle" /> 背景音（轻量循环，默认关）
+      </label>
+    </div>
+    <p class="note">板子响＝由开发板发声；电脑响＝网页用 Web Audio 合成 8 个音（do~高音哆），<b>没接板子也能听到声音练手</b>。背景音默认关闭，需要时手动打开。</p>
+  </div>
+
+  <div class="group-title">🧩 其它模式</div>
+  <div class="panel">
+    <h2>🎼 学习模式（阶段③）</h2>
+    <div class="row">
+      <select id="songSel">
+        <option value="0">小星星</option>
+        <option value="1">两只老虎</option>
+        <option value="2">欢乐颂</option>
+      </select>
+      <button id="songBtn">开始学这首</button>
+      <button id="demoBtn">▶ 演示</button>
+    </div>
+    <p class="note">
+      选歌后进入学习模式：<b>D1~D5 五灯亮成“下一个要弹的音”的颜色</b>，你按对才响、按错不前进（颜色不变=提示重来）。
+      整首弹完灯变柔白。也可以<b>短按旋钮</b>进/出学习模式、<b>演示</b>按钮让板子自动弹一遍。
+    </p>
+  </div>
+
+  <div class="group-title">🎵 库管理</div>
+  <div class="panel">
+    <h2>🎵 曲库管理（5 槽 · 同步写 flash）</h2>
+    <div class="row">
+      <label>槽位</label>
+      <select id="libSlot">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+      <select id="libBuiltin">
+        <option value="0">小星星</option>
+        <option value="1">两只老虎</option>
+        <option value="2">欢乐颂</option>
+      </select>
+      <button id="libUse">用这首旋律</button>
+    </div>
+    <div class="row" style="margin-top:12px;">
+      <label>曲名</label>
+      <input type="text" id="libName" value="小星星" placeholder="给这首曲子起个名字" />
+    </div>
+    <div class="row" style="margin-top:12px;">
+      <button id="libAdd">➕ 新增</button>
+      <button id="libReplace">🔁 替换</button>
+      <button id="libDel">🗑 删除</button>
+      <button id="libPlay">▶ 试听</button>
+    </div>
+    <div class="row" style="margin-top:10px;">
+      <button id="libList">📋 刷新列表</button>
+      <button id="libPreset">📥 一键放入 3 首内置儿歌</button>
+    </div>
+    <p class="note" id="libNotes"></p>
+    <p class="note" id="libInfo">这里是<b>试听曲库</b>（出厂 3 首 + 网页管理），共 5 槽（0~4）。新增 / 替换会写进键盘 flash（断电不丢）。你自己弹的曲子、以及游戏通关的曲子会自动进「回放」。</p>
+  </div>
+
+  <div class="panel">
+    <h2>🗣️ 开机语音（新增）</h2>
+    <div class="row">
+      <button id="replayBtn">🔊 重播欢迎语</button>
+      <button id="defaultBtn">恢复默认语音</button>
+    </div>
+    <div class="row" style="margin-top:12px;">
+      <input type="file" id="voiceFile" accept="audio/*" class="filebtn" style="flex:1;" />
+      <button id="voiceBtn">导入我的语音</button>
+    </div>
+    <div class="progress"><i id="voiceProg"></i></div>
+    <p class="note" id="voiceHint">开机默认播人声“欢迎来到AI音乐世界”。点“导入我的语音”选一个 ≤10 秒的音频（mp3/wav 都行），会盖过默认、开机优先播导入的；想还原就点“恢复默认语音”。导入中请耐心等待，进度条走完即成功。</p>
+  </div>
+
+  <div class="group-title">📖 说明</div>
+  <div class="panel">
+    <h2>🎮 游戏说明</h2>
+    <p class="note">
+      音符方块上显示的是<b>中文唱名</b>：哆/唻/咪/发/嗦/啦/唏/高哆（右下角小字＝键号，1~8 对应 S1~S8）。
+      底部小狐狸会滑到该音轨下瞄准 —— 按对键射中爆开，按错就射偏、本局结束。<br>
+      玩法（在「🎮 游戏玩法」里切换）：<b>不限时</b>＝<b>一次只出一个音符</b>，按对才从上方出下一个；<b>踩节奏</b>＝整段按拍<b>连续下落</b>，±0.22 秒内踩中才得分（漏拍也算失败）。<br>
+      <b>电脑也能玩</b>：按键盘 <b>1~8</b> 就等于按板子 <b>S1~S8</b>；<b>8</b> = <b>高音哆</b>。录音/回放为<b>对局自动触发</b>（不再绑按键）。<br>
+      想让<b>没接板子也能听到声音</b>，到「🔊 音源」把发声改成「电脑响」。
+      <span class="note warn">开始前把板子切到「弹奏模式」（状态灯常亮、别是呼吸）：这样按键才出声、也才会被录下来。开局 record:1，通关 record:0 后 400ms 回放（通关曲目由板端记谱进「回放池」）；中途失败丢弃。</span>
+    </p>
+    <p class="note" id="gameUrl">打开方式：终端运行 <code>python -m http.server 8765</code>，浏览器访问 <code>http://127.0.0.1:8765/index.html</code>（板子不会播报网址，录屏请看这里）。</p>
+  </div>
+
+  <div class="group-title">📨 日志</div>
+  <details class="logbox">
+    <summary>键盘回传（实时）<span id="pbInfo" class="pb">回放池：—</span></summary>
+    <pre id="log">（连上后会显示板子发回的信息）</pre>
+  </details>
+    </div>
+  </aside>
+
+<script>
+(function () {
+  "use strict";
+  const $ = (id) => document.getElementById(id);
+  const statusEl = $("status");
+  const logEl = $("log");
+  const connectBtn = $("connect");
+
+  /* 双击文件打开时 file:// 下 Web Serial 基本连不上 → 弹警告教用户用本地服务器 */
+  if (location.protocol === "file:") {
+    $("warnbar").classList.add("show");
+  }
+
+  /* ---- 右上角「菜单」按钮 → 右侧抽屉（收纳所有设置）---- */
+  const drawerEl = $("drawer");
+  const menuBtn = $("menuBtn");
+  function setMenu(open) {
+    drawerEl.classList.toggle("open", open);
+    $("drawerMask").classList.toggle("open", open);
+    drawerEl.setAttribute("aria-hidden", open ? "false" : "true");
+    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+  menuBtn.addEventListener("click", function () {
+    setMenu(!drawerEl.classList.contains("open"));
+  });
+  $("drawerClose").addEventListener("click", function () { setMenu(false); });
+  $("drawerMask").addEventListener("click", function () { setMenu(false); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
+
+  /* ---- 🔊 音源：板子响（默认）/ 电脑响（Web Audio 合成 8 个音）---- */
+  const AUDIO_FREQ = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25]; /* do…高音哆 */
+  let audioCtx = null;
+  let soundCount = 0;   /* 网页发声次数（供自测/调试观察） */
+  function audioMode() { const el = $("audioSrc"); return el ? el.value : "board"; }
+  function ensureAudio() {
+    try {
+      if (!audioCtx) {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (AC) audioCtx = new AC();
+      }
+      if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+    } catch (e) { audioCtx = null; }
+    return audioCtx;
+  }
+  function beep(freq, dur, type, vol) {
+    const ac = ensureAudio();
+    if (!ac || !freq) return;
+    try {
+      const t = ac.currentTime, o = ac.createOscillator(), g = ac.createGain();
+      o.type = type || "triangle"; o.frequency.value = freq;
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(vol || 0.18, t + 0.012);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g); g.connect(ac.destination); o.start(t); o.stop(t + dur + 0.03);
+    } catch (e) { /* 无音频设备等场景静默 */ }
+  }
+  /* 电脑响模式下按音键发声（0=do … 7=高音哆） */
+  function playNoteSound(i) {
+    if (audioMode() !== "pc") return;
+    const f = AUDIO_FREQ[i];
+    if (!f) return;
+    soundCount++;
+    beep(f, 0.34, "triangle", 0.2);
+  }
+  function sfxHit() { if (audioMode() !== "pc") return; soundCount++; beep(1046.5, 0.07, "square", 0.06); }
+  function sfxMiss() { if (audioMode() !== "pc") return; soundCount++; beep(146.8, 0.2, "sawtooth", 0.09); }
+  const audioSel = $("audioSrc");
+  if (audioSel) audioSel.addEventListener("change", function () {
+    ensureAudio(); /* 用户手势时预热 AudioContext */
+    log("🔊 音源：" + (audioSel.value === "pc" ? "电脑响（网页合成 8 音）" : "板子响"));
+  });
+
+  /* ---- 🎵 背景音：默认开、独立开关、轻量循环（很轻，别吵）---- */
+  let bgmOn = false, bgmTimer = null, bgmStep = 0, bgmCount = 0;  /* 背景音默认关闭 */
+  const BGM_PATTERN = [0, 2, 4, 2, 5, 4, 2, 0];   /* 8 音里的轻量循环 */
+  const BGM_STEP_MS = 700;
+  function bgmTick() {
+    if (!bgmOn) return;
+    bgmCount++;
+    beep(AUDIO_FREQ[BGM_PATTERN[bgmStep % BGM_PATTERN.length]], 1.0, "sine", 0.035);
+    bgmStep++;
+  }
+  function startBgm() { ensureAudio(); if (!bgmTimer) bgmTimer = setInterval(bgmTick, BGM_STEP_MS); }
+  function stopBgm() { if (bgmTimer) { clearInterval(bgmTimer); bgmTimer = null; } }
+  const bgmEl = $("bgmToggle");
+  if (bgmEl) bgmEl.addEventListener("change", function () {
+    bgmOn = !!bgmEl.checked;
+    if (bgmOn) startBgm(); else stopBgm();
+    log(bgmOn ? "🎵 背景音：开" : "🎵 背景音：关");
+  });
+  /* 首次用户交互（浏览器要求手势后才能出声）→ 自动开背景音 */
+  function firstGestureAudio() { ensureAudio(); if (bgmOn) startBgm(); }
+  document.addEventListener("pointerdown", firstGestureAudio, { once: true });
+  document.addEventListener("click", firstGestureAudio, { once: true });
+
+  let port = null;
+  let writer = null;
+  let reading = false;
+
+  function setStatus(text, ok) {
+    statusEl.textContent = text;
+    statusEl.className = ok ? "ok" : "";
+  }
+
+  function log(text) {
+    const line = document.createElement("div");
+    line.textContent = text;
+    logEl.appendChild(line);
+    logEl.scrollTop = logEl.scrollHeight;
+    while (logEl.childElementCount > 200) logEl.removeChild(logEl.firstChild);
+  }
+
+  /* 板子回执“state”时，在对应滑块旁闪一下“已收到”，让命令送达看得见 */
+  function flashAck(el, val) {
+    el.textContent = "✅ 板子已收到 " + val;
+    el.classList.add("show");
+    clearTimeout(el._t);
+    el._t = setTimeout(() => el.classList.remove("show"), 1500);
+  }
+
+  function sendObj(obj) {
+    if (!writer) return;
+    const msg = JSON.stringify(obj) + "\n";
+    writer.write(msg).catch((e) => log("发送失败: " + e));
+  }
+  function sendCmd(type, value) { sendObj({ t: type, v: value }); }
+
+  // 滑块防抖：拖动时别每像素都发，停下 120ms 再发
+  function debounceSend(type, getValue) {
+    let t = null;
+    return function () {
+      clearTimeout(t);
+      t = setTimeout(() => sendCmd(type, getValue()), 120);
+    };
+  }
+
+  const brightness = $("brightness");
+  const volume = $("volume");
+  /* 闭包只生成一次（t 共享），才是真正的防抖：停止拖动 120ms 才发一次 */
+  const sendBrightness = debounceSend("brightness", () => Number(brightness.value));
+  const sendVolume = debounceSend("volume", () => Number(volume.value));
+  brightness.addEventListener("input", function () {
+    $("brightnessVal").textContent = brightness.value;
+    sendBrightness();
+  });
+  volume.addEventListener("input", function () {
+    $("volumeVal").textContent = volume.value;
+    sendVolume();
+  });
+
+  // ---- 学习模式：选歌 / 演示 ----
+  $("songBtn").addEventListener("click", function () {
+    const idx = parseInt($("songSel").value, 10);
+    sendCmd("song", idx);
+    log("🎼 进入学习：" + $("songSel").selectedOptions[0].text);
+  });
+  $("demoBtn").addEventListener("click", function () {
+    sendCmd("demo", 0);
+    log("▶ 演示：" + $("songSel").selectedOptions[0].text);
+  });
+
+  // ---- 开机语音：重播 / 恢复默认 ----
+  $("replayBtn").addEventListener("click", function () {
+    sendCmd("voice_replay", 0);
+    log("🔊 重播欢迎语");
+  });
+  $("defaultBtn").addEventListener("click", function () {
+    sendCmd("voice_default", 0);
+    log("↩ 恢复默认语音");
+  });
+
+  // ---- 开机语音：导入（浏览器内解码 + 重采样到 32k 单声道 16bit） ----
+  const TARGET_RATE = 32000;
+  const MAX_SECONDS = 10;
+  const MAX_SAMPLES = TARGET_RATE * MAX_SECONDS;
+  const CHUNK_BYTES = 600; // 每块原始字节数，base64 后约 800 字符，低于固件 1024 上限
+
+  function bytesToBase64(u8) {
+    let bin = "";
+    for (let i = 0; i < u8.length; i++) bin += String.fromCharCode(u8[i]);
+    return btoa(bin);
+  }
+
+  async function importVoice(file) {
+    const btn = $("voiceBtn");
+    const prog = $("voiceProg");
+    const hint = $("voiceHint");
+    btn.disabled = true;
+    prog.style.width = "0%";
+    try {
+      const buf = await file.arrayBuffer();
+      const AC = window.AudioContext || window.webkitAudioContext;
+      const audioCtx = new AC();
+      const audioBuf = await audioCtx.decodeAudioData(buf);
+      audioCtx.close();
+
+      // 1) 多声道混成单声道
+      const ch = audioBuf.numberOfChannels;
+      const sr = audioBuf.sampleRate;
+      const len = audioBuf.length;
+      const mono = new Float32Array(len);
+      for (let c = 0; c < ch; c++) {
+        const data = audioBuf.getChannelData(c);
+        for (let i = 0; i < len; i++) mono[i] += data[i];
+      }
+      for (let i = 0; i < len; i++) mono[i] /= ch;
+
+      // 2) 线性插值重采样到 32kHz
+      const ratio = TARGET_RATE / sr;
+      let outLen = Math.floor(len * ratio);
+      let truncated = false;
+      if (outLen > MAX_SAMPLES) { outLen = MAX_SAMPLES; truncated = true; }
+      const out = new Float32Array(outLen);
+      for (let i = 0; i < outLen; i++) {
+        const pos = i / ratio;
+        const i0 = Math.floor(pos);
+        const i1 = Math.min(i0 + 1, len - 1);
+        const frac = pos - i0;
+        out[i] = mono[i0] * (1 - frac) + mono[i1] * frac;
+      }
+
+      // 3) 转 16bit PCM
+      const pcm = new Int16Array(outLen);
+      for (let i = 0; i < outLen; i++) {
+        let s = Math.max(-1, Math.min(1, out[i]));
+        pcm[i] = s < 0 ? (s * 32768) | 0 : (s * 32767) | 0;
+      }
+      const bytes = new Uint8Array(pcm.buffer);
+
+      log("🗣️ 导入语音：" + (outLen / TARGET_RATE).toFixed(1) + " 秒" + (truncated ? "（已截断到 10 秒）" : ""));
+
+      // 4) 分块 base64 上传
+      sendCmd("voice_begin", bytes.length);
+      const chunks = Math.ceil(bytes.length / CHUNK_BYTES);
+      for (let off = 0, k = 0; off < bytes.length; off += CHUNK_BYTES, k++) {
+        const slice = bytes.subarray(off, Math.min(off + CHUNK_BYTES, bytes.length));
+        sendObj({ t: "voice_data", d: bytesToBase64(slice) });
+        prog.style.width = Math.round(((k + 1) / chunks) * 100) + "%";
+        if ((k & 31) === 0) await new Promise((r) => setTimeout(r, 0)); // 让出主线程，刷新进度
+      }
+      sendCmd("voice_end", 0);
+      hint.textContent = "上传完成，等板子回传 ack 即成功。下次开机就会播你导入的语音。";
+    } catch (e) {
+      log("导入失败：" + e);
+      hint.className = "note warn";
+      hint.textContent = "这个音频文件无法解码（格式不支持？）。换一个 mp3/wav 试试。";
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  $("voiceBtn").addEventListener("click", function () {
+    const f = $("voiceFile").files[0];
+    if (!f) { log("先选一个音频文件"); return; }
+    if (!writer) { log("请先连接键盘"); return; }
+    importVoice(f);
+  });
+
+  async function readLoop() {
+    if (!port || !port.readable) return;
+    reading = true;
+    const decoder = new TextDecoder();
+    let buffer = "";
+    while (port && port.readable && reading) {
+      try {
+        const reader = port.readable.getReader();
+        try {
+          while (true) {
+            const { value, done } = await reader.read();
+            if (done) break;
+            buffer += decoder.decode(value, { stream: true });
+            let nl;
+            while ((nl = buffer.indexOf("\n")) >= 0) {
+              const line = buffer.slice(0, nl).trim();
+              buffer = buffer.slice(nl + 1);
+              if (line) handleLine(line);
+            }
+          }
+        } finally {
+          reader.releaseLock();
+        }
+      } catch (e) {
+        log("读取中断: " + e);
+        if (reading) onSerialLost();  /* 非用户主动断开 → 干净下线，别卡在游戏里 */
+        break;
+      }
+    }
+    reading = false;
+  }
+
+  /* 串口意外断开：复位状态 + 明确提示 */
+  function onSerialLost() {
+    reading = false;
+    if (writer) { try { writer.releaseLock(); } catch (e) {} writer = null; }
+    port = null;
+    setStatus("键盘已断开，请重新连接", false);
+    connectBtn.textContent = "连接键盘";
+    gQuit("⚠️ 串口断开：已回到初始状态，请重新连接键盘");
+  }
+
+  function handleLine(line) {
+    let obj = null;
+    try { obj = JSON.parse(line); } catch (e) { /* 不是标准 JSON 也照常显示 */ }
+    /* 按键"松开"事件很密，不刷日志；按下事件照常显示 */
+    if (obj && obj.t === "key" && obj.v === 0) return;
+    /* 固件日志上报 {"t":"log","tag":..,"msg":..}：格式化后进「键盘回传」面板（防御式，缺字段不崩） */
+    if (obj && obj.t === "log") {
+      const tag = (typeof obj.tag === "string" && obj.tag) ? obj.tag : "log";
+      const msg = (typeof obj.msg === "string") ? obj.msg : "";
+      log("[" + new Date().toLocaleTimeString() + "] [" + tag + "] " + msg);
+      return;
+    }
+    log(line);
+    if (!obj) return;
+    if (obj.t === "hello") {
+      const caps = Array.isArray(obj.caps) ? obj.caps.join("、") : "";
+      log("👉 板子已连上，支持功能：" + caps);
+    } else if (obj.t === "state") {
+      /* 板子把当前音量/亮度回发回来 = 命令确实送达并生效 */
+      if (typeof obj.vol === "number") flashAck($("volumeAck"), obj.vol);
+      if (typeof obj.bri === "number") flashAck($("brightnessAck"), obj.bri);
+      /* 回放池条数（新增字段 pb）：显示在「键盘回传」标题旁，通关 record:0 后应 +1 */
+      if (typeof obj.pb === "number") {
+        const pbEl = $("pbInfo");
+        if (pbEl) pbEl.textContent = "回放池：" + obj.pb + " 首";
+      }
+    } else if (obj.t === "ack" && obj.cmd === "voice") {
+      $("voiceHint").textContent = obj.ok
+        ? "✅ 语音导入成功！下次开机优先播你导入的语音。"
+        : "❌ 语音导入失败，请重试（或先恢复默认）。";
+      $("voiceHint").className = obj.ok ? "note" : "note warn";
+    } else if (obj.t === "rec_list") {
+      /* 旧录音面板已移除；仅保留解析以防回包时出错（无 UI 元素时静默忽略） */
+      const used = Array.isArray(obj.used) ? obj.used : [];
+      const el = $("recList");
+      if (el) el.textContent = used.length
+        ? "已存槽位：" + used.join("、") + "（共 " + obj.n + " 首）"
+        : "暂无已存乐谱";
+    } else if (obj.t === "song_list" || obj.type === "song_list") {
+      /* 曲库回包（字段可能缺失/格式不一，防御式解析，绝不崩） */
+      const slots = Array.isArray(obj.slots) ? obj.slots : [];
+      const n = (typeof obj.n === "number") ? obj.n : slots.length;
+      if (!slots.length) {
+        $("libInfo").textContent = n > 0
+          ? "曲库已存 " + n + " 首（未返回明细）"
+          : "曲库为空（可“新增”或一键放入 3 首内置儿歌）";
+      } else {
+        const parts = [];
+        for (let i = 0; i < slots.length; i++) {
+          const s = slots[i] || {};
+          const slot = (typeof s.slot === "number") ? s.slot : i;
+          const nm = (typeof s.name === "string" && s.name) ? s.name : "（无名）";
+          const cnt = (typeof s.count === "number") ? s.count : 0;
+          parts.push("槽 " + slot + "：" + nm + "（" + cnt + " 音）");
+        }
+        $("libInfo").textContent = "已存 " + n + " 首 → " + parts.join("；");
+      }
+    } else if (obj.t === "ack" && (obj.cmd === "song_add" || obj.cmd === "song_del")) {
+      log(obj.ok === false ? "❌ 曲库写入失败" : "✅ 曲库已写入键盘");
+    } else if (obj.t === "key") {
+      /* 延迟诊断：记录每次板子按键到达网页的高精度时刻，连按时可看出串口是否积压/丢事件 */
+      const __nowMs = performance.now();
+      if (!window.__keyDbg) window.__keyDbg = { last: 0, n: 0 };
+      const __gap = window.__keyDbg.last ? (__nowMs - window.__keyDbg.last).toFixed(0) : "-";
+      window.__keyDbg.last = __nowMs; window.__keyDbg.n++;
+      if (obj.v === 1) {
+        const __line = "[KEYDBG] #" + window.__keyDbg.n + " i=" + obj.i +
+          " gap=" + __gap + "ms prog=" +
+          ((document.getElementById("gameProg") || {}).textContent || "?");
+        console.log(__line);
+        /* 同时在“键盘回传”面板显示（便于不打开 F12 也能看） */
+        log(__line);
+      }
+      gameOnKey(obj.i, obj.v); /* 板子按键事件 → 游戏判定 */
+      if (obj.v === 1) playNoteSound(obj.i); /* 电脑响模式下按板子键也发网页音 */
+    }
+  }
+
+  /* ================= 🎮 跟弹闯关：弓箭手下落射击 =================
+   * 玩法：8 条音轨（=S1~S8）。要弹的音符从天上掉下来，落到判定线停住；
+   * 底部小狐狸弓箭手滑到该音轨下方瞄准：按对键 → 射中、音符爆开、连击加分；
+   * 按错键 → 箭射偏、音符砸落、本局结束。全程「按顺序、不限时」，
+   * 所以现有歌曲数据（只有音符、没有节奏时长）就够用。
+   * 声音仍由板子发出（板子被按到才响）；开始游戏自动 record:1、通关自动 record:0 后 400ms 回放。
+   * 音符编码与固件一致：0=do … 6=si、7=高音哆（高八度 do）；颜色表与固件 music_notes.c 一致。
+   */
+  const GAME_NOTES = [
+    { num:1, sol:"do",  cn:"哆",  rgb:[150, 25, 25] },
+    { num:2, sol:"re",  cn:"唻",  rgb:[150, 85,  0] },
+    { num:3, sol:"mi",  cn:"咪",  rgb:[140,120,  0] },
+    { num:4, sol:"fa",  cn:"发",  rgb:[  0,130, 40] },
+    { num:5, sol:"sol", cn:"嗦",  rgb:[  0,130,130] },
+    { num:6, sol:"la",  cn:"啦",  rgb:[ 30, 60,150] },
+    { num:7, sol:"si",  cn:"唏",  rgb:[120, 30,150] },
+    /* 高音哆：与 do 同色系（红）但更亮，与 do 可区分 —— 与固件 music_notes.c 第 8 色 (200,40,40) 一致 */
+    { num:8, sol:"do'", cn:"高哆", rgb:[200, 40, 40] }
+  ];
+  /* notes = 音符（0=do…7=高音哆）；deltas = 与上一个音的间隔（毫秒），与 notes 等长。
+     下落时长 = deltas[i] × 速度系数（简单×2=半速，专家×1=原速）。第一个音给固定 800ms。 */
+  const BEAT_MS = 750;              /* 一拍时长（≈80 BPM），与固件 RHY_BEAT 一致 */
+  const FIRST_FALL_MS = 800;        /* 第一个音符的下落时间 */
+  function deltasFromBeats(beats) {
+    return beats.map(function (b, i) { return i === 0 ? FIRST_FALL_MS : Math.round(b * BEAT_MS); });
+  }
+  const GAME_SONGS = [
+    { name:"小星星", notes:[0,0,4,4,5,5,4,3,3,2,2,1,1,0,
+                            4,4,3,3,2,2,1,
+                            4,4,3,3,2,2,1,
+                            0,0,4,4,5,5,4,3,3,2,2,1,1,0],
+      beats:        [1,1,1,1,1,1,2, 1,1,1,1,1,1,2,
+                     1,1,1,1,1,1,2,
+                     1,1,1,1,1,1,2,
+                     1,1,1,1,1,1,2, 1,1,1,1,1,1,2] },
+    { name:"两只老虎", notes:[1,2,3,1,1,2,3,1,3,4,5,3,4,5,
+                             5,6,5,4,3,1,5,6,5,4,3,1,1,5,1,1,5,1],
+      beats:        [1,1,1,1, 1,1,1,1, 1,1,2, 1,1,2,
+                     1,1,1,1,1,1, 1,1,1,1,1,1, 1,1,2, 1,1,2] },
+    { name:"欢乐颂", notes:[3,3,4,5,5,4,3,2,1,1,2,3,3,2,2],
+      beats:        [1,1,1,1, 1,1,1,1, 1,1,1,1, 1,1,2] }
+  ];
+  GAME_SONGS.forEach(function (s) { s.deltas = deltasFromBeats(s.beats); });
+
+  /* ---- 画面常量（逻辑坐标） ---- */
+  const CV = $("gameCanvas");
+  const gctx = CV.getContext("2d");
+  const GW = 480, GH = 680;      /* 画布逻辑宽高（窄版/竖版，四周大片留白） */
+  const LANES = 8;
+  const LANE_W = GW / LANES;
+  const JUDGE_Y = 486;           /* 判定线：音符停在这里等你射 */
+  const GAP = 36;                /* 队列里相邻音符的间距 */
+  const ARCHER_Y = GH - 28;      /* 弓箭手脚下（与判定线留出大间距，音符/角色不挤） */
+  function laneX(i) { return LANE_W * i + LANE_W / 2; }
+
+  /* ---- 下落参数（简单/专家模式共用，速度由每音符 fallMs 决定） ---- */
+  const RHY_BEAT_SEC = 0.75;      /* 一拍 0.75s（≈80 BPM），保留常量供后续使用 */
+
+  let gState = "idle";           /* idle | playing | over | win */
+  let gSeq = [];
+  let gPos = 0;
+  let gCombo = 0;
+  let gScore = 0;
+  let gMode = "easy";            /* easy（简单，半速）| expert（专家，原速） */
+  let gNotes = [];               /* 队列音符 {lane, y, ty, fallStart, fallMs, arrived} */
+  let gDebris = [];              /* 按错时砸落的音符 */
+  let gArrows = [];              /* 箭 {x, y, ty, hit, lane} */
+  let gParts = [];               /* 粒子 {x,y,vx,vy,life,color,size} */
+  let gFloats = [];              /* 飘分 {x,y,text,life} */
+  let gFlash = 0;                /* 按错红闪强度 */
+  let gArcherX = GW / 2;         /* 弓箭手当前横向位置 */
+
+  function gCurSong() { return GAME_SONGS[parseInt($("gameSel").value, 10)] || GAME_SONGS[0]; }
+  function gRgb(a) { return "rgb(" + a[0] + "," + a[1] + "," + a[2] + ")"; }
+  function gRgbA(a, al) { return "rgba(" + a[0] + "," + a[1] + "," + a[2] + "," + al + ")"; }
+
+  /* 开始游戏时让板子清空缓冲并录音：通关后原样回放你弹的整首 */
+  function gArm() {
+    sendCmd("record", 1);
+  }
+  function gStop() {
+    sendCmd("record", 0);
+  }
+
+  function gShowBanner(kind, html) {
+    const b = $("gameBanner");
+    b.className = "banner " + kind;
+    b.innerHTML = html;
+  }
+  function gHideBanner() { $("gameBanner").className = "banner"; }
+  function gOverlay(html) {
+    const o = $("gameOverlay");
+    if (html) { o.innerHTML = html; o.classList.remove("hide"); }
+    else o.classList.add("hide");
+  }
+
+  /* 高清适配：内部分辨率 ×devicePixelRatio，逻辑坐标仍是 GW×GH */
+  function gShowStartOverlay() {
+    gOverlay(
+      '<div class="start-card">' +
+        '<div class="start-title">跟弹闯关</div>' +
+        '<div class="mode-row">' +
+          '<label class="mode-opt"><input type="radio" name="gmode" value="easy" checked /> <span>简单模式<small>音符慢慢落（0.25 倍速）</small></span></label>' +
+          '<label class="mode-opt"><input type="radio" name="gmode" value="expert" /> <span>专家模式<small>按原曲速度下落</small></span></label>' +
+        '</div>' +
+        '<button id="gameStartBig" class="startbig">▶ 开始</button>' +
+      '</div>');
+    const b = $("gameStartBig");
+    if (b) b.addEventListener("click", gStart);
+  }
+
+  function gFit() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    CV.width = GW * dpr;
+    CV.height = GH * dpr;
+    gctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function gHud() {
+    $("gameProg").textContent = gPos + "/" + gSeq.length;
+    $("gameCombo").textContent = gCombo;
+    $("gameScore").textContent = gScore;
+    if (gState === "playing") {
+      const n = GAME_NOTES[gSeq[gPos]];
+      $("gameMeta").innerHTML = "下一个：<b>" + n.cn + "（" + n.sol + "）</b> · 请按 <b>S" + n.num +
+                                "</b> · 第 " + (gPos + 1) + " / " + gSeq.length + " 个音";
+    }
+  }
+
+  /* 单音符出场：从顶部落下，落速按该音符的曲谱间隔 × 模式系数（简单×2、专家×1）。
+     同一时刻只有一个音符；按对后由 gHit 调用本函数生成下一个。 */
+  const NOTE_TOP_Y = -60;        /* 音符出生位置（画布顶部之上） */
+  const EASY_MULT = 4;          /* 简单模式相对原速的下落时长倍数（慢） */
+  const FALL_MIN_MS = 700;      /* 单音下落时长下限 */
+  const FALL_MAX_MS = 1600;     /* 单音下落时长上限：避免×4 后干等 3 秒显得"卡" */
+  const EARLY_HIT_MS = 150;     /* 音符落定前 150ms 内即可命中（音游式提前判定，更跟手） */
+  function clampFall(v) { return Math.max(FALL_MIN_MS, Math.min(FALL_MAX_MS, v)); }
+  function gFallMsFor(index) {
+    const song = gCurSong();
+    const base = (song.deltas && song.deltas[index]) || FIRST_FALL_MS;
+    return gMode === "expert" ? clampFall(base) : clampFall(base * EASY_MULT);
+  }
+  function gSpawnNext() {
+    if (gPos >= gSeq.length) return;
+    const fallMs = gFallMsFor(gPos);
+    gNotes = [{
+      lane: gSeq[gPos],
+      y: NOTE_TOP_Y, ty: JUDGE_Y,
+      fallStart: performance.now(),
+      fallMs: fallMs,
+      arrived: false
+    }];
+  }
+  function gReset() {
+    gSeq = gCurSong().notes.slice();
+    gPos = 0; gCombo = 0; gScore = 0;
+    gDebris = []; gArrows = []; gParts = []; gFloats = []; gFlash = 0;
+    gSpawnNext();  /* 两种模式都只出一个音符，按对才出下一个 */
+    gArcherX = laneX(gSeq[0]);
+    gHud();
+  }
+
+  function gBurst(lane, y) {
+    const cx = laneX(lane), col = GAME_NOTES[lane].rgb;
+    for (let i = 0; i < 22; i++) {
+      const a = Math.random() * Math.PI * 2, sp = 1 + Math.random() * 4;
+      gParts.push({ x: cx, y: y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 1.2,
+                    life: 1, color: col, size: 2 + Math.random() * 3 });
+    }
+  }
+  function gFire(lane, hit) {
+    gArrows.push({ x: laneX(lane), y: ARCHER_Y - 30, ty: hit ? JUDGE_Y - 6 : JUDGE_Y - 70,
+                   hit: hit, lane: lane });
+  }
+
+  /* 按对：射中并把队首音符打碎 */
+  function gHit() {
+    const lane = gNotes[0].lane;
+    gNotes.shift();
+    sfxHit(); /* 电脑响模式：命中轻音效（板子响模式无操作） */
+    gPos++; gCombo++;
+    const gain = 10 + Math.max(0, gCombo - 1) * 2;
+    gScore += gain;
+    gFire(lane, true);
+    gFloats.push({ x: laneX(lane), y: JUDGE_Y - 24, text: "+" + gain, life: 1 });
+    if (gPos >= gSeq.length) { gWin(); return; }
+    gSpawnNext();        /* 按对后才出下一个 */
+    gHud();
+  }
+
+  /* 按错键：只红闪提示，不前进、不结束（学习友好，孩子不会因一个错就重来） */
+  function gMiss(pressed) {
+    if (pressed === null || pressed === undefined) return;  /* 新模式不会漏拍：音符停在判定线等 */
+    gCombo = 0;
+    gFlash = 0.85;
+    sfxMiss();
+    const wn = GAME_NOTES[gSeq[gPos]];
+    const pn = GAME_NOTES[pressed];
+    gFire(pressed, false);
+    gHud();
+    $("gameMeta").innerHTML = "应按 <b>" + wn.cn + "（S" + wn.num + "）</b>，你按成了 " +
+                              "<b>" + pn.cn + "（S" + pn.num + "）</b>，再试一次。";
+    log("⚠️ 应为 S" + wn.num + "（" + wn.cn + "），按成了 S" + pn.num + "（" + pn.cn + "），不前进");
+  }
+
+  function gStart() {
+    const song = gCurSong();
+    const modeSel = document.querySelector('input[name="gmode"]:checked');
+    gMode = modeSel ? modeSel.value : "easy";   /* easy | expert */
+    gState = "playing";
+    gHideBanner();
+    gOverlay(null);
+    gReset();
+    if (writer) gArm();
+    else log("⚠️ 未连接键盘：只判谱面（板子不出声、不回放）。可用电脑键盘 1~8 当 S1~S8 练习。");
+    $("gameHearBtn").disabled = true;
+    if (bgmOn) startBgm();     /* 开局恢复背景音（若被退出本局停过） */
+    log("🎮 开始闯关：" + song.name + "（共 " + gSeq.length + " 个音）· " +
+        (gMode === "expert" ? "专家模式（原曲速度）" : "简单模式（0.25 倍速）"));
+  }
+
+  function gameOnKey(i, v) {
+    if (v !== 1 || i < 0 || i >= GAME_NOTES.length) return; /* 只判 S1~S8 的按下 */
+    if (gState !== "playing" || !gNotes.length) return;
+    const nt = gNotes[0];
+    /* 落定后可按；落定前 EARLY_HIT_MS（约150ms）内也可按（提前判定，跟手）；更早忽略 */
+    let canHit = nt.arrived;
+    if (!canHit) {
+      const remain = nt.fallMs - (performance.now() - nt.fallStart);
+      if (remain <= EARLY_HIT_MS) canHit = true;
+    }
+    if (!canHit) return;
+    if (i !== gSeq[gPos]) { gMiss(i); return; }  /* 可按窗口内按错 → 红闪提示，不前进 */
+    gHit();                                       /* 按对即中，下一个音符从顶部落下 */
+  }
+
+  function gWin() {
+    gState = "win"; gCombo = 0;
+    if (writer) gStop(); /* 先停止录音，谱留在板子 RAM 里等回放 */
+    gHud();
+    gShowBanner("win",
+      "🎉 恭喜通关，全对！得分 <b>" + gScore + "</b>。" +
+      (writer ? "<br>板子正在播放你刚刚亲手弹的这一整首（就是你按下的那些键）。"
+              : "<br>未连接键盘：没有板子回放，接上板子再来一次就能听到。"));
+    gOverlay("<div><b>🎉 通关！</b><br>得分 <b>" + gScore + "</b><br>" +
+             (writer ? "板子正在回放你弹的这首歌…" : "（未连接键盘，没有回放）") +
+             "<div style='margin-top:14px;display:flex;gap:10px;justify-content:center'>" +
+             "<button class='ghost' onclick='window.__gRetry && window.__gRetry()'>↻ 再来一局</button>" +
+             "<button class='ghost' onclick='window.__gHome && window.__gHome()'>✕ 返回</button></div></div>");
+    window.__gRetry = gStart;
+    window.__gHome = function () { gQuit(); };
+    $("gameHearBtn").disabled = !writer;
+    for (let i = 0; i < 40; i++) {
+      const a = Math.random() * Math.PI * 2, sp = 1 + Math.random() * 5;
+      gParts.push({ x: GW / 2, y: GH / 2, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 1,
+                    life: 1, color: GAME_NOTES[i % GAME_NOTES.length].rgb, size: 2 + Math.random() * 3 });
+    }
+    if (writer) {
+      /* 稍等一拍，让 record:0 先到板子，再触发回放 */
+      /* 通关曲目不再由网页 song_add 落试听池：板端记谱会话自动进「回放池」 */
+      setTimeout(function () { sendCmd("play", 0); }, 400);
+      log("🎉 通关！得分 " + gScore + "，板子开始回放。");
+    } else {
+      log("🎉 通关！得分 " + gScore + "（未连接键盘，无回放）。");
+    }
+  }
+
+  /* ⏹ 退出本局：停动画 + 停背景音 → record:0 丢弃本次记谱（不落回放池）→ 回到初始态 */
+  function gQuit(reason) {
+    gState = "idle";
+    gNotes = []; gDebris = []; gArrows = []; gParts = []; gFloats = []; gFlash = 0;
+    gCombo = 0; gScore = 0; gPos = 0; gSeq = [];
+    gHideBanner();
+    gShowStartOverlay();
+    stopBgm();                 /* 停背景音 */
+    if (writer) gStop();       /* record:0：丢弃这次记谱会话，不会进回放池 */
+    $("gameHearBtn").disabled = true;
+    gHud();
+    log(reason || "⏹ 已退出本局（record:0 丢弃本次记谱，不会进回放池）");
+  }
+
+  /* ---- 绘制 ---- */
+  function gDrawNote(x, y, lane, big, alpha) {
+    const col = GAME_NOTES[lane].rgb;
+    const w = big ? 46 : 38, h = big ? 30 : 25, r = 8;
+    gctx.globalAlpha = (alpha === undefined) ? 1 : alpha;
+    gctx.fillStyle = gRgb(col);
+    gctx.strokeStyle = "rgba(255,255,255,.55)";
+    gctx.lineWidth = 1.5;
+    gctx.beginPath();
+    gctx.moveTo(x - w / 2 + r, y - h / 2);
+    gctx.arcTo(x + w / 2, y - h / 2, x + w / 2, y + h / 2, r);
+    gctx.arcTo(x + w / 2, y + h / 2, x - w / 2, y + h / 2, r);
+    gctx.arcTo(x - w / 2, y + h / 2, x - w / 2, y - h / 2, r);
+    gctx.arcTo(x - w / 2, y - h / 2, x + w / 2, y - h / 2, r);
+    gctx.closePath();
+    gctx.fill(); gctx.stroke();
+    gctx.fillStyle = "#fff";
+    gctx.font = (big ? "bold 17px " : "bold 13px ") + 'system-ui, "Microsoft YaHei", sans-serif';
+    gctx.textAlign = "center"; gctx.textBaseline = "middle";
+    gctx.fillText(GAME_NOTES[lane].cn, x, y + 1);          /* 方块主标签显示中文唱名：哆/唻/咪… */
+    /* 右下角小角标保留键号（1~7），提示该按哪个键 */
+    gctx.font = 'bold 10px system-ui, "Microsoft YaHei", sans-serif';
+    gctx.textAlign = "right"; gctx.textBaseline = "bottom";
+    gctx.globalAlpha = ((alpha === undefined) ? 1 : alpha) * 0.8;
+    gctx.fillText(String(GAME_NOTES[lane].num), x + w / 2 - 3, y + h / 2 - 1);
+    gctx.globalAlpha = 1;
+  }
+
+  function gDrawArcher() {
+    /* 角色“很小”：整体缩到 0.78（以脚部为锚点） */
+    const s = 0.78;
+    const x = 0, y = 0;
+    gctx.save();
+    gctx.translate(gArcherX, ARCHER_Y);
+    gctx.scale(s, s);
+    gctx.fillStyle = "rgba(0,0,0,.35)";
+    gctx.beginPath(); gctx.ellipse(x, y + 11, 26, 7, 0, 0, Math.PI * 2); gctx.fill();
+    /* 身体 */
+    gctx.fillStyle = "#e8833a";
+    gctx.beginPath();
+    gctx.moveTo(x - 17, y + 9);
+    gctx.quadraticCurveTo(x - 22, y - 22, x, y - 26);
+    gctx.quadraticCurveTo(x + 22, y - 22, x + 17, y + 9);
+    gctx.closePath(); gctx.fill();
+    /* 尾巴 */
+    gctx.fillStyle = "#f2a25c";
+    gctx.beginPath(); gctx.moveTo(x + 12, y + 5);
+    gctx.quadraticCurveTo(x + 34, y + 1, x + 26, y - 18);
+    gctx.quadraticCurveTo(x + 22, y - 2, x + 10, y - 2);
+    gctx.closePath(); gctx.fill();
+    /* 头 + 耳 */
+    gctx.fillStyle = "#ffa860";
+    gctx.beginPath(); gctx.arc(x, y - 34, 15, 0, Math.PI * 2); gctx.fill();
+    gctx.beginPath(); gctx.moveTo(x - 12, y - 42); gctx.lineTo(x - 15, y - 56); gctx.lineTo(x - 3, y - 47); gctx.closePath(); gctx.fill();
+    gctx.beginPath(); gctx.moveTo(x + 12, y - 42); gctx.lineTo(x + 15, y - 56); gctx.lineTo(x + 3, y - 47); gctx.closePath(); gctx.fill();
+    /* 脸 + 眼 + 鼻 */
+    gctx.fillStyle = "#ffe0c2";
+    gctx.beginPath(); gctx.ellipse(x, y - 30, 10, 8, 0, 0, Math.PI * 2); gctx.fill();
+    gctx.fillStyle = "#231a12";
+    gctx.beginPath(); gctx.arc(x - 5, y - 36, 2.4, 0, Math.PI * 2); gctx.arc(x + 5, y - 36, 2.4, 0, Math.PI * 2); gctx.fill();
+    gctx.beginPath(); gctx.arc(x, y - 30, 2.6, 0, Math.PI * 2); gctx.fill();
+    /* 弓 */
+    gctx.strokeStyle = "#c98a4b"; gctx.lineWidth = 3;
+    gctx.beginPath(); gctx.arc(x - 20, y - 20, 16, -Math.PI * 0.75, Math.PI * 0.35); gctx.stroke();
+    gctx.strokeStyle = "rgba(255,255,255,.6)"; gctx.lineWidth = 1;
+    gctx.beginPath(); gctx.moveTo(x - 31, y - 31); gctx.lineTo(x - 14, y - 4); gctx.stroke();
+    gctx.restore();
+  }
+
+  function gFrame() {
+    const t = performance.now() / 1000;
+    /* 弓箭手平滑滑向当前目标音轨 */
+    let tx = GW / 2;
+    if (gState === "playing" && gNotes.length) tx = laneX(gNotes[0].lane);
+    gArcherX += (tx - gArcherX) * 0.18;
+    /* 音符下落：统一规则（两种模式同逻辑，只是 fallMs 不同）。
+       按 (now - fallStart)/fallMs 做时间线性插值，从 NOTE_TOP_Y 匀速落到 JUDGE_Y；
+       落到底后置 arrived=true 并停住，等待正确按键（不自动消失、不判负）。 */
+    if (gState === "playing") {
+      for (let i = 0; i < gNotes.length; i++) {
+        const nt = gNotes[i];
+        if (!nt.arrived) {
+          const p = Math.min(1, (performance.now() - nt.fallStart) / nt.fallMs);
+          nt.y = NOTE_TOP_Y + (nt.ty - NOTE_TOP_Y) * p;
+          if (p >= 1) { nt.y = nt.ty; nt.arrived = true; }
+        }
+      }
+    }
+
+    /* 夜空背景 */
+    const bg = gctx.createLinearGradient(0, 0, 0, GH);
+    bg.addColorStop(0, "#0a1220"); bg.addColorStop(1, "#060a12");
+    gctx.fillStyle = bg; gctx.fillRect(0, 0, GW, GH);
+
+    /* 7 条音轨（各用自己的颜色做极淡底纹），目标轨高亮 */
+    for (let i = 0; i < LANES; i++) {
+      const col = GAME_NOTES[i].rgb;
+      const head = gState === "playing" && gNotes.length && gNotes[0].lane === i;
+      gctx.fillStyle = gRgbA(col, head ? 0.16 : 0.06);
+      gctx.fillRect(i * LANE_W + 3, 0, LANE_W - 6, JUDGE_Y);
+      if (head) {
+        gctx.strokeStyle = gRgbA(col, 0.5); gctx.lineWidth = 2;
+        gctx.strokeRect(i * LANE_W + 3, 0, LANE_W - 6, JUDGE_Y);
+      }
+    }
+
+    /* 判定线 + 地表 */
+    gctx.strokeStyle = "rgba(255,255,255,.22)"; gctx.lineWidth = 2;
+    gctx.setLineDash([10, 8]);
+    gctx.beginPath(); gctx.moveTo(0, JUDGE_Y); gctx.lineTo(GW, JUDGE_Y); gctx.stroke();
+    gctx.setLineDash([]);
+    gctx.fillStyle = "#0d1526";
+    gctx.fillRect(0, JUDGE_Y + 2, GW, GH - JUDGE_Y - 2);
+
+    /* 队列音符 */
+    for (let i = 0; i < gNotes.length; i++) {
+      const nt = gNotes[i];
+      if (nt.y < -40) continue;
+      const head = (i === 0 && gState === "playing");
+      if (head) { /* 瞄准环：脉冲呼吸 */
+        const pr = 26 + Math.sin(t * 6) * 3;
+        gctx.strokeStyle = gRgbA(GAME_NOTES[nt.lane].rgb, 0.85); gctx.lineWidth = 2.5;
+        gctx.beginPath(); gctx.arc(laneX(nt.lane), nt.y, pr, 0, Math.PI * 2); gctx.stroke();
+        gctx.strokeStyle = "rgba(255,255,255,.18)";
+        gctx.beginPath(); gctx.arc(laneX(nt.lane), nt.y, pr + 8, 0, Math.PI * 2); gctx.stroke();
+      }
+      gDrawNote(laneX(nt.lane), nt.y, nt.lane, head, head ? 1 : 0.72);
+    }
+
+    /* 砸落的音符 */
+    for (let i = 0; i < gDebris.length; i++) {
+      const d = gDebris[i];
+      d.vy += 0.55; d.y += d.vy; d.rot += 0.25;
+      gctx.save(); gctx.translate(d.x, d.y); gctx.rotate(d.rot);
+      gDrawNote(0, 0, d.lane, false, Math.max(0, 1 - (d.y - JUDGE_Y) / 220));
+      gctx.restore();
+    }
+
+    gDrawArcher();
+
+    /* 箭 */
+    for (let i = 0; i < gArrows.length; i++) {
+      const a = gArrows[i];
+      a.y -= 16;
+      gctx.strokeStyle = a.hit ? "#ffd77a" : "#ff8080";
+      gctx.lineWidth = 3; gctx.lineCap = "round";
+      gctx.beginPath(); gctx.moveTo(a.x, a.y + 22); gctx.lineTo(a.x, a.y); gctx.stroke();
+      if (a.y <= a.ty) {
+        if (a.hit) gBurst(a.lane, a.ty + 4);
+        else for (let k = 0; k < 6; k++) {
+          const ang = Math.random() * Math.PI * 2;
+          gParts.push({ x: a.x, y: a.ty, vx: Math.cos(ang) * 1.5, vy: Math.sin(ang) * 1.5,
+                        life: 1, color: [255, 120, 120], size: 2 });
+        }
+        a.dead = true;
+      }
+    }
+    gArrows = gArrows.filter(function (a) { return !a.dead; });
+
+    /* 粒子 */
+    for (let i = 0; i < gParts.length; i++) {
+      const p = gParts[i];
+      p.x += p.vx; p.y += p.vy; p.vy += 0.12; p.life -= 0.022;
+      gctx.globalAlpha = Math.max(0, p.life);
+      gctx.fillStyle = gRgb(p.color);
+      gctx.fillRect(p.x, p.y, p.size, p.size);
+    }
+    gctx.globalAlpha = 1;
+    gParts = gParts.filter(function (p) { return p.life > 0; });
+
+    /* 飘分 */
+    for (let i = 0; i < gFloats.length; i++) {
+      const f = gFloats[i];
+      f.y -= 0.8; f.life -= 0.015;
+      gctx.globalAlpha = Math.max(0, f.life);
+      gctx.fillStyle = "#ffd77a";
+      gctx.font = 'bold 16px system-ui, sans-serif';
+      gctx.textAlign = "center";
+      gctx.fillText(f.text, f.x, f.y);
+    }
+    gctx.globalAlpha = 1;
+    gFloats = gFloats.filter(function (f) { return f.life > 0; });
+
+    /* 按错红闪 */
+    if (gFlash > 0.01) {
+      gctx.fillStyle = "rgba(255,60,60," + (gFlash * 0.45) + ")";
+      gctx.fillRect(0, 0, GW, GH);
+      gFlash *= 0.9;
+    }
+
+    requestAnimationFrame(gFrame);
+  }
+
+  /* 开始按钮在 overlay 里动态生成（gShowStartOverlay 内绑定）；重来直接复用 gStart */
+  $("gameRetryBtn").addEventListener("click", function () {
+    if (gState === "idle") gShowStartOverlay(); else gStart();
+  });
+  if ($("gameQuitBtn")) $("gameQuitBtn").addEventListener("click", function () { gQuit(); });
+  if ($("gameExitBtn")) $("gameExitBtn").addEventListener("click", function () { gQuit(); });
+  $("gameHearBtn").addEventListener("click", function () {
+    if (!writer) { log("请先连接键盘"); return; }
+    sendCmd("play", 0);
+    log("🎧 再听一遍（板子回放你弹的谱）");
+  });
+
+  /* ---- 🎵 曲库管理：5 槽（song_add / song_del / song_list / song_play）----
+   * 用 v2 协议对象（{"v":2,"cmd":...}），与固件 host_link 曲库命令对齐；
+   * notes 每项 = [音号 0~7, 间隔毫秒]。板子收到 song_add 即同步写 flash（持久）。
+   * 命令名与字段已冻结：song_add/slot/name/notes、song_del/slot、song_list、song_play/slot。
+   */
+  const libSlot = $("libSlot");
+  const libBuiltin = $("libBuiltin");
+  const LIB_NOTE_MS = 300;   /* 每拍时长（毫秒）：把曲子的 beats 换算成 note 的「间隔毫秒」 */
+  let libNotes = [];         /* 当前待写入的 notes: [[note, ms], ...] */
+
+  function libCurSlot() { return parseInt(libSlot.value, 10); }
+
+  function songToLibNotes(song) {
+    if (!song || !Array.isArray(song.notes)) return [];
+    const beats = Array.isArray(song.beats) ? song.beats : [];
+    return song.notes.map(function (nn, i) {
+      const b = (typeof beats[i] === "number" && beats[i] > 0) ? beats[i] : 1;
+      return [nn, Math.round(b * LIB_NOTE_MS)];
+    });
+  }
+  function libPreview() {
+    return libNotes.map(function (p) {
+      const n = GAME_NOTES[p[0]];
+      return n ? n.num : "?";
+    }).join(" ");
+  }
+  function libLoadBuiltin() {
+    const s = GAME_SONGS[parseInt(libBuiltin.value, 10)] || null;
+    libNotes = songToLibNotes(s);
+    if (s) $("libName").value = s.name;
+    $("libNotes").textContent = "曲谱（" + libNotes.length + " 个音，简谱）："
+      + (libNotes.length ? libPreview() : "（空）");
+  }
+  function libAddTo(slot) {
+    if (!writer) { log("请先连接键盘"); return false; }
+    if (!libNotes.length) { log("⚠️ 先点“用这首旋律”载入曲谱"); return false; }
+    const name = ($("libName").value || "").trim() || "未命名";
+    sendObj({ v: 2, cmd: "song_add", slot: slot, name: name, notes: libNotes });
+    log("🎵 写入槽位 " + slot + "：" + name + "（" + libNotes.length + " 个音）→ 板子同步写 flash");
+    return true;
+  }
+
+  $("libUse").addEventListener("click", libLoadBuiltin);
+  libBuiltin.addEventListener("change", libLoadBuiltin);
+  $("libAdd").addEventListener("click", function () { libAddTo(libCurSlot()); });
+  $("libReplace").addEventListener("click", function () {
+    if (!writer) { log("请先连接键盘"); return; }
+    const slot = libCurSlot();
+    sendObj({ v: 2, cmd: "song_del", slot: slot });  /* 先删旧槽，稍后再写新谱，避免覆盖竞态 */
+    setTimeout(function () { libAddTo(slot); }, 150);
+    log("🔁 替换槽位 " + slot);
+  });
+  $("libDel").addEventListener("click", function () {
+    if (!writer) { log("请先连接键盘"); return; }
+    sendObj({ v: 2, cmd: "song_del", slot: libCurSlot() });
+    log("🗑 删除槽位 " + libCurSlot());
+  });
+  $("libPlay").addEventListener("click", function () {
+    if (!writer) { log("请先连接键盘"); return; }
+    sendObj({ v: 2, cmd: "song_play", slot: libCurSlot() });
+    log("▶ 试听槽位 " + libCurSlot());
+  });
+  $("libList").addEventListener("click", function () {
+    if (!writer) { log("请先连接键盘"); return; }
+    sendObj({ v: 2, cmd: "song_list" });
+    log("📋 查询曲库");
+  });
+  /* 一键把 3 首内置儿歌写入槽 0/1/2（各写一次 flash，持久） */
+  $("libPreset").addEventListener("click", function () {
+    if (!writer) { log("请先连接键盘"); return; }
+    for (let i = 0; i < 3 && i < GAME_SONGS.length; i++) {
+      const s = GAME_SONGS[i];
+      sendObj({ v: 2, cmd: "song_add", slot: i, name: s.name, notes: songToLibNotes(s) });
+    }
+    log("📥 已把 3 首内置儿歌写入槽位 0/1/2");
+  });
+
+  libLoadBuiltin();  /* 初始化曲谱预览 */
+
+  gFit();
+  gShowStartOverlay();   /* 首次进入显示"简单/专家"模式选择 + 开始卡片 */
+  window.addEventListener("resize", gFit);
+  requestAnimationFrame(gFrame);
+
+  /* ---- 电脑键盘模拟 S1~S8（数字键 1~8 = 8 个音，8 = 高音哆）----
+   * PC 键盘只是板子按键的"替身"：驱动网页谱面判定；板子的声音仍由板子自己被按到时发出。
+   * 录音/回放不再绑按键：由「开始游戏 / 通关」自动触发（record:1 → record:0 → 400ms 后 play）。
+   * 输入框/下拉框获得焦点时数字键照旧给控件用，不抢。
+   */
+  function pcInField(el) {
+    const t = el && el.tagName;
+    return t === "INPUT" || t === "SELECT" || t === "TEXTAREA";
+  }
+  /* 自己跟踪 1~8 的按下状态：不依赖 e.repeat（快速连点同一个键时，
+     浏览器可能把第二次 keydown 也标记 repeat，导致第二个音被吞、画面不同步）。
+     规则：keydown 时若"我们认为该键还没按下"，就算一次新的按下；keyup 清除。 */
+  const gKeyDown = [false, false, false, false, false, false, false, false];
+  document.addEventListener("keydown", function (e) {
+    if (pcInField(e.target)) return;
+    const k = e.key;
+    if (k >= "1" && k <= "8") {
+      e.preventDefault();
+      const n = Number(k) - 1;
+      if (gKeyDown[n]) return;          /* 真·按住自动重复：忽略 */
+      gKeyDown[n] = true;               /* 快速连点：第二次按下时前一次已 keyup → 不吞 */
+      gameOnKey(n, 1); playNoteSound(n);
+    } else if (k === "Escape") {
+      /* Esc = 退出本局 / 返回开始卡片（快捷键） */
+      if (gState === "playing" || gState === "over" || gState === "win") gQuit();
+    }
+  });
+  document.addEventListener("keyup", function (e) {
+    if (pcInField(e.target)) return;
+    const k = e.key;
+    if (k >= "1" && k <= "8") {
+      const n = Number(k) - 1;
+      gKeyDown[n] = false;
+      gameOnKey(n, 0);
+    }
+  });
+
+  async function connect() {
+    if (!("serial" in navigator)) {
+      setStatus("这个浏览器不支持 Web Serial，请用 Chrome / Edge", false);
+      return;
+    }
+    try {
+      port = await navigator.serial.requestPort();
+      await port.open({ baudRate: 115200 });
+      writer = port.writable.getWriter();
+      setStatus("已连接 ✅", true);
+      connectBtn.textContent = "断开";
+      $("brightnessVal").textContent = brightness.value;
+      $("volumeVal").textContent = volume.value;
+      readLoop();
+    } catch (e) {
+      setStatus("连接失败：" + e, false);
+      port = null;
+    }
+  }
+
+  async function disconnect() {
+    reading = false;
+    if (writer) { try { writer.releaseLock(); } catch (e) {} writer = null; }
+    if (port) { try { await port.close(); } catch (e) {} port = null; }
+    setStatus("未连接", false);
+    connectBtn.textContent = "连接键盘";
+  }
+
+  connectBtn.addEventListener("click", function () {
+    if (port) disconnect(); else connect();
+  });
+})();
+</script>
+</body>
+</html>

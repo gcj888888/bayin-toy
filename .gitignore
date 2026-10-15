@@ -1,0 +1,24 @@
+# 构建产物
+firmware/build/
+firmware/managed_components/
+firmware/sdkconfig.old
+**/build/
+**/build-host/
+**/__pycache__/
+*.pyc
+*.o
+*.map
+
+# 中间素材（可重新生成）
+tools/note_samples/*.wav
+tools/note_samples/*.raw
+tools/note_samples/*.mp3
+tools/voice_prompts/_raw/
+tools/voice_prompts/*.pcm
+tools/voice_prompts/*_preview.wav
+tools/voice_prompts/*.bak
+*.bak
+
+# 系统文件
+.DS_Store
+Thumbs.db

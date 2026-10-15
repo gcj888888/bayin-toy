@@ -5,16 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>八音琴控制台</title>
 <style>
-  :root { --bg:#05070a; --card:#12161d; --acc:#5ad1c0; --txt:#e8eef7; --sub:#8b93a2; --warn:#ffce6b; }
+  :root { --bg:#05070a; --card:#12161d; --acc:#5ad1c0; --txt:#e8eef7; --sub:#8b93a2; --warn:#ffce6b;
+          --line:rgba(255,255,255,.08); }
   * { box-sizing: border-box; }
   body { margin:0; font-family: system-ui, "PingFang SC", "Microsoft YaHei", sans-serif;
-         background:var(--bg); color:var(--txt); padding:0; }
+         background:var(--bg); color:var(--txt); padding:0;
+         /* 夜色底 + 顶部一抹青绿辉光：整页不再是一块死黑 */
+         background-image:
+           radial-gradient(1100px 520px at 50% -12%, rgba(90,209,192,.10), transparent 60%),
+           radial-gradient(760px 420px at 82% 6%, rgba(120,140,255,.07), transparent 60%);
+         background-attachment:fixed; }
   h1 { font-size:22px; margin:0 0 4px; }
   .hint { color:var(--sub); font-size:13px; margin:0 0 18px; line-height:1.6; }
   .bar { display:flex; align-items:center; gap:12px; margin-bottom:18px; flex-wrap:wrap; }
   button { background:var(--acc); color:#06231f; border:0; border-radius:10px;
-           padding:10px 18px; font-size:15px; font-weight:600; cursor:pointer; }
+           padding:10px 18px; font-size:15px; font-weight:600; cursor:pointer;
+           transition:transform .12s ease, filter .15s ease; }
+  button:hover:not(:disabled) { filter:brightness(1.08); }
+  button:active:not(:disabled) { transform:translateY(1px); }
   button:disabled { opacity:.5; cursor:default; }
+  :focus-visible { outline:2px solid var(--acc); outline-offset:2px; }
   select { background:var(--card); color:var(--txt); border:1px solid #2c3850;
            border-radius:10px; padding:9px 12px; font-size:15px; }
   input[type=text] { background:var(--card); color:var(--txt); border:1px solid #2c3850;
@@ -45,7 +55,9 @@
   .topbar { position:fixed; top:14px; left:18px; right:18px; z-index:60;
             display:flex; align-items:center; justify-content:space-between; pointer-events:none; }
   .topbar > * { pointer-events:auto; }
-  .topbar h1 { margin:0; font-size:15px; font-weight:600; color:#8b93a2; letter-spacing:.4px; }
+  .topbar h1 { margin:0; font-size:15px; font-weight:700; letter-spacing:.6px;
+               background:linear-gradient(92deg, #e8eef7, #5ad1c0 72%);
+               -webkit-background-clip:text; background-clip:text; color:transparent; }
   .menubtn { height:34px; padding:0 14px; border-radius:999px;
              background:rgba(255,255,255,.06); color:var(--txt);
              border:1px solid rgba(255,255,255,.18); font-size:13px; font-weight:500;
@@ -97,8 +109,10 @@
   .logbox pre { margin-top:10px; }
 
   /* ---- 🎮 跟弹闯关：窄版竖画布 + 四周大片留白 ---- */
-  .stage { position:relative; width:min(420px, 88vw); border-radius:16px; overflow:hidden;
-           background:#080b10; box-shadow:0 0 0 1px #1a2230, 0 24px 60px rgba(0,0,0,.6); }
+  .stage { position:relative; width:min(420px, 88vw); border-radius:18px; overflow:hidden;
+           background:#080b10;
+           box-shadow:0 0 0 1px rgba(255,255,255,.07), 0 0 0 6px rgba(90,209,192,.05),
+                      0 28px 70px rgba(0,0,0,.66), 0 0 46px rgba(90,209,192,.10); }
   .stage canvas { display:block; width:100%; height:auto; }
   .stage .overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
                     text-align:center; padding:20px; font-size:14px; line-height:1.6; color:var(--sub);
@@ -117,8 +131,23 @@
   .mode-opt small { display:block; margin-left:26px; margin-top:2px; font-size:12px; font-weight:400; color:var(--sub); }
   .mode-opt:has(input:checked) span { color:var(--acc); }
   .mini { margin:0; min-height:14px; font-size:12px; color:#6b7486; text-align:center; }
-  .game-stats { display:flex; gap:16px; font-size:12px; color:#6b7486; font-variant-numeric:tabular-nums; }
-  .game-stats b { color:var(--txt); }
+  .game-stats { display:flex; gap:10px; font-size:12px; color:#7d8698; font-variant-numeric:tabular-nums;
+                flex-wrap:wrap; justify-content:center; }
+  .game-stats span { background:rgba(255,255,255,.045); border:1px solid var(--line);
+                     border-radius:999px; padding:5px 12px; }
+  .game-stats b { color:var(--txt); font-size:13px; }
+  /* 「下一步按哪个键」是整屏最该一眼看到的信息，给它一点存在感 */
+  #gameMeta { background:rgba(90,209,192,.08); border:1px solid rgba(90,209,192,.22);
+              border-radius:12px; padding:8px 14px; color:#cfe9e4; font-size:13px; }
+  #gameMeta b { color:var(--acc); }
+  /* 键位图例：1~8 ↔ 哆…高哆（与音符方块同色系），帮玩家建立映射 */
+  .keymap { display:flex; gap:7px; flex-wrap:wrap; justify-content:center; max-width:420px; }
+  .keymap i { font-style:normal; font-size:12px; padding:4px 10px; border-radius:999px;
+              border:1px solid var(--line); background:rgba(255,255,255,.04); color:#c9d2e0; }
+  .keymap i b { color:#fff; font-weight:700; margin-right:3px; }
+  @media (prefers-reduced-motion: reduce) {
+    .drawer, button, .menubtn { transition:none; }
+  }
   .banner { display:none; border-radius:12px; padding:10px 16px; margin:0; font-size:14px; line-height:1.6;
             max-width:420px; text-align:center; }
   .banner.win  { display:block; background:#10301f; border:1px solid var(--acc); color:var(--acc); }
@@ -157,7 +186,12 @@
       <span>得分 <b id="gameScore">0</b></span>
     </div>
 
-    <p class="mini" id="gameMeta">按 1–8 弹音 · 点「▶ 开始」闯关</p>
+    <div class="keymap" aria-label="键位对应">
+      <i><b>1</b>哆</i><i><b>2</b>唻</i><i><b>3</b>咪</i><i><b>4</b>发</i>
+      <i><b>5</b>嗦</i><i><b>6</b>啦</i><i><b>7</b>唏</i><i><b>8</b>高哆</i>
+    </div>
+
+    <p class="mini" id="gameMeta">按 <b>1–8</b>（或板子 S1~S8）弹音 · 点「▶ 开始」闯关</p>
   </main>
 
   <div class="drawer-mask" id="drawerMask"></div>
@@ -455,7 +489,15 @@
     el._t = setTimeout(() => el.classList.remove("show"), 1500);
   }
 
+  /* 所有出站命令都留一份记录（window.__trace，最多 200 条）：
+     ① 排障时能看见"网页到底发了什么"；② 不接板子也能验证协议联动（自测用）。 */
+  function traceSend(obj) {
+    if (!window.__trace) window.__trace = [];
+    window.__trace.push(obj);
+    while (window.__trace.length > 200) window.__trace.shift();
+  }
   function sendObj(obj) {
+    traceSend(obj);
     if (!writer) return;
     const msg = JSON.stringify(obj) + "\n";
     writer.write(msg).catch((e) => log("发送失败: " + e));
@@ -638,8 +680,8 @@
   function handleLine(line) {
     let obj = null;
     try { obj = JSON.parse(line); } catch (e) { /* 不是标准 JSON 也照常显示 */ }
-    /* 按键"松开"事件很密，不刷日志；按下事件照常显示 */
-    if (obj && obj.t === "key" && obj.v === 0) return;
+    /* 按键事件走专用通道：高频，且已有 [KEYDBG] 诊断行，不再重复打印原始 JSON */
+    if (obj && obj.t === "key") { handleKeyEvent(obj); return; }
     /* 固件日志上报 {"t":"log","tag":..,"msg":..}：格式化后进「键盘回传」面板（防御式，缺字段不崩） */
     if (obj && obj.t === "log") {
       const tag = (typeof obj.tag === "string" && obj.tag) ? obj.tag : "log";
@@ -694,23 +736,28 @@
       }
     } else if (obj.t === "ack" && (obj.cmd === "song_add" || obj.cmd === "song_del")) {
       log(obj.ok === false ? "❌ 曲库写入失败" : "✅ 曲库已写入键盘");
-    } else if (obj.t === "key") {
-      /* 延迟诊断：记录每次板子按键到达网页的高精度时刻，连按时可看出串口是否积压/丢事件 */
-      const __nowMs = performance.now();
-      if (!window.__keyDbg) window.__keyDbg = { last: 0, n: 0 };
-      const __gap = window.__keyDbg.last ? (__nowMs - window.__keyDbg.last).toFixed(0) : "-";
-      window.__keyDbg.last = __nowMs; window.__keyDbg.n++;
-      if (obj.v === 1) {
-        const __line = "[KEYDBG] #" + window.__keyDbg.n + " i=" + obj.i +
-          " gap=" + __gap + "ms prog=" +
-          ((document.getElementById("gameProg") || {}).textContent || "?");
-        console.log(__line);
-        /* 同时在“键盘回传”面板显示（便于不打开 F12 也能看） */
-        log(__line);
-      }
-      gameOnKey(obj.i, obj.v); /* 板子按键事件 → 游戏判定 */
-      if (obj.v === 1) playNoteSound(obj.i); /* 电脑响模式下按板子键也发网页音 */
     }
+  }
+
+  /* ---- 板子按键事件专用通道 ----
+   * ① 诊断：记下每次按键到达网页的高精度时刻与间隔（连按时能看出串口是否积压）；
+   * ② 判定：交给 gameOnKey，并把判定结果（hit/miss/ignored）一并记下——
+   *    "按了没反应"到底是串口没到、还是判定被吞，一眼可分。 */
+  function handleKeyEvent(obj) {
+    const nowMs = performance.now();
+    if (!window.__keyDbg) window.__keyDbg = { last: 0, n: 0, down: 0, ignored: 0 };
+    const d = window.__keyDbg;
+    const gap = d.last ? (nowMs - d.last).toFixed(0) : "-";
+    d.last = nowMs; d.n++;
+    if (obj.v !== 1) { gameOnKey(obj.i, obj.v); return; }   /* 松开：只转发，不刷日志 */
+    d.down++;
+    const r = gameOnKey(obj.i, obj.v);
+    if (r === "ignored") d.ignored++;
+    playNoteSound(obj.i);   /* 电脑响模式下按板子键也发网页音 */
+    const prog = (document.getElementById("gameProg") || {}).textContent || "?";
+    const line = "[KEYDBG] #" + d.n + " i=" + obj.i + " gap=" + gap + "ms prog=" + prog + " r=" + r;
+    console.log(line);
+    log(line);              /* 同时在“键盘回传”面板显示（不打开 F12 也能看） */
   }
 
   /* ================= 🎮 跟弹闯关：弓箭手下落射击 =================
@@ -934,19 +981,25 @@
         (gMode === "expert" ? "专家模式（原曲速度）" : "简单模式（0.25 倍速）"));
   }
 
+  /* 按键 → 判定。返回值用于诊断：release | idle | hit | miss | ignored
+   * ★ 跟手性关键改动：原来"按对但音符还没落线"会被直接丢掉（连按时特别明显——
+   *   第二下常常按在下一个音符刚出生的那段时间里，等于白按）。
+   *   现在改成：**按对就立刻命中**，并把这个音符"瞬移"到判定线再爆开——
+   *   视觉上不突兀，手感立刻有反馈。 */
   function gameOnKey(i, v) {
-    if (v !== 1 || i < 0 || i >= GAME_NOTES.length) return; /* 只判 S1~S8 的按下 */
-    if (gState !== "playing" || !gNotes.length) return;
+    if (v !== 1 || i < 0 || i >= GAME_NOTES.length) return "release"; /* 只判 S1~S8 的按下 */
+    if (gState !== "playing" || !gNotes.length) return "idle";
     const nt = gNotes[0];
-    /* 落定后可按；落定前 EARLY_HIT_MS（约150ms）内也可按（提前判定，跟手）；更早忽略 */
-    let canHit = nt.arrived;
-    if (!canHit) {
-      const remain = nt.fallMs - (performance.now() - nt.fallStart);
-      if (remain <= EARLY_HIT_MS) canHit = true;
+    if (i === gSeq[gPos]) {
+      nt.y = nt.ty; nt.arrived = true;      /* 立刻落到判定线，再走命中流程 */
+      gHit();                               /* 按对即中，下一个音符从顶部落下 */
+      return "hit";
     }
-    if (!canHit) return;
-    if (i !== gSeq[gPos]) { gMiss(i); return; }  /* 可按窗口内按错 → 红闪提示，不前进 */
-    gHit();                                       /* 按对即中，下一个音符从顶部落下 */
+    /* 按错：只有"已落定 / 已进入提前窗口(150ms)"才算一次真实误按 → 红闪提示；
+       过早的误按不算数（不红闪、不重置连击），避免连点手滑被罚。 */
+    const remain = nt.fallMs - (performance.now() - nt.fallStart);
+    if (nt.arrived || remain <= EARLY_HIT_MS) { gMiss(i); return "miss"; }
+    return "ignored";
   }
 
   function gWin() {
@@ -1063,12 +1116,23 @@
     gctx.restore();
   }
 
+  /* ★ 帧率无关：把"距上一帧的真实时长"折算成 60Hz 的倍数 k（上限 50ms，
+     防止切后台/掉帧后一次性跳一大步）。所有逐帧增量都乘 k，
+     这样 120Hz/144Hz 高刷屏下粒子、箭、飘分、红闪的观感与 60Hz 一致。 */
+  const FRAME_MS = 1000 / 60;
+  const MAX_STEP_MS = 50;      /* 单帧最多按 50ms 折算：切后台/掉帧回来时不会一次跳很远 */
+  let gLastFrameT = 0;
+  function gFrameK(dtMs) { return dtMs / FRAME_MS; }                      /* 60Hz→1、30Hz→2 */
+  function gStepK(dtMs) { return gFrameK(Math.min(MAX_STEP_MS, dtMs)); }  /* 带上限的折算 */
   function gFrame() {
-    const t = performance.now() / 1000;
-    /* 弓箭手平滑滑向当前目标音轨 */
+    const nowMs = performance.now();
+    const k = gStepK(gLastFrameT ? nowMs - gLastFrameT : FRAME_MS);
+    gLastFrameT = nowMs;
+    const t = nowMs / 1000;
+    /* 弓箭手平滑滑向当前目标音轨（指数平滑按 k 折算，避免高刷下"抢跑"） */
     let tx = GW / 2;
     if (gState === "playing" && gNotes.length) tx = laneX(gNotes[0].lane);
-    gArcherX += (tx - gArcherX) * 0.18;
+    gArcherX += (tx - gArcherX) * (1 - Math.pow(1 - 0.18, k));
     /* 音符下落：统一规则（两种模式同逻辑，只是 fallMs 不同）。
        按 (now - fallStart)/fallMs 做时间线性插值，从 NOTE_TOP_Y 匀速落到 JUDGE_Y；
        落到底后置 arrived=true 并停住，等待正确按键（不自动消失、不判负）。 */
@@ -1088,7 +1152,7 @@
     bg.addColorStop(0, "#0a1220"); bg.addColorStop(1, "#060a12");
     gctx.fillStyle = bg; gctx.fillRect(0, 0, GW, GH);
 
-    /* 7 条音轨（各用自己的颜色做极淡底纹），目标轨高亮 */
+    /* 8 条音轨（各用自己的颜色做极淡底纹），目标轨高亮 */
     for (let i = 0; i < LANES; i++) {
       const col = GAME_NOTES[i].rgb;
       const head = gState === "playing" && gNotes.length && gNotes[0].lane === i;
@@ -1098,6 +1162,11 @@
         gctx.strokeStyle = gRgbA(col, 0.5); gctx.lineWidth = 2;
         gctx.strokeRect(i * LANE_W + 3, 0, LANE_W - 6, JUDGE_Y);
       }
+    }
+    /* 轨间隔线：只有底纹时音轨边界含糊，加一条极淡的分隔线，8 条轨一眼可辨 */
+    gctx.strokeStyle = "rgba(255,255,255,.05)"; gctx.lineWidth = 1;
+    for (let i = 1; i < LANES; i++) {
+      gctx.beginPath(); gctx.moveTo(i * LANE_W, 0); gctx.lineTo(i * LANE_W, JUDGE_Y); gctx.stroke();
     }
 
     /* 判定线 + 地表 */
@@ -1126,7 +1195,7 @@
     /* 砸落的音符 */
     for (let i = 0; i < gDebris.length; i++) {
       const d = gDebris[i];
-      d.vy += 0.55; d.y += d.vy; d.rot += 0.25;
+      d.vy += 0.55 * k; d.y += d.vy * k; d.rot += 0.25 * k;
       gctx.save(); gctx.translate(d.x, d.y); gctx.rotate(d.rot);
       gDrawNote(0, 0, d.lane, false, Math.max(0, 1 - (d.y - JUDGE_Y) / 220));
       gctx.restore();
@@ -1137,7 +1206,7 @@
     /* 箭 */
     for (let i = 0; i < gArrows.length; i++) {
       const a = gArrows[i];
-      a.y -= 16;
+      a.y -= 16 * k;
       gctx.strokeStyle = a.hit ? "#ffd77a" : "#ff8080";
       gctx.lineWidth = 3; gctx.lineCap = "round";
       gctx.beginPath(); gctx.moveTo(a.x, a.y + 22); gctx.lineTo(a.x, a.y); gctx.stroke();
@@ -1156,7 +1225,7 @@
     /* 粒子 */
     for (let i = 0; i < gParts.length; i++) {
       const p = gParts[i];
-      p.x += p.vx; p.y += p.vy; p.vy += 0.12; p.life -= 0.022;
+      p.x += p.vx * k; p.y += p.vy * k; p.vy += 0.12 * k; p.life -= 0.022 * k;
       gctx.globalAlpha = Math.max(0, p.life);
       gctx.fillStyle = gRgb(p.color);
       gctx.fillRect(p.x, p.y, p.size, p.size);
@@ -1167,7 +1236,7 @@
     /* 飘分 */
     for (let i = 0; i < gFloats.length; i++) {
       const f = gFloats[i];
-      f.y -= 0.8; f.life -= 0.015;
+      f.y -= 0.8 * k; f.life -= 0.015 * k;
       gctx.globalAlpha = Math.max(0, f.life);
       gctx.fillStyle = "#ffd77a";
       gctx.font = 'bold 16px system-ui, sans-serif';
@@ -1181,7 +1250,7 @@
     if (gFlash > 0.01) {
       gctx.fillStyle = "rgba(255,60,60," + (gFlash * 0.45) + ")";
       gctx.fillRect(0, 0, GW, GH);
-      gFlash *= 0.9;
+      gFlash *= Math.pow(0.9, k);
     }
 
     requestAnimationFrame(gFrame);
@@ -1319,6 +1388,148 @@
       gameOnKey(n, 0);
     }
   });
+
+  /* ================= 🧪 网页侧自测（可复跑 · 随仓库入库） =================
+   * 为什么要有它：网页的判定/协议联动以前只靠"临时跑一次"、脚本没留下，数字无从复核。
+   * 现在把它做成**页面内置**、任何人打开就能复跑。
+   * 跑法：① 打开 http://127.0.0.1:8765/index.html?selftest=1 → 自动跑，结果写进状态栏与 console；
+   *       ② 或控制台执行 window.__selftest() → 返回 { total, pass, fails }。
+   * 口径（必须说清，别误读成"真机验收"）：
+   *   · 只验证**网页侧**：判定 / 连按 / 得分 / 出站协议 / 帧率折算 / 日志上限。
+   *   · 板子用**串口桩**模拟 → 验的是"网页发出的命令对不对"，**不是**板子真的照做了。
+   *   · 真机（按键→发声/亮灯/落槽）仍须上板，按 docs/八音琴-真机验收清单.md 逐项验收。
+   */
+  async function tSelfTest() {
+    const out = [];
+    const ok = function (name, cond, extra) { out.push({ name: name, pass: !!cond, extra: extra || "" }); };
+    const sleep = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+
+    /* 现场快照：测完原样还原，自测不能污染用户手上的状态 */
+    const snap = { state: gState, seq: gSeq.slice(), pos: gPos, combo: gCombo, score: gScore,
+                   notes: gNotes.slice(), writer: writer, trace: window.__trace };
+    /* 串口桩：让 if (writer) 的分支照常走，命令记进 __trace 但不真写串口 */
+    writer = { write: function () { return Promise.resolve(); } };
+    window.__trace = [];
+
+    try {
+      /* ---------- A. 开局：越状态 + 协议 + 谱面 ---------- */
+      $("gameSel").value = "0";                       /* 小星星：首两音同为 do，便于测连按 */
+      gStart();
+      ok("A1 开局进入 playing", gState === "playing");
+      ok("A2 开局发 record:1（板子开始记谱）",
+         window.__trace.some(function (m) { return m.t === "record" && m.v === 1; }));
+      ok("A3 谱面装载完整", gSeq.length === GAME_SONGS[0].notes.length, "n=" + gSeq.length);
+      ok("A4 同一时刻只有一个音符", gNotes.length === 1);
+      ok("A5 弓箭手对准首音音轨", gArcherX === laneX(gSeq[0]));
+
+      /* ---------- B. 连按：同一键立刻连按两下（改前第二下会被"还没落线"吞掉） ---------- */
+      const b0 = gPos;
+      const r1 = gameOnKey(gSeq[gPos], 1);
+      const r2 = gameOnKey(gSeq[gPos], 1);
+      ok("B1 第一下命中", r1 === "hit");
+      ok("B2 连按第二下也命中（不再被吞）", r2 === "hit" && gPos === b0 + 2,
+         "r2=" + r2 + " pos=" + b0 + "→" + gPos);
+
+      /* ---------- C. 按错：过早按错不罚；落定后按错只提示 ---------- */
+      gStart();
+      const c0 = gPos;
+      const rEarly = gameOnKey((gSeq[gPos] + 5) % 8, 1);   /* 错音轨 + 音符刚出生 */
+      ok("C1 过早按错被忽略（不红闪、不罚）", rEarly === "ignored" && gPos === c0 && gFlash === 0, "r=" + rEarly);
+      gCombo = 5; gNotes[0].arrived = true;
+      const rWrong = gameOnKey((gSeq[gPos] + 5) % 8, 1);   /* 落定后按错 */
+      ok("C2 落定后按错只提示、不前进", rWrong === "miss" && gPos === c0);
+      ok("C3 按错重置连击", gCombo === 0);
+
+      /* ---------- D. 松开 / 非对局：不推进、不判分 ---------- */
+      const d0 = gPos;
+      ok("D1 松开事件不推进", gameOnKey(gSeq[gPos], 0) === "release" && gPos === d0);
+      const rIdle = (function () { const s = gState; gState = "idle"; const r = gameOnKey(0, 1); gState = s; return r; })();
+      ok("D2 非对局中按键不判分", rIdle === "idle");
+
+      /* ---------- E. 整首通关：命中→得分→record:0→400ms 后 play:0 ---------- */
+      gStart();
+      let guard = 0;
+      while (gState === "playing" && guard++ < 500) {
+        if (gameOnKey(gSeq[gPos], 1) !== "hit") break;
+      }
+      ok("E1 全曲按对可通关", gState === "win", "pos=" + gPos + "/" + gSeq.length);
+      ok("E2 得分累计", gScore > 0, "score=" + gScore);
+      ok("E3 通关发 record:0（停记谱）",
+         window.__trace.some(function (m) { return m.t === "record" && m.v === 0; }));
+      await sleep(650);
+      ok("E4 通关 400ms 后自动 play:0（板子回放）",
+         window.__trace.some(function (m) { return m.t === "play" && m.v === 0; }));
+
+      /* ---------- F. 帧率无关折算（高刷屏速度一致） ---------- */
+      ok("F1 60Hz → k=1", Math.abs(gFrameK(1000 / 60) - 1) < 1e-9);
+      ok("F2 30Hz → k=2", Math.abs(gFrameK(2000 / 60) - 2) < 1e-9);
+      const once = Math.pow(0.9, gStepK(2000 / 60));
+      const twice = Math.pow(0.9, gStepK(1000 / 60)) * Math.pow(0.9, gStepK(1000 / 60));
+      ok("F3 高刷/低刷衰减一致", Math.abs(once - twice) < 1e-9);
+      ok("F4 单帧折算上限生效（防掉帧跳步）", gStepK(1000) === gStepK(MAX_STEP_MS));
+
+      /* ---------- G. 曲库协议联动 ---------- */
+      window.__trace = [];
+      $("libSlot").value = "3"; $("libName").value = "自测曲";
+      libNotes = songToLibNotes(GAME_SONGS[0]);
+      const added = libAddTo(3);
+      ok("G1 新增曲库发 song_add(v2/slot/name/notes)",
+         !!added && window.__trace.some(function (m) { return m.v === 2 && m.cmd === "song_add" && m.slot === 3; }));
+      $("libList").click();
+      ok("G2 刷新列表发 song_list", window.__trace.some(function (m) { return m.cmd === "song_list"; }));
+      $("libDel").click();
+      ok("G3 删除发 song_del", window.__trace.some(function (m) { return m.cmd === "song_del" && m.slot === 3; }));
+
+      /* ---------- H. 日志面板上限（长跑不拖慢） ---------- */
+      for (let i = 0; i < 500; i++) log("selftest-line-" + i);
+      ok("H1 日志面板保留上限 200 行", $("log").childElementCount <= 200, "n=" + $("log").childElementCount);
+
+      /* ---------- I. 板子回包解析（防御式，不崩） ---------- */
+      handleLine(JSON.stringify({ t: "state", vol: 55, bri: 90, pb: 2 }));
+      ok("I1 state 回包更新回放池显示", ($("pbInfo").textContent || "").indexOf("2") >= 0, $("pbInfo").textContent);
+      ok("I2 音量回执闪示", $("volumeAck").className.indexOf("show") >= 0);
+      let crashed = false;
+      try {
+        handleLine("这不是 JSON");
+        handleLine("{}");
+        handleLine(JSON.stringify({ t: "log", tag: "snd", msg: "note=3" }));
+      } catch (e) { crashed = true; }
+      ok("I3 畸形/缺字段回包不崩", !crashed);
+
+      /* ---------- J. 板子按键走 handleLine 的端到端通路 ---------- */
+      gStart();
+      const progBefore = $("gameProg").textContent;
+      handleLine(JSON.stringify({ t: "key", i: gSeq[gPos], v: 1 }));
+      ok("J1 板子按键经 handleLine 能推进判定", gPos === 1 && $("gameProg").textContent !== progBefore,
+         "prog " + progBefore + "→" + $("gameProg").textContent);
+      const igBefore = (window.__keyDbg || {}).ignored || 0;
+      handleLine(JSON.stringify({ t: "key", i: (gSeq[gPos] + 5) % 8, v: 1 }));
+      ok("J2 过早按错计入 ignored 统计（可区分「串口没到」与「判定被吞」）",
+         ((window.__keyDbg || {}).ignored || 0) === igBefore + 1);
+      handleLine(JSON.stringify({ t: "key", i: 0, v: 0 }));
+      ok("J3 松开事件不推进", gPos === 1);
+    } finally {
+      gQuit();
+      gState = snap.state; gSeq = snap.seq; gPos = snap.pos; gCombo = snap.combo;
+      gScore = snap.score; gNotes = snap.notes; writer = snap.writer; window.__trace = snap.trace;
+    }
+    const fails = out.filter(function (o) { return !o.pass; });
+    return { total: out.length, pass: out.length - fails.length, fails: fails, all: out };
+  }
+  window.__selftest = tSelfTest;
+
+  /* ?selftest=1 → 打开即自动跑，结果写进状态栏与 console（任何人可复跑，不用看 F12） */
+  if (new URLSearchParams(location.search).has("selftest")) {
+    setTimeout(function () {
+      tSelfTest().then(function (r) {
+        const text = "🧪 网页自测 " + r.pass + "/" + r.total +
+          (r.fails.length ? " ❌ " + r.fails.map(function (f) { return f.name; }).join(" | ") : " ✅ 全绿");
+        setStatus(text, r.fails.length === 0);
+        console.log(text);
+        console.table(r.all.map(function (o) { return { 用例: o.name, 结果: o.pass ? "PASS" : "FAIL", 备注: o.extra }; }));
+      });
+    }, 300);   /* 等页面初始化完 */
+  }
 
   async function connect() {
     if (!("serial" in navigator)) {

@@ -13,6 +13,14 @@ add_executable(music_notes_tests music_notes_tests.c ../main/music_notes.c)
 target_include_directories(music_notes_tests PRIVATE ../main)
 add_test(NAME music_notes_tests COMMAND music_notes_tests)
 
+# 电子琴：钢琴化音色的客观波形特征（读固件内嵌的 note_do.raw，断言失谐/双段衰减等）
+# 需要 libm（cos/sin/log）与采样目录（编译期注入绝对路径，避免依赖运行时工作目录）。
+add_executable(piano_timbre_tests piano_timbre_tests.c)
+target_compile_definitions(piano_timbre_tests PRIVATE
+    SAMPLE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/../main/audio/samples")
+target_link_libraries(piano_timbre_tests PRIVATE m)
+add_test(NAME piano_timbre_tests COMMAND piano_timbre_tests)
+
 # 电子琴：旋钮短按/长按手势状态机（纯逻辑，可电脑验证）
 add_executable(gesture_tests gesture_tests.c ../main/gesture.c)
 target_include_directories(gesture_tests PRIVATE ../main)

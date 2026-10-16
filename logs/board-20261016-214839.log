@@ -1,0 +1,68 @@
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x15 (USB_UART_CHIP_RESET),boot:0x8 (SPI_FAST_FLASH_BOOT)
+Saved PC:0x4037d663
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x16a8
+load:0x403c8700,len:0xe88
+load:0x403cb700,len:0x3184
+entry 0x403c8948
+I (24) boot: ESP-IDF v5.5.5 2nd stage bootloader
+I (24) boot: compile time Oct 12 2026 06:34:00
+I (25) boot: Multicore bootloader
+I (25) boot: chip revision: v0.2
+I (25) boot: efuse block revision: v1.4
+I (25) qio_mode: Enabling default flash chip QIO
+I (25) boot.esp32s3: Boot SPI Speed : 80MHz
+I (26) boot.esp32s3: SPI Mode       : QIO
+I (26) boot.esp32s3: SPI Flash Size : 16MB
+I (26) boot: Enabling RNG early entropy source...
+I (26) boot: Partition Table:
+I (26) boot: ## Label            Usage          Type ST Offset   Length
+I (27) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (27) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (27) boot:  2 otadata          OTA data         01 00 00010000 00002000
+I (28) boot:  3 ota_0            OTA app          00 10 00020000 00200000
+I (28) boot:  4 ota_2            OTA app          00 12 00220000 00080000
+I (29) boot:  5 sound_a          Unknown data     01 40 00310000 00090000
+I (29) boot:  6 sound_b          Unknown data     01 41 003a0000 00090000
+I (29) boot:  7 ota_1            OTA app          00 11 00430000 00280000
+I (30) boot:  8 ota_3            OTA app          00 13 006b0000 00100000
+I (30) boot:  9 voice            Unknown data     01 43 007b0000 00200000
+I (31) boot: 10 rec              Unknown data     01 44 009b0000 00100000
+I (31) boot: 11 ota_4            OTA app          00 14 00ab0000 00200000
+I (31) boot: 12 ota_5            OTA app          00 15 00cb0000 00200000
+I (32) boot: 13 switch_voice     Unknown data     01 42 00eb0000 00100000
+I (32) boot: End of partition table
+I (33) esp_image: segment 0: paddr=00020020 vaddr=3c030020 size=ab488h (701576) map
+I (142) esp_image: segment 1: paddr=000cb4b0 vaddr=3fc96800 size=034cch ( 13516) load
+I (144) esp_image: segment 2: paddr=000ce984 vaddr=40374000 size=01694h (  5780) load
+I (146) esp_image: segment 3: paddr=000d0020 vaddr=42000020 size=2b6b4h (177844) map
+I (174) esp_image: segment 4: paddr=000fb6dc vaddr=40375694 size=11070h ( 69744) load
+I (188) esp_image: segment 5: paddr=0010c754 vaddr=50000000 size=00020h (    32) load
+I (196) boot: Loaded app from partition at offset 0x20000
+I (196) boot: Disabling RNG early entropy source...
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"log","tag":"boot","msg":"playpool loaded 3 slots (pb=3)"}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"pattern","bank":0,"rev":1,"p":"780000006e000000780000006e000000000000007600000000000000760000003a002a003a002a003a002a003a002a00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"}
+{"t":"pattern","bank":1,"rev":1,"p":"780000000000000078000000000000000000000076000000000064007600000034002600340026003400260034002600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"}
+{"t":"pattern","bank":2,"rev":1,"p":"78000000000000006e00000000000000640067006a006d00700073007600790028002800280028002800280028002800000000000000000000000000000000000000000000000000000000000000000000000000000069000000640000006e00"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8,"pb":3}
+{"t":"log","tag":"voice","msg":"play id=0 '请选择模式'"}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8,"pb":3}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8,"pb":3}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8,"pb":3}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8,"pb":3}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8,"pb":3}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8,"pb":3}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8,"pb":3}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8,"pb":3}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8,"pb":3}
+{"t":"hello","v":2,"name":"EasyInput Piano","caps":["drum","pattern","swing","volume","brightness","record","play","learn","song","voice","demo"]}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8,"pb":3}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8,"pb":3}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8,"pb":3}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8,"pb":3}
+{"t":"state","bpm":120,"run":0,"beat":0,"step":0,"bar":0,"tick":0,"swing":50,"var":0,"fill":0,"rev":1,"click":1,"mode":0,"vol":60,"bri":8,"pb":3}

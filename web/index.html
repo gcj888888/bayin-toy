@@ -286,6 +286,18 @@
     <p class="note">旋钮也能调音量，这里和旋钮是同一个值。拖动后旁边会显示「✅ 已同步（板子音量 = N）」。</p>
   </div>
 
+  <div class="panel">
+    <h2>🔄 哪些设置会同步到板子？</h2>
+    <p class="note" style="line-height:1.8">
+      <b>会同步（写进板子，断电也记住）</b>：①灯亮度 ②音量 ③开机语音（重播 / 恢复默认 / 导入我的语音）
+      ④曲库（新增 / 替换 / 删除 / 试听）⑤你自己编的曲子（存入槽 0~4）⑥游戏通关的曲子（自动进板子回放池）。<br>
+      <b>只在网页生效、不需要同步</b>：音源（板子响 / 电脑响）、背景音开关、游戏玩法、简单 / 专家速度 ——
+      这些是网页自己的显示与判定设置，板子那边没有对应状态。<br>
+      <b>板子还没有的</b>：<b>没有</b>「开机提示音 开 / 关」这种总开关（只支持「换语音」或「恢复默认」）；
+      曲库也<b>固定 5 槽</b>。这两项要改固件才能加，列为下一步。
+    </p>
+  </div>
+
   <div class="group-title">🎮 游戏</div>
   <div class="panel">
     <h2>📖 游戏说明</h2>
@@ -375,6 +387,51 @@
     </div>
     <p class="note" id="libNotes"></p>
     <p class="note" id="libInfo">这里是<b>试听曲库</b>（出厂 3 首 + 网页管理），共 5 槽（0~4）。新增 / 替换会写进键盘 flash（断电不丢）。你自己弹的曲子、以及游戏通关的曲子会自动进「回放」。</p>
+  </div>
+
+  <div class="panel">
+    <h2>✍️ 自己编曲（输入简谱 → 试听 → 存入板子）</h2>
+    <div class="row">
+      <label>曲名</label>
+      <input type="text" id="myName" placeholder="给这首曲子起个名字（不超过 24 个字）" />
+    </div>
+    <div class="row" style="margin-top:10px; align-items:flex-start;">
+      <label style="padding-top:6px;">简谱</label>
+      <textarea id="myScore" rows="3" style="flex:1; min-width:0;"
+        placeholder="用空格分开：1~7 = 哆 唻 咪 发 嗦 啦 唏，8 = 高哆；数字后跟 :2 表示这个音占两拍；减号 - 表示把上一个音再延长一拍"></textarea>
+    </div>
+    <div class="row" style="margin-top:10px;">
+      <button id="myExample">✨ 填个示例</button>
+      <button id="myParse">🔍 解析预览</button>
+      <button id="myPlayLocal">🎧 网页试听（不碰板子）</button>
+    </div>
+    <div class="row" style="margin-top:10px;">
+      <label>存入板子</label>
+      <select id="mySlot" title="板子曲库槽位（试听模式下 S1~S5 对应槽 0~4）">
+        <option value="0">槽 0（S1）</option>
+        <option value="1">槽 1（S2）</option>
+        <option value="2">槽 2（S3）</option>
+        <option value="3">槽 3（S4）</option>
+        <option value="4">槽 4（S5）</option>
+      </select>
+      <button id="myPush">⬆️ 存入该槽并试听</button>
+    </div>
+    <div class="row" style="margin-top:10px;">
+      <button id="mySave">💾 存进「我的歌单」</button>
+    </div>
+    <p class="note" id="myPreview">还没解析。填好简谱后点「解析预览」。</p>
+    <div class="row" style="margin-top:10px;">
+      <label>我的歌单</label>
+      <select id="myList" style="flex:1; min-width:0;"></select>
+      <button id="myLoad">↧ 载入到上面</button>
+      <button id="myDel">🗑 删除</button>
+    </div>
+    <p class="note">
+      <b>「我的歌单」存在浏览器本地，不限首数</b>；板子只有 <b>5 个曲库槽（0~4）</b>，所以你可以从歌单里挑 5 首推上去。
+      存进板子后：<b>试听模式</b>按 S1~S5 就能听到、<b>游戏选歌</b>里也能选到（通关后自动进「回放池」）。<br>
+      ⚠️ 板子上限：一首最多 <b>400 个音</b>（超了会被网页拦下）、曲名最多 <b>24 字符</b>。
+      想把板子的 5 槽扩成更多，需要改固件分区使用（列为下一步，见 README）。
+    </p>
   </div>
 
   <div class="panel">
@@ -925,7 +982,12 @@
   let gFlash = 0;                /* 按错红闪强度 */
   let gArcherX = GW / 2;         /* 弓箭手当前横向位置 */
 
-  function gCurSong() { return GAME_SONGS[parseInt($("gameSel").value, 10)] || GAME_SONGS[0]; }
+  function gCurSong() {
+    /* ★ 选歌数据源改成 allSongs()（内置 3 首 + 「我的歌单」）：
+       索引 0~2 仍是内置曲不变，所以既有的 selftest / 录屏口径不受影响。 */
+    const list = allSongs();
+    return list[parseInt($("gameSel").value, 10)] || list[0];
+  }
   function gRgb(a) { return "rgb(" + a[0] + "," + a[1] + "," + a[2] + ")"; }
   function gRgbA(a, al) { return "rgba(" + a[0] + "," + a[1] + "," + a[2] + "," + al + ")"; }
 
@@ -1483,6 +1545,196 @@
 
   libLoadBuiltin();  /* 初始化曲谱预览 */
 
+  /* ================= ✍️ 自己编曲：简谱 → 我的歌单（浏览器本地库，不限首数）→ 推板子 =================
+   * 为什么这么做：板子只有 5 个曲库槽（固件 SONGP_SLOTS=5），装不下"很多歌"。
+   * 所以把"歌库"放在网页本地（localStorage，不限首数），用户从里面挑 5 首推上板子 ——
+   * 既不突破硬件上限，又满足"我想加很多歌、想让板子存我选的歌"。
+   *
+   * 音符编码与固件完全一致：[[音号 0~7, 间隔毫秒], ...]；1~7 = 哆~唏，8 = 高哆；一拍 = 300ms。
+   * 简谱语法：数字=音；`n:2`=占两拍；`-`=延音（给上一个音再加一拍）；`|`、逗号、换行都当分隔符。
+   * 上限对齐固件：≤400 个音（SONGP_MAX_EVENTS）、曲名 ≤24 字符（SONGP_NAME_MAX）。
+   */
+  const MY_SONGS_KEY = "bayin.mysongs.v1";
+  const MY_BEAT_MS = LIB_NOTE_MS;   /* 300ms/拍，与「曲库管理」的换算保持一致 */
+  const MY_MAX_EVENTS = 400;        /* = 固件 SONGP_MAX_EVENTS */
+  const MY_NAME_MAX = 24;           /* = 固件 SONGP_NAME_MAX */
+  let myNotes = [];                 /* 当前正在编辑的谱 */
+  let myTimers = [];                /* 网页试听的定时器（换一首/重跑时清掉） */
+
+  /* 简谱 → notes。非法记号收集进 bad（不静默吞掉，这样用户知道哪里写错了） */
+  function parseScore(text) {
+    const tokens = String(text == null ? "" : text)
+      .replace(/[|｜、,，;；\n\r\t]+/g, " ").trim().split(/\s+/)
+      .filter(function (s) { return s.length > 0; });
+    const notes = [], bad = [];
+    for (let i = 0; i < tokens.length; i++) {
+      const tk = tokens[i];
+      if (/^[-—–]+$/.test(tk)) {                      /* 延音：把上一个音再延长（几个减号就加几拍） */
+        if (!notes.length) { bad.push(tk); continue; }
+        notes[notes.length - 1][1] += MY_BEAT_MS * tk.length;
+        continue;
+      }
+      const m = tk.match(/^([1-8])(?::(\d{1,2}))?$/);
+      if (!m) { bad.push(tk); continue; }
+      if (notes.length >= MY_MAX_EVENTS) { bad.push("超过 " + MY_MAX_EVENTS + " 个音的部分"); break; }
+      const beats = m[2] ? Math.max(1, Math.min(16, parseInt(m[2], 10))) : 1;
+      notes.push([parseInt(m[1], 10) - 1, beats * MY_BEAT_MS]);
+    }
+    return { notes: notes, bad: bad };
+  }
+
+  /* notes → 简谱文本（回显 / 预览 / 存进歌单时留档） */
+  function scoreText(notes) {
+    return notes.map(function (p) {
+      const n = GAME_NOTES[p[0]];
+      const b = Math.max(1, Math.round(p[1] / MY_BEAT_MS));
+      return (n ? n.num : "?") + (b > 1 ? ":" + b : "");
+    }).join(" ");
+  }
+  function loadMySongs() {
+    try {
+      const raw = localStorage.getItem(MY_SONGS_KEY);
+      const arr = raw ? JSON.parse(raw) : [];
+      if (!Array.isArray(arr)) return [];
+      return arr.filter(function (s) { return s && typeof s.name === "string" && Array.isArray(s.notes) && s.notes.length; })
+                .map(function (s) { return { name: s.name, notes: s.notes, score: s.score || scoreText(s.notes) }; });
+    } catch (e) { return []; }
+  }
+  function saveMySongs(arr) {
+    try { localStorage.setItem(MY_SONGS_KEY, JSON.stringify(arr)); }
+    catch (e) { log("⚠️ 存不进浏览器本地（可能禁用了本地存储）"); }
+  }
+  /* 「我的歌单」→ 游戏要的形状（notes 音号数组 + deltas 下落间隔）。
+     一拍 300ms 按游戏的一拍 750ms 折算，手感和内置曲一致。 */
+  function userSongToGame(s) {
+    const beats = s.notes.map(function (p) { return Math.max(1, Math.round(p[1] / MY_BEAT_MS)); });
+    return { name: s.name, notes: s.notes.map(function (p) { return p[0]; }),
+             beats: beats, deltas: deltasFromBeats(beats), mine: true };
+  }
+  function allSongs() { return GAME_SONGS.concat(loadMySongs().map(userSongToGame)); }
+
+  /* 重建「选择曲目」下拉：内置 3 首在前（索引 0~2 不变），我的歌单在后并标注"（我的）" */
+  function refreshGameSel() {
+    const sel = $("gameSel");
+    if (!sel) return;
+    const list = allSongs(), keep = sel.value;
+    sel.innerHTML = "";
+    list.forEach(function (s, i) {
+      const o = document.createElement("option");
+      o.value = String(i);
+      o.textContent = s.name + (s.mine ? "（我的）" : "");
+      sel.appendChild(o);
+    });
+    if (keep !== "" && Number(keep) < list.length) sel.value = keep;
+  }
+  function refreshMyList() {
+    const sel = $("myList"), arr = loadMySongs();
+    sel.innerHTML = "";
+    arr.forEach(function (s, i) {
+      const o = document.createElement("option");
+      o.value = String(i);
+      o.textContent = s.name + "（" + s.notes.length + " 个音）";
+      sel.appendChild(o);
+    });
+    $("myLoad").disabled = !arr.length;
+    $("myDel").disabled = !arr.length;
+  }
+  function myPreviewRender(r) {
+    const secs = (r.notes.reduce(function (a, p) { return a + p[1]; }, 0) / 1000).toFixed(1);
+    $("myPreview").innerHTML = "曲谱（" + r.notes.length + " 个音，约 " + secs + " 秒，简谱）："
+      + (r.notes.length ? scoreText(r.notes) : "（还没有音）")
+      + (r.bad.length ? "<br><b style='color:#ff8a80'>⚠️ 认不出的记号：" + r.bad.join(" / ")
+                        + "</b>（已忽略，请检查拼写）" : "");
+  }
+  function myParseNow(render) {
+    const r = parseScore($("myScore").value);
+    myNotes = r.notes;
+    if (render !== false) myPreviewRender(r);
+    return r;
+  }
+  function myStopLocal() { myTimers.forEach(clearTimeout); myTimers = []; }
+
+  /* 网页试听：完全在浏览器里合成（不碰板子），所以没接板子也能听自己写的曲子 */
+  function myPlayLocal() {
+    const r = myParseNow(true);
+    if (!r.notes.length) { log("⚠️ 先在「简谱」里写几个音，再点试听"); return; }
+    ensureAudio();
+    myStopLocal();
+    let at = 0;
+    r.notes.forEach(function (p) {
+      const f = AUDIO_FREQ[p[0]];
+      const dur = Math.max(0.12, Math.min(0.8, (p[1] / 1000) * 0.9));
+      myTimers.push(setTimeout(function () { soundCount++; beep(f, dur, "triangle", 0.2); }, at));
+      at += p[1];
+    });
+    myTimers.push(setTimeout(function () { log("🎧 网页试听结束（" + r.notes.length + " 个音）"); }, at));
+    log("🎧 网页试听（只在电脑上响，不动板子）：" + r.notes.length + " 个音");
+  }
+
+  /* 推给板子：song_add 会把曲子**写进 flash**（断电不丢），写完顺手让板子试听 */
+  function myPush() {
+    const r = myParseNow(true);
+    if (!r.notes.length) { log("⚠️ 先在「简谱」里写几个音，再推给板子"); return; }
+    if (!writer) { log("请先连接键盘，命令才发得出去"); return; }
+    const name = ($("myName").value || "").trim().slice(0, MY_NAME_MAX) || "我的曲子";
+    const slot = parseInt($("mySlot").value, 10);
+    sendObj({ v: 2, cmd: "song_add", slot: slot, name: name, notes: r.notes });
+    log("⬆️ 写入槽位 " + slot + "：" + name + "（" + r.notes.length + " 个音）→ 板子同步写 flash");
+    setTimeout(function () {
+      if (!writer) return;
+      sendObj({ v: 2, cmd: "song_play", slot: slot });
+      log("▶ 让板子试听槽位 " + slot + "（试听模式按 S" + (slot + 1) + " 也是它）");
+    }, 180);
+  }
+  /* 存进「我的歌单」（网页本地库）→ 于是游戏选歌里就能选到 */
+  function mySave() {
+    const r = myParseNow(true);
+    if (!r.notes.length) { log("⚠️ 先在「简谱」里写几个音，再存进歌单"); return; }
+    const name = ($("myName").value || "").trim().slice(0, MY_NAME_MAX) || ("我的曲子" + (loadMySongs().length + 1));
+    const arr = loadMySongs();
+    const item = { name: name, notes: r.notes, score: scoreText(r.notes) };
+    const dup = arr.findIndex(function (s) { return s.name === name; });
+    if (dup >= 0) { arr[dup] = item; log("💾 已有同名曲目，已覆盖：" + name); }
+    else { arr.push(item); log("💾 已存进「我的歌单」：" + name); }
+    saveMySongs(arr);
+    refreshMyList();
+    refreshGameSel();
+    log("🎮 现在到「选择曲目」里就能选到它了（歌单共 " + arr.length + " 首）");
+  }
+
+  $("myParse").addEventListener("click", function () { myParseNow(true); });
+  $("myPlayLocal").addEventListener("click", myPlayLocal);
+  $("myPush").addEventListener("click", myPush);
+  $("mySave").addEventListener("click", mySave);
+  $("myExample").addEventListener("click", function () {
+    $("myName").value = "小蜜蜂（示例）";
+    $("myScore").value = "5 3 3 - 4 2 2 - 1 2 3 4 5 5 5 - 5 3 3 - 4 2 2 - 1 3 5 5 3 1 1 -";
+    myParseNow(true);
+    log("✨ 已填入示例简谱：可直接「网页试听」，或选个槽位「存入板子」");
+  });
+  $("myLoad").addEventListener("click", function () {
+    const s = loadMySongs()[parseInt($("myList").value, 10)];
+    if (!s) { log("歌单还是空的：先写一首再点「存进我的歌单」"); return; }
+    $("myName").value = s.name;
+    $("myScore").value = s.score || scoreText(s.notes);
+    myParseNow(true);
+    log("↧ 已载入到编辑区：" + s.name);
+  });
+  $("myDel").addEventListener("click", function () {
+    const arr = loadMySongs(), i = parseInt($("myList").value, 10);
+    if (!arr[i]) return;
+    const name = arr[i].name;
+    arr.splice(i, 1);
+    saveMySongs(arr);
+    refreshMyList();
+    refreshGameSel();
+    log("🗑 已从「我的歌单」删除：" + name + "（板子上该槽不受影响）");
+  });
+
+  refreshMyList();
+  refreshGameSel();
+  myParseNow(false);
+
   gFit();
   gShowStartOverlay();   /* 首次进入显示"简单/专家"模式选择 + 开始卡片 */
   window.addEventListener("resize", gFit);
@@ -1542,7 +1794,8 @@
 
     /* 现场快照：测完原样还原，自测不能污染用户手上的状态 */
     const snap = { state: gState, seq: gSeq.slice(), pos: gPos, combo: gCombo, score: gScore,
-                   notes: gNotes.slice(), writer: writer, trace: window.__trace };
+                   notes: gNotes.slice(), writer: writer, trace: window.__trace,
+                   myNotes: myNotes.slice(), myStore: localStorage.getItem(MY_SONGS_KEY) };
     /* 串口桩：让 if (writer) 的分支照常走，命令记进 __trace 但不真写串口 */
     writer = { write: function () { return Promise.resolve(); } };
     window.__trace = [];
@@ -1693,10 +1946,75 @@
       gameOnKey(gSeq[gPos], 1);
       ok("L3 到判定线后按对 → 不触发超时",
          gState === "playing" && checkNoteTimeout(performance.now()) === false);
+
+      /* ---------- M. 自己编曲：简谱解析 ---------- */
+      const pmA = parseScore("1 1 5 5 6 6 5");
+      ok("M1 简谱 → 正确音号序列",
+         pmA.notes.map(function (p) { return p[0]; }).join(",") === "0,0,4,4,5,5,4" && pmA.bad.length === 0,
+         JSON.stringify(pmA.notes.map(function (p) { return p[0]; })));
+      const pmB = parseScore("1 5:2");
+      ok("M2 时值 :2 → 占两拍（600ms）", pmB.notes[1][1] === 600, "ms=" + pmB.notes[1][1]);
+      const pmC = parseScore("1 5 -");
+      ok("M3 延音 - → 给上一个音再加一拍（不新增音）",
+         pmC.notes.length === 2 && pmC.notes[1][1] === 600, "n=" + pmC.notes.length + " ms=" + pmC.notes[1][1]);
+      const pmD = parseScore("1 x 9 5 end");
+      ok("M4 非法记号被挑出来（不静默吞）",
+         pmD.bad.length === 3 && pmD.notes.length === 2, JSON.stringify(pmD.bad));
+      const pmE = parseScore("1|2,3\n4");
+      ok("M5 竖线 / 逗号 / 换行都当分隔符", pmE.notes.length === 4 && pmE.bad.length === 0, "n=" + pmE.notes.length);
+      ok("M6 空输入 → 0 音 0 错（不崩）",
+         parseScore("").notes.length === 0 && parseScore(null).notes.length === 0);
+
+      /* ---------- N. 我的歌单（网页本地库）与游戏选歌合并 ---------- */
+      localStorage.removeItem(MY_SONGS_KEY);
+      $("myScore").value = "1 2 3 4 8";
+      $("myName").value = "自测小曲";
+      $("mySave").click();
+      const myArr = loadMySongs();
+      ok("N1 存进「我的歌单」→ 落进浏览器本地库",
+         myArr.length === 1 && myArr[0].name === "自测小曲" && myArr[0].notes.length === 5,
+         JSON.stringify(myArr.map(function (s) { return s.name; })));
+      ok("N2 自编曲出现在「选择曲目」下拉里",
+         Array.prototype.some.call($("gameSel").options, function (o) { return o.textContent.indexOf("自测小曲") >= 0; }),
+         "opts=" + $("gameSel").options.length);
+      const nIdx = allSongs().findIndex(function (s) { return s.name === "自测小曲"; });
+      $("gameSel").value = String(nIdx);
+      ok("N3 游戏能选中自编曲（音符数与录入一致）",
+         gCurSong().name === "自测小曲" && gCurSong().notes.length === 5 && gCurSong().deltas.length === 5,
+         gCurSong().name + "/" + gCurSong().notes.length);
+      gStart();
+      ok("N4 自编曲照样能开局（谱面装载）", gSeq.length === 5 && gState === "playing", "seq=" + gSeq.length);
+
+      /* ---------- O. 把自编曲推给板子（song_add 写 flash）+ 自动试听 ---------- */
+      window.__trace = [];
+      $("mySlot").value = "4";
+      $("myScore").value = "1 2 3 4 8";
+      $("myPush").click();
+      await sleep(240);        /* 发完 song_add 隔 180ms 才发试听 */
+      ok("O1 存入板子 → song_add(v2 / slot=4 / name / notes)",
+         window.__trace.some(function (m) {
+           return m.v === 2 && m.cmd === "song_add" && m.slot === 4 &&
+                  m.name === "自测小曲" && m.notes && m.notes.length === 5;
+         }), JSON.stringify(window.__trace.map(function (m) { return m.cmd || m.t; })));
+      ok("O2 写完后自动让板子试听 → song_play(slot=4)",
+         window.__trace.some(function (m) { return m.cmd === "song_play" && m.slot === 4; }));
+
+      /* ---------- P. 网页试听是"不打扰板子"的本地预览 ---------- */
+      window.__trace = [];
+      const snd0 = soundCount;
+      $("myPlayLocal").click();
+      await sleep(90);
+      ok("P1 网页试听不发任何串口命令", window.__trace.length === 0, "trace=" + window.__trace.length);
+      ok("P2 网页试听确实在电脑上发声（没接板子也能听）", soundCount > snd0, snd0 + "→" + soundCount);
     } finally {
+      myStopLocal();                       /* 别让自测留下的试听定时器在页面上继续响 */
       gQuit();
       gState = snap.state; gSeq = snap.seq; gPos = snap.pos; gCombo = snap.combo;
       gScore = snap.score; gNotes = snap.notes; writer = snap.writer; window.__trace = snap.trace;
+      myNotes = snap.myNotes;
+      if (snap.myStore === null) localStorage.removeItem(MY_SONGS_KEY);
+      else localStorage.setItem(MY_SONGS_KEY, snap.myStore);
+      refreshMyList(); refreshGameSel();
     }
     const fails = out.filter(function (o) { return !o.pass; });
     return { total: out.length, pass: out.length - fails.length, fails: fails, all: out };
@@ -1730,6 +2048,11 @@
       $("brightnessVal").textContent = brightness.value;
       $("volumeVal").textContent = volume.value;
       readLoop();
+      /* ★ 连上后主动要一次真实状态：滑块显示的是板子上的实际值、曲库面板显示板子上真正存了什么，
+         而不是"网页自己的默认值" —— 这才叫双向同步（板子→网页）。 */
+      sendCmd("ping", 1);                      /* 板子回 hello + state（含 vol / bri / pb） */
+      sendObj({ v: 2, cmd: "song_list" });     /* 板子回曲库槽位清单 */
+      log("🔗 已连接：正在同步板子的音量 / 亮度 / 曲库状态…");
     } catch (e) {
       setStatus("连接失败：" + e, false);
       port = null;

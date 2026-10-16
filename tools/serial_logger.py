@@ -21,6 +21,19 @@ except ImportError:
     sys.exit("需要 pyserial：请用 IDF 的 python 运行本脚本（自带 pyserial）")
 
 
+def _open(port, baud):
+    """打开串口，并显式放开 DTR/RTS。
+
+    ★ 必须放开：ESP32-S3 的 USB-Serial/JTAG 把 RTS 当"芯片复位"用，
+    pyserial 默认打开时会把这两根线拉住 → **芯片被按在复位里**，
+    表现就是"能打开端口、但一个字节都抓不到"（踩过一次，白等 13 秒）。
+    """
+    s = serial.Serial(port, baud, timeout=0.2)
+    s.dtr = False
+    s.rts = False
+    return s
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--port", default="COM5")
@@ -36,7 +49,7 @@ def main():
     stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
     path = os.path.join(out_dir, "board-%s.log" % stamp)
 
-    s = serial.Serial(args.port, args.baud, timeout=0.2)
+    s = _open(args.port, args.baud)
     print("录制中 -> %s" % path)
     print("提示：串口是流式的，打开之前的输出已丢失，只能抓到打开之后的。")
 
@@ -60,7 +73,7 @@ def main():
                         break
                     for _ in range(15):
                         try:
-                            s = serial.Serial(args.port, args.baud, timeout=0.2)
+                            s = _open(args.port, args.baud)
                             print("已重连 %s，继续录制" % args.port)
                             break
                         except Exception as e2:

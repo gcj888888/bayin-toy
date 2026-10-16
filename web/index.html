@@ -69,7 +69,8 @@
      说明文字从上下搬到左右，画布就能靠"高度"撑起来，音符下落路程更长。 */
   .workspace { min-height:100vh; display:flex; flex-direction:row;
                align-items:center; justify-content:center; gap:22px; padding:72px 18px 24px; }
-  .stage-col { display:flex; flex-direction:column; align-items:center; gap:12px; }
+  .stage-col { display:flex; flex-direction:column; align-items:center; gap:12px;
+               flex:1 1 auto; min-width:0; }
   .side { display:flex; flex-direction:column; gap:12px; width:212px; }
   .side .card { background:rgba(255,255,255,.035); border:1px solid var(--line);
                 border-radius:14px; padding:12px 14px; }
@@ -117,9 +118,10 @@
   .logbox pre { margin-top:10px; }
 
   /* ---- 🎮 跟弹闯关：窄版竖画布 + 四周大片留白 ---- */
-  /* 画布尺寸改由"高度"决定（原来由宽度决定 → 被 420px 宽卡住，只有约 595px 高）。
-     高度取自视口 + 固定纵横比 480:880（与 JS 里的 GW:GH 一致），宽度随高度算出来。 */
-  .stage { position:relative; height:min(78vh, 780px); aspect-ratio:480 / 880;
+  /* 尺寸主要由 gFit() 用 JS 算好写进内联样式（要同时满足中栏宽度与视口高度）；
+     这里保留一份"高度 + 纵横比"作兜底，万一脚本没跑到，画布也不会是 0 尺寸。
+     兜底纵横比 = GW:GH = 960:880。 */
+  .stage { position:relative; height:min(78vh, 780px); aspect-ratio:960 / 880;
            border-radius:18px; overflow:hidden; background:#080b10;
            box-shadow:0 0 0 1px rgba(255,255,255,.07), 0 0 0 6px rgba(90,209,192,.05),
                       0 28px 70px rgba(0,0,0,.66), 0 0 46px rgba(90,209,192,.10); }
@@ -163,11 +165,13 @@
   .side .keymap { max-width:none; justify-content:flex-start; }
   .side .banner { max-width:none; }
   .side #gameMeta { text-align:left; }
-  /* 窄屏（<680px，基本只剩手机竖屏）才退回"上下一列"。
-     断点定得低一点：常见笔记本 / 桌面窗口都走三栏，免得白白退回竖排又把上下空间占掉。 */
-  @media (max-width: 680px) {
-    .workspace { flex-direction:column; gap:14px; }
-    .side { width:min(420px, 92vw); }
+  /* 窄屏才退回"上下一列"（画布加宽到 960:880 后，横向需求更大；
+     低于 900px 就让左右两栏收到下面去，把整幅宽度让给画布）。 */
+  @media (max-width: 900px) {
+    /* 竖排时 align-items 必须 stretch：否则中栏会被"内容宽度"卡住（画布自己撑自己→偏小） */
+    .workspace { flex-direction:column; align-items:stretch; gap:14px; }
+    .side { width:min(420px, 92vw); align-self:center; }
+    .stage-col { width:100%; }
     .stage { height:min(62vh, 580px); }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -269,7 +273,7 @@
       <span class="val" id="brightnessVal">80</span>
       <span class="ack" id="brightnessAck">✅ 板子已收到</span>
     </div>
-    <p class="note">往左拖 = 更柔和，往右拖 = 更亮。默认 80 已经调柔过了。</p>
+    <p class="note">往左拖 = 更柔和，往右拖 = 更亮。拖动后旁边会显示「✅ 已同步（板子亮度 = N）」；若显示「⚠️ 板子没跟上」，就说明还没连板子、或串口被别的程序占用了。</p>
   </div>
 
   <div class="panel">
@@ -279,7 +283,7 @@
       <span class="val" id="volumeVal">100</span>
       <span class="ack" id="volumeAck">✅ 板子已收到</span>
     </div>
-    <p class="note">旋钮也能调音量，这里和旋钮是同一个值。</p>
+    <p class="note">旋钮也能调音量，这里和旋钮是同一个值。拖动后旁边会显示「✅ 已同步（板子音量 = N）」。</p>
   </div>
 
   <div class="group-title">🎮 游戏</div>
@@ -521,13 +525,7 @@
     while (logEl.childElementCount > 200) logEl.removeChild(logEl.firstChild);
   }
 
-  /* 板子回执“state”时，在对应滑块旁闪一下“已收到”，让命令送达看得见 */
-  function flashAck(el, val) {
-    el.textContent = "✅ 板子已收到 " + val;
-    el.classList.add("show");
-    clearTimeout(el._t);
-    el._t = setTimeout(() => el.classList.remove("show"), 1500);
-  }
+  /* 板子回执由 applyBoardValue() 处理（见下方"滑块 ⇄ 板子 双向同步"） */
 
   /* 所有出站命令都留一份记录（window.__trace，最多 200 条）：
      ① 排障时能看见"网页到底发了什么"；② 不接板子也能验证协议联动（自测用）。 */
@@ -536,9 +534,20 @@
     window.__trace.push(obj);
     while (window.__trace.length > 200) window.__trace.shift();
   }
+  let s_noConnWarnAt = 0;
   function sendObj(obj) {
     traceSend(obj);
-    if (!writer) return;
+    if (!writer) {
+      /* 没连板子时命令根本发不出去 —— 这正是"拖了滑块没反应"最常见的原因，
+         所以明确提示一次（1.5 秒内不重复刷屏），别让人对着没反应的界面猜。 */
+      const now = performance.now();
+      if (now - s_noConnWarnAt > 1500) {
+        s_noConnWarnAt = now;
+        log("⚠️ 还没连接键盘，命令发不出去：" + JSON.stringify(obj) +
+            " —— 请先点「连接键盘」并选 USB 串行设备。");
+      }
+      return;
+    }
     const msg = JSON.stringify(obj) + "\n";
     writer.write(msg).catch((e) => log("发送失败: " + e));
   }
@@ -558,12 +567,53 @@
   /* 闭包只生成一次（t 共享），才是真正的防抖：停止拖动 120ms 才发一次 */
   const sendBrightness = debounceSend("brightness", () => Number(brightness.value));
   const sendVolume = debounceSend("volume", () => Number(volume.value));
+  /* ---- 滑块 ⇄ 板子 双向同步（用户报"拖了没效果"，其实最需要的是"看得见有没有送到"）----
+   * ① 拖滑块 → 记下"期望值 + 时刻"，再把命令发出去；
+   * ② 板子每约 0.4 秒回一次 state（含 vol / bri）→ 期望值对上了亮 ✅「已同步」，
+   *    超过 1.5 秒还没对上亮 ⚠️「板子没跟上」（十有八九是没连上，或串口被别的程序占着）；
+   * ③ 没有待确认命令时，反手把滑块对齐到板子的实际值 —— 两边永远显示同一个数。 */
+  const BOARD_SYNC = {
+    vol: { slider: () => volume,   val: () => $("volumeVal"),      ack: () => $("volumeAck"),
+           want: null, at: 0, label: "音量" },
+    bri: { slider: () => brightness, val: () => $("brightnessVal"), ack: () => $("brightnessAck"),
+           want: null, at: 0, label: "亮度" }
+  };
+  function showAck(ackEl, text) {
+    ackEl.textContent = text;
+    ackEl.classList.add("show");
+    clearTimeout(ackEl._t);
+    ackEl._t = setTimeout(function () { ackEl.classList.remove("show"); }, 2400);
+  }
+  function applyBoardValue(key, boardVal) {
+    const c = BOARD_SYNC[key];
+    const slider = c.slider(), valEl = c.val(), ackEl = c.ack();
+    if (!slider || !valEl || !ackEl) return;
+    if (c.want !== null) {
+      if (boardVal === c.want) {
+        c.want = null;
+        showAck(ackEl, "✅ 已同步（板子" + c.label + " = " + boardVal + "）");
+      } else if (performance.now() - c.at > 1500) {
+        c.want = null;
+        showAck(ackEl, "⚠️ 板子没跟上（确认已「连接键盘」、串口没被占用）");
+      }
+      return;
+    }
+    /* 没有待确认的命令：把滑块对齐到板子实际值（正在拖的时候不打断） */
+    if (document.activeElement !== slider) {
+      slider.value = String(boardVal);
+      valEl.textContent = boardVal;
+    }
+  }
   brightness.addEventListener("input", function () {
     $("brightnessVal").textContent = brightness.value;
+    BOARD_SYNC.bri.want = Number(brightness.value);
+    BOARD_SYNC.bri.at = performance.now();
     sendBrightness();
   });
   volume.addEventListener("input", function () {
     $("volumeVal").textContent = volume.value;
+    BOARD_SYNC.vol.want = Number(volume.value);
+    BOARD_SYNC.vol.at = performance.now();
     sendVolume();
   });
 
@@ -735,10 +785,10 @@
       const caps = Array.isArray(obj.caps) ? obj.caps.join("、") : "";
       log("👉 板子已连上，支持功能：" + caps);
     } else if (obj.t === "state") {
-      /* 板子把当前音量/亮度回发回来 = 命令确实送达并生效 */
-      if (typeof obj.vol === "number") flashAck($("volumeAck"), obj.vol);
-      if (typeof obj.bri === "number") flashAck($("brightnessAck"), obj.bri);
-      /* 回放池条数（新增字段 pb）：显示在「键盘回传」标题旁，通关 record:0 后应 +1 */
+      /* 板子把当前音量/亮度回发回来 → 用来确认"我们发过去的命令到底生效没有" */
+      if (typeof obj.vol === "number") applyBoardValue("vol", obj.vol);
+      if (typeof obj.bri === "number") applyBoardValue("bri", obj.bri);
+      /* 回放池条数（pb 字段）：显示在「键盘回传」标题旁，通关 record:0 后应 +1 */
       if (typeof obj.pb === "number") {
         const pbEl = $("pbInfo");
         if (pbEl) pbEl.textContent = "回放池：" + obj.pb + " 首";
@@ -781,18 +831,18 @@
 
   /* ---- 板子按键事件专用通道 ----
    * ① 诊断：记下每次按键到达网页的高精度时刻与间隔（连按时能看出串口是否积压）；
-   * ② 判定：交给 gameOnKey，并把判定结果（hit/miss/ignored）一并记下——
-   *    "按了没反应"到底是串口没到、还是判定被吞，一眼可分。 */
+   * ② 判定：交给 gameOnKey，并把判定结果（hit / over）一并记下——
+   *    "按了没反应"到底是串口没到、还是判定被吞，一眼可分；over 还能看出"按错结束"发生了几次。 */
   function handleKeyEvent(obj) {
     const nowMs = performance.now();
-    if (!window.__keyDbg) window.__keyDbg = { last: 0, n: 0, down: 0, ignored: 0 };
+    if (!window.__keyDbg) window.__keyDbg = { last: 0, n: 0, down: 0, over: 0 };
     const d = window.__keyDbg;
     const gap = d.last ? (nowMs - d.last).toFixed(0) : "-";
     d.last = nowMs; d.n++;
     if (obj.v !== 1) { gameOnKey(obj.i, obj.v); return; }   /* 松开：只转发，不刷日志 */
     d.down++;
     const r = gameOnKey(obj.i, obj.v);
-    if (r === "ignored") d.ignored++;
+    if (r === "over") d.over++;
     playNoteSound(obj.i);   /* 电脑响模式下按板子键也发网页音 */
     const prog = (document.getElementById("gameProg") || {}).textContent || "?";
     const line = "[KEYDBG] #" + d.n + " i=" + obj.i + " gap=" + gap + "ms prog=" + prog + " r=" + r;
@@ -847,10 +897,10 @@
   /* ---- 画面常量（逻辑坐标） ---- */
   const CV = $("gameCanvas");
   const gctx = CV.getContext("2d");
-  /* 画布逻辑宽高。★ GH 由 680 提到 880、判定线由 486 下移到 640：
-     音符下落路程 546px → 700px（+28%）。配合侧栏布局（上下不再被文字挤占），
-     顶端到底部的"跑道"明显变长。CSS 里 .stage 的纵横比必须是 480:880 —— 改一处要两处一起改。 */
-  const GW = 480, GH = 880;
+  /* 画布逻辑宽高。★ GW 480 → 960（用户要求"宽度加宽到现在的两倍"）、GH 880、判定线 640：
+     下落路程 = 700 逻辑 px；因为宽高比从 480:880 变成 960:880，屏幕上的宽度约为原来的 2 倍、高度不变。
+     ★ 改这里必须同时改 .stage 的兜底纵横比（CSS）与 gFit() 的换算（JS）。 */
+  const GW = 960, GH = 880;
   const LANES = 8;
   const LANE_W = GW / LANES;
   const JUDGE_Y = 640;           /* 判定线：音符停在这里等你射 */
@@ -914,11 +964,24 @@
     if (b) b.addEventListener("click", gStart);
   }
 
+  /* 尺寸自适应 + 高清适配：在"不溢出视口 / 不超出中栏"的前提下把画布做到尽量大。
+     ★ 为什么用 JS 算而不是纯 CSS：画布同时受"中栏可用宽度"和"视口高度"两个约束，
+       纯 CSS 的 aspect-ratio 配上 max-width/max-height 一旦被夹住就会破坏纵横比（画面被拉伸变形）；
+       这里直接算出唯一的 w/h 写进内联样式，CSS 里保留一份比例只作兜底。 */
   function gFit() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     CV.width = GW * dpr;
     CV.height = GH * dpr;
     gctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const AR = GW / GH;                               /* 宽 / 高 */
+    const col = document.querySelector(".stage-col");
+    const availW = (col && col.clientWidth > 0) ? col.clientWidth : (window.innerWidth - 40);
+    const availH = window.innerHeight - 72 - 24;      /* 上下留白，与 .workspace 的 padding 对应 */
+    let h = Math.max(180, Math.min(availH, 780, availW / AR));  /* 取"视口高"与"可用宽÷比例"里更紧的 */
+    const w = Math.round(h * AR);
+    const stage = document.querySelector(".stage");
+    if (stage) { stage.style.width = w + "px"; stage.style.height = Math.round(h) + "px"; }
   }
 
   function gHud() {
@@ -938,7 +1001,6 @@
   const EASY_MULT = 4;          /* 简单模式相对原速的下落时长倍数（慢） */
   const FALL_MIN_MS = 700;      /* 单音下落时长下限 */
   const FALL_MAX_MS = 1600;     /* 单音下落时长上限：避免×4 后干等 3 秒显得"卡" */
-  const EARLY_HIT_MS = 150;     /* 音符落定前 150ms 内即可命中（音游式提前判定，更跟手） */
   function clampFall(v) { return Math.max(FALL_MIN_MS, Math.min(FALL_MAX_MS, v)); }
   function gFallMsFor(index) {
     const song = gCurSong();
@@ -993,19 +1055,32 @@
     gHud();
   }
 
-  /* 按错键：只红闪提示，不前进、不结束（学习友好，孩子不会因一个错就重来） */
-  function gMiss(pressed) {
-    if (pressed === null || pressed === undefined) return;  /* 新模式不会漏拍：音符停在判定线等 */
-    gCombo = 0;
-    gFlash = 0.85;
-    sfxMiss();
+  /* 按错 → 本局结束（与 gWin 的区别：**不落槽、不回放**，record:0 直接丢弃这次记谱）
+   * 用户 2026-10-16 要求："按错了键就要结束游戏，而不是让他一直按到正确为止"。 */
+  function gOver(pressed) {
+    gState = "over"; gCombo = 0;
+    if (writer) gStop();          /* 停记谱 → 本次会话被丢弃，不进回放池 */
     const wn = GAME_NOTES[gSeq[gPos]];
     const pn = GAME_NOTES[pressed];
+    gFlash = 0.9;
+    sfxMiss();
     gFire(pressed, false);
     gHud();
     $("gameMeta").innerHTML = "应按 <b>" + wn.cn + "（S" + wn.num + "）</b>，你按成了 " +
-                              "<b>" + pn.cn + "（S" + pn.num + "）</b>，再试一次。";
-    log("⚠️ 应为 S" + wn.num + "（" + wn.cn + "），按成了 S" + pn.num + "（" + pn.cn + "），不前进");
+                              "<b>" + pn.cn + "（S" + pn.num + "）</b> → 本局结束";
+    gShowBanner("over",
+      "💥 本局结束：应按 <b>" + wn.cn + "（S" + wn.num + "）</b>，你按成了 " +
+      "<b>" + pn.cn + "（S" + pn.num + "）</b>。得分 <b>" + gScore + "</b>。" +
+      (writer ? "<br>这次记谱已丢弃，不会进回放池。" : ""));
+    gOverlay("<div><b>💥 本局结束</b><br>应按 <b>" + wn.cn + "</b>（S" + wn.num +
+             "），你按成了 <b>" + pn.cn + "</b>（S" + pn.num + "）<br>得分 <b>" + gScore + "</b>" +
+             "<div style='margin-top:14px;display:flex;gap:10px;justify-content:center'>" +
+             "<button class='ghost' onclick='window.__gRetry && window.__gRetry()'>↻ 再来一局</button>" +
+             "<button class='ghost' onclick='window.__gHome && window.__gHome()'>✕ 返回</button></div></div>");
+    window.__gRetry = gStart;
+    window.__gHome = function () { gQuit(); };
+    $("gameHearBtn").disabled = true;
+    log("💥 按错 → 本局结束：应按 S" + wn.num + "（" + wn.cn + "），按成了 S" + pn.num + "（" + pn.cn + "）");
   }
 
   function gStart() {
@@ -1024,11 +1099,9 @@
         (gMode === "expert" ? "专家模式（原曲速度）" : "简单模式（0.25 倍速）"));
   }
 
-  /* 按键 → 判定。返回值用于诊断：release | idle | hit | miss | ignored
-   * ★ 跟手性关键改动：原来"按对但音符还没落线"会被直接丢掉（连按时特别明显——
-   *   第二下常常按在下一个音符刚出生的那段时间里，等于白按）。
-   *   现在改成：**按对就立刻命中**，并把这个音符"瞬移"到判定线再爆开——
-   *   视觉上不突兀，手感立刻有反馈。 */
+  /* 按键 → 判定。返回值用于诊断：release | idle | hit | over
+   * ★ 跟手性：按对就立刻命中（音符"瞬移"到判定线再爆开），连按第二下不会被吞。
+   * ★ 按错即结束本局（用户 2026-10-16 明确要求：不能一直试到按对为止）。 */
   function gameOnKey(i, v) {
     if (v !== 1 || i < 0 || i >= GAME_NOTES.length) return "release"; /* 只判 S1~S8 的按下 */
     if (gState !== "playing" || !gNotes.length) return "idle";
@@ -1038,11 +1111,8 @@
       gHit();                               /* 按对即中，下一个音符从顶部落下 */
       return "hit";
     }
-    /* 按错：只有"已落定 / 已进入提前窗口(150ms)"才算一次真实误按 → 红闪提示；
-       过早的误按不算数（不红闪、不重置连击），避免连点手滑被罚。 */
-    const remain = nt.fallMs - (performance.now() - nt.fallStart);
-    if (nt.arrived || remain <= EARLY_HIT_MS) { gMiss(i); return "miss"; }
-    return "ignored";
+    gOver(i);                               /* 按错 → 立刻结束本局 */
+    return "over";
   }
 
   function gWin() {
@@ -1473,15 +1543,16 @@
       ok("B2 连按第二下也命中（不再被吞）", r2 === "hit" && gPos === b0 + 2,
          "r2=" + r2 + " pos=" + b0 + "→" + gPos);
 
-      /* ---------- C. 按错：过早按错不罚；落定后按错只提示 ---------- */
+      /* ---------- C. 按错 → 立刻结束本局（用户要求：不能一直试到按对为止） ---------- */
       gStart();
       const c0 = gPos;
-      const rEarly = gameOnKey((gSeq[gPos] + 5) % 8, 1);   /* 错音轨 + 音符刚出生 */
-      ok("C1 过早按错被忽略（不红闪、不罚）", rEarly === "ignored" && gPos === c0 && gFlash === 0, "r=" + rEarly);
-      gCombo = 5; gNotes[0].arrived = true;
-      const rWrong = gameOnKey((gSeq[gPos] + 5) % 8, 1);   /* 落定后按错 */
-      ok("C2 落定后按错只提示、不前进", rWrong === "miss" && gPos === c0);
-      ok("C3 按错重置连击", gCombo === 0);
+      gCombo = 5;
+      const rWrong = gameOnKey((gSeq[gPos] + 5) % 8, 1);   /* 错音轨 */
+      ok("C1 按错 → 本局结束（状态变 over）", rWrong === "over" && gState === "over",
+         "r=" + rWrong + " state=" + gState);
+      ok("C2 按错不推进进度", gPos === c0, "pos=" + gPos);
+      ok("C3 按错清零连击", gCombo === 0);
+      ok("C4 结束之后按键不再判分", gameOnKey(gSeq[gPos], 1) === "idle");
 
       /* ---------- D. 松开 / 非对局：不推进、不判分 ---------- */
       const d0 = gPos;
@@ -1530,7 +1601,9 @@
       /* ---------- I. 板子回包解析（防御式，不崩） ---------- */
       handleLine(JSON.stringify({ t: "state", vol: 55, bri: 90, pb: 2 }));
       ok("I1 state 回包更新回放池显示", ($("pbInfo").textContent || "").indexOf("2") >= 0, $("pbInfo").textContent);
-      ok("I2 音量回执闪示", $("volumeAck").className.indexOf("show") >= 0);
+      ok("I2 state 回包把滑块对齐到板子的实际值",
+         $("volume").value === "55" && $("brightness").value === "90",
+         "vol=" + $("volume").value + " bri=" + $("brightness").value);
       let crashed = false;
       try {
         handleLine("这不是 JSON");
@@ -1545,12 +1618,41 @@
       handleLine(JSON.stringify({ t: "key", i: gSeq[gPos], v: 1 }));
       ok("J1 板子按键经 handleLine 能推进判定", gPos === 1 && $("gameProg").textContent !== progBefore,
          "prog " + progBefore + "→" + $("gameProg").textContent);
-      const igBefore = (window.__keyDbg || {}).ignored || 0;
+      const overBefore = (window.__keyDbg || {}).over || 0;
       handleLine(JSON.stringify({ t: "key", i: (gSeq[gPos] + 5) % 8, v: 1 }));
-      ok("J2 过早按错计入 ignored 统计（可区分「串口没到」与「判定被吞」）",
-         ((window.__keyDbg || {}).ignored || 0) === igBefore + 1);
+      ok("J2 板子按键按错 → 同样结束本局（并计入 over 统计）",
+         gState === "over" && ((window.__keyDbg || {}).over || 0) === overBefore + 1);
       handleLine(JSON.stringify({ t: "key", i: 0, v: 0 }));
       ok("J3 松开事件不推进", gPos === 1);
+
+      /* ---------- K. 滑块与各按钮的出站命令（"该同步的都要能同步"） ---------- */
+      window.__trace = [];
+      $("volume").value = "33";
+      $("volume").dispatchEvent(new Event("input", { bubbles: true }));
+      $("brightness").value = "120";
+      $("brightness").dispatchEvent(new Event("input", { bubbles: true }));
+      await sleep(260);                        /* 滑块是防抖的：停手 120ms 才真的发出去 */
+      ok("K1 音量滑块 → 发 volume 命令",
+         window.__trace.some(function (m) { return m.t === "volume" && m.v === 33; }));
+      ok("K2 亮度滑块 → 发 brightness 命令",
+         window.__trace.some(function (m) { return m.t === "brightness" && m.v === 120; }));
+      window.__trace = [];
+      $("replayBtn").click();
+      $("defaultBtn").click();
+      $("songBtn").click();
+      $("demoBtn").click();
+      $("gameHearBtn").disabled = false;   /* 未通关时这个按钮本来就是禁用的，测命令先放开 */
+      $("gameHearBtn").click();
+      await sleep(80);
+      ok("K3 重播欢迎语 → voice_replay", window.__trace.some(function (m) { return m.t === "voice_replay"; }));
+      ok("K4 恢复默认语音 → voice_default", window.__trace.some(function (m) { return m.t === "voice_default"; }));
+      ok("K5 学习模式开始 → song", window.__trace.some(function (m) { return m.t === "song"; }));
+      ok("K6 演示 → demo", window.__trace.some(function (m) { return m.t === "demo"; }));
+      ok("K7 再听一遍 → play:0", window.__trace.some(function (m) { return m.t === "play" && m.v === 0; }));
+      BOARD_SYNC.vol.want = null;              /* 先清掉 K1 留在那儿的待确认值 */
+      applyBoardValue("vol", 77);
+      ok("K8 板子 state 回包 → 反手把滑块对齐到板子的值",
+         $("volume").value === "77" && $("volumeVal").textContent === "77");
     } finally {
       gQuit();
       gState = snap.state; gSeq = snap.seq; gPos = snap.pos; gCombo = snap.combo;

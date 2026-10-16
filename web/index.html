@@ -1055,32 +1055,37 @@
     gHud();
   }
 
-  /* 按错 → 本局结束（与 gWin 的区别：**不落槽、不回放**，record:0 直接丢弃这次记谱）
-   * 用户 2026-10-16 要求："按错了键就要结束游戏，而不是让他一直按到正确为止"。 */
+  /* 结束本局 —— 两种触发：①按错键 ②音符落到判定线后超时没按。
+     与 gWin 的区别：**不落槽、不回放**，record:0 直接丢弃这次记谱。
+     用户 2026-10-16 要求："按错了键就要结束游戏，而不是让他一直按到正确为止"；
+     并追加："音符掉到最底部、用户没按对键，游戏也结束"。 */
   function gOver(pressed) {
     gState = "over"; gCombo = 0;
     if (writer) gStop();          /* 停记谱 → 本次会话被丢弃，不进回放池 */
     const wn = GAME_NOTES[gSeq[gPos]];
-    const pn = GAME_NOTES[pressed];
+    const timedOut = (pressed === null || pressed === undefined);
+    const pn = timedOut ? null : GAME_NOTES[pressed];
     gFlash = 0.9;
     sfxMiss();
-    gFire(pressed, false);
+    if (pn) gFire(pressed, false);
     gHud();
-    $("gameMeta").innerHTML = "应按 <b>" + wn.cn + "（S" + wn.num + "）</b>，你按成了 " +
-                              "<b>" + pn.cn + "（S" + pn.num + "）</b> → 本局结束";
+    const whyHtml = timedOut
+      ? "音符落到判定线后 <b>" + (NOTE_HOLD_LIMIT_MS / 1000) + " 秒</b>没按（应弹 <b>" +
+        wn.cn + "（S" + wn.num + "）</b>）"
+      : "应按 <b>" + wn.cn + "（S" + wn.num + "）</b>，你按成了 <b>" +
+        pn.cn + "（S" + pn.num + "）</b>";
+    $("gameMeta").innerHTML = whyHtml + " → 本局结束";
     gShowBanner("over",
-      "💥 本局结束：应按 <b>" + wn.cn + "（S" + wn.num + "）</b>，你按成了 " +
-      "<b>" + pn.cn + "（S" + pn.num + "）</b>。得分 <b>" + gScore + "</b>。" +
+      "💥 本局结束：" + whyHtml + "。得分 <b>" + gScore + "</b>。" +
       (writer ? "<br>这次记谱已丢弃，不会进回放池。" : ""));
-    gOverlay("<div><b>💥 本局结束</b><br>应按 <b>" + wn.cn + "</b>（S" + wn.num +
-             "），你按成了 <b>" + pn.cn + "</b>（S" + pn.num + "）<br>得分 <b>" + gScore + "</b>" +
+    gOverlay("<div><b>💥 本局结束</b><br>" + whyHtml + "<br>得分 <b>" + gScore + "</b>" +
              "<div style='margin-top:14px;display:flex;gap:10px;justify-content:center'>" +
              "<button class='ghost' onclick='window.__gRetry && window.__gRetry()'>↻ 再来一局</button>" +
              "<button class='ghost' onclick='window.__gHome && window.__gHome()'>✕ 返回</button></div></div>");
     window.__gRetry = gStart;
     window.__gHome = function () { gQuit(); };
     $("gameHearBtn").disabled = true;
-    log("💥 按错 → 本局结束：应按 S" + wn.num + "（" + wn.cn + "），按成了 S" + pn.num + "（" + pn.cn + "）");
+    log("💥 本局结束（" + (timedOut ? "落线超时没按" : "按错") + "）：" + whyHtml.replace(/<[^>]+>/g, ""));
   }
 
   function gStart() {
@@ -1237,6 +1242,23 @@
   let gLastFrameT = 0;
   function gFrameK(dtMs) { return dtMs / FRAME_MS; }                      /* 60Hz→1、30Hz→2 */
   function gStepK(dtMs) { return gFrameK(Math.min(MAX_STEP_MS, dtMs)); }  /* 带上限的折算 */
+
+  /* ★ 音符落到判定线后，不再"无限等你按"：NOTE_HOLD_LIMIT_MS 内没按对 → 也结束本局
+     （用户 2026-10-16 追加：与"按错即结束"配套的第二条失败判据）。
+     抽成独立函数，好让自测能直接调（自测走不到 requestAnimationFrame 内部）。 */
+  const NOTE_HOLD_LIMIT_MS = 2500;      /* 落定后给多少反应时间（毫秒） */
+  function checkNoteTimeout(nowMs) {
+    if (gState !== "playing" || !gNotes.length) return false;
+    const nt = gNotes[0];
+    if (!nt.arrived) return false;
+    if (nt.arrivedAt === undefined) { nt.arrivedAt = nowMs; return false; }  /* 兜底：没记时间就从现在起算 */
+    if (nowMs - nt.arrivedAt <= NOTE_HOLD_LIMIT_MS) return false;
+    /* ★ 传 null 而不是音轨号：否则会被 gOver 当成"按错键"，文案会写成
+       "你按成了 哆（S1）"（明明一下都没按）。null → 走"落线超时没按"文案。 */
+    gOver(null);
+    return true;
+  }
+
   function gFrame() {
     const nowMs = performance.now();
     const k = gStepK(gLastFrameT ? nowMs - gLastFrameT : FRAME_MS);
@@ -1253,11 +1275,12 @@
       for (let i = 0; i < gNotes.length; i++) {
         const nt = gNotes[i];
         if (!nt.arrived) {
-          const p = Math.min(1, (performance.now() - nt.fallStart) / nt.fallMs);
+          const p = Math.min(1, (nowMs - nt.fallStart) / nt.fallMs);
           nt.y = NOTE_TOP_Y + (nt.ty - NOTE_TOP_Y) * p;
-          if (p >= 1) { nt.y = nt.ty; nt.arrived = true; }
+          if (p >= 1) { nt.y = nt.ty; nt.arrived = true; nt.arrivedAt = nowMs; }
         }
       }
+      checkNoteTimeout(nowMs);   /* 落定后超时没按 → 结束本局 */
     }
 
     /* 夜空背景 */
@@ -1653,6 +1676,23 @@
       applyBoardValue("vol", 77);
       ok("K8 板子 state 回包 → 反手把滑块对齐到板子的值",
          $("volume").value === "77" && $("volumeVal").textContent === "77");
+
+      /* ---------- L. 音符落到判定线后超时没按 → 也结束（2026-10-16 追加规则） ---------- */
+      gStart();
+      gNotes[0].arrived = true;
+      gNotes[0].arrivedAt = performance.now();
+      const lT0 = gNotes[0].arrivedAt;
+      ok("L1 刚落定不算超时（还在反应时间内）",
+         checkNoteTimeout(lT0 + 100) === false && gState === "playing");
+      ok("L2 落定后超过 " + (NOTE_HOLD_LIMIT_MS / 1000) + " 秒没按 → 本局结束",
+         checkNoteTimeout(lT0 + NOTE_HOLD_LIMIT_MS + 1) === true && gState === "over");
+      /* 到判定线后按对，就不该再被超时判负 */
+      gStart();
+      gNotes[0].arrived = true;
+      gNotes[0].arrivedAt = performance.now();
+      gameOnKey(gSeq[gPos], 1);
+      ok("L3 到判定线后按对 → 不触发超时",
+         gState === "playing" && checkNoteTimeout(performance.now()) === false);
     } finally {
       gQuit();
       gState = snap.state; gSeq = snap.seq; gPos = snap.pos; gCombo = snap.combo;

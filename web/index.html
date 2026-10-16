@@ -65,8 +65,16 @@
              display:inline-flex; align-items:center; gap:5px;
              transition:background .15s,border-color .15s; }
   .menubtn:hover { background:rgba(255,255,255,.12); border-color:rgba(255,255,255,.32); color:var(--txt); }
-  .workspace { min-height:100vh; display:flex; flex-direction:column;
-               align-items:center; justify-content:center; gap:14px; padding:76px 16px 28px; }
+  /* 三栏：左（曲目 / 操作 / 图例）— 中（画布）— 右（战况 / 提示）。
+     说明文字从上下搬到左右，画布就能靠"高度"撑起来，音符下落路程更长。 */
+  .workspace { min-height:100vh; display:flex; flex-direction:row;
+               align-items:center; justify-content:center; gap:22px; padding:72px 18px 24px; }
+  .stage-col { display:flex; flex-direction:column; align-items:center; gap:12px; }
+  .side { display:flex; flex-direction:column; gap:12px; width:212px; }
+  .side .card { background:rgba(255,255,255,.035); border:1px solid var(--line);
+                border-radius:14px; padding:12px 14px; }
+  .side h3 { margin:0 0 10px; font-size:11px; letter-spacing:1.2px; color:#7b8497;
+             font-weight:700; text-transform:uppercase; }
   .note code { background:#0a0e14; border-radius:4px; padding:1px 5px; color:#cfe; }
   .drawer-mask { position:fixed; inset:0; background:rgba(4,8,14,.55); opacity:0; visibility:hidden;
                  transition:opacity .2s; z-index:70; }
@@ -109,11 +117,13 @@
   .logbox pre { margin-top:10px; }
 
   /* ---- 🎮 跟弹闯关：窄版竖画布 + 四周大片留白 ---- */
-  .stage { position:relative; width:min(420px, 88vw); border-radius:18px; overflow:hidden;
-           background:#080b10;
+  /* 画布尺寸改由"高度"决定（原来由宽度决定 → 被 420px 宽卡住，只有约 595px 高）。
+     高度取自视口 + 固定纵横比 480:880（与 JS 里的 GW:GH 一致），宽度随高度算出来。 */
+  .stage { position:relative; height:min(78vh, 780px); aspect-ratio:480 / 880;
+           border-radius:18px; overflow:hidden; background:#080b10;
            box-shadow:0 0 0 1px rgba(255,255,255,.07), 0 0 0 6px rgba(90,209,192,.05),
                       0 28px 70px rgba(0,0,0,.66), 0 0 46px rgba(90,209,192,.10); }
-  .stage canvas { display:block; width:100%; height:auto; }
+  .stage canvas { display:block; width:100%; height:100%; }
   .stage .overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
                     text-align:center; padding:20px; font-size:14px; line-height:1.6; color:var(--sub);
                     background:rgba(5,7,10,.68); }
@@ -145,6 +155,21 @@
   .keymap i { font-style:normal; font-size:12px; padding:4px 10px; border-radius:999px;
               border:1px solid var(--line); background:rgba(255,255,255,.04); color:#c9d2e0; }
   .keymap i b { color:#fff; font-weight:700; margin-right:3px; }
+  /* 侧栏排版：这些原来是"横向居中一行"，进侧栏后改成"纵向填满一栏" */
+  .side .gamebar { flex-direction:column; align-items:stretch; }
+  .side .gamebar select, .side .gamebar button { width:100%; }
+  .side .game-stats { flex-direction:column; align-items:stretch; }
+  .side .game-stats span { text-align:center; }
+  .side .keymap { max-width:none; justify-content:flex-start; }
+  .side .banner { max-width:none; }
+  .side #gameMeta { text-align:left; }
+  /* 窄屏（<680px，基本只剩手机竖屏）才退回"上下一列"。
+     断点定得低一点：常见笔记本 / 桌面窗口都走三栏，免得白白退回竖排又把上下空间占掉。 */
+  @media (max-width: 680px) {
+    .workspace { flex-direction:column; gap:14px; }
+    .side { width:min(420px, 92vw); }
+    .stage { height:min(62vh, 580px); }
+  }
   @media (prefers-reduced-motion: reduce) {
     .drawer, button, .menubtn { transition:none; }
   }
@@ -162,36 +187,51 @@
   </header>
 
   <main class="workspace">
-    <div class="gamebar">
-      <select id="gameSel" aria-label="选择曲目">
-        <option value="0">小星星</option>
-        <option value="1">两只老虎</option>
-        <option value="2">欢乐颂</option>
-      </select>
-      <button id="gameRetryBtn" class="ghost">↻ 重来</button>
-      <button id="gameHearBtn" class="ghost" disabled>🎧 再听一遍</button>
-      <button id="gameExitBtn" class="ghost" title="退出本局（Esc）">✕ 退出</button>
+    <!-- 左栏：曲目 / 操作 / 键位图例（原先在画布上方的说明，搬到侧边） -->
+    <aside class="side left">
+      <div class="card">
+        <h3>曲目</h3>
+        <div class="gamebar">
+          <select id="gameSel" aria-label="选择曲目">
+            <option value="0">小星星</option>
+            <option value="1">两只老虎</option>
+            <option value="2">欢乐颂</option>
+          </select>
+          <button id="gameRetryBtn" class="ghost">↻ 重来</button>
+          <button id="gameHearBtn" class="ghost" disabled>🎧 再听一遍</button>
+          <button id="gameExitBtn" class="ghost" title="退出本局（Esc）">✕ 退出</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3>键位图例</h3>
+        <div class="keymap" aria-label="键位对应">
+          <i><b>1</b>哆</i><i><b>2</b>唻</i><i><b>3</b>咪</i><i><b>4</b>发</i>
+          <i><b>5</b>嗦</i><i><b>6</b>啦</i><i><b>7</b>唏</i><i><b>8</b>高哆</i>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 中栏：画布独占上下空间（音符的下落路程因此变长） -->
+    <div class="stage-col">
+      <div class="stage">
+        <canvas id="gameCanvas"></canvas>
+        <div class="overlay" id="gameOverlay"></div>
+      </div>
     </div>
 
-    <div class="stage">
-      <canvas id="gameCanvas"></canvas>
-      <div class="overlay" id="gameOverlay"></div>
-    </div>
-
-    <div class="banner" id="gameBanner"></div>
-
-    <div class="game-stats">
-      <span>进度 <b id="gameProg">0/0</b></span>
-      <span>连击 <b id="gameCombo">0</b></span>
-      <span>得分 <b id="gameScore">0</b></span>
-    </div>
-
-    <div class="keymap" aria-label="键位对应">
-      <i><b>1</b>哆</i><i><b>2</b>唻</i><i><b>3</b>咪</i><i><b>4</b>发</i>
-      <i><b>5</b>嗦</i><i><b>6</b>啦</i><i><b>7</b>唏</i><i><b>8</b>高哆</i>
-    </div>
-
-    <p class="mini" id="gameMeta">按 <b>1–8</b>（或板子 S1~S8）弹音 · 点「▶ 开始」闯关</p>
+    <!-- 右栏：战况 / 提示 / 结算（原先在画布下方的说明，搬到侧边） -->
+    <aside class="side right">
+      <div class="card">
+        <h3>战况</h3>
+        <div class="game-stats">
+          <span>进度 <b id="gameProg">0/0</b></span>
+          <span>连击 <b id="gameCombo">0</b></span>
+          <span>得分 <b id="gameScore">0</b></span>
+        </div>
+      </div>
+      <div class="banner" id="gameBanner"></div>
+      <p class="mini" id="gameMeta">按 <b>1–8</b>（或板子 S1~S8）弹音 · 点「▶ 开始」闯关</p>
+    </aside>
   </main>
 
   <div class="drawer-mask" id="drawerMask"></div>
@@ -807,10 +847,13 @@
   /* ---- 画面常量（逻辑坐标） ---- */
   const CV = $("gameCanvas");
   const gctx = CV.getContext("2d");
-  const GW = 480, GH = 680;      /* 画布逻辑宽高（窄版/竖版，四周大片留白） */
+  /* 画布逻辑宽高。★ GH 由 680 提到 880、判定线由 486 下移到 640：
+     音符下落路程 546px → 700px（+28%）。配合侧栏布局（上下不再被文字挤占），
+     顶端到底部的"跑道"明显变长。CSS 里 .stage 的纵横比必须是 480:880 —— 改一处要两处一起改。 */
+  const GW = 480, GH = 880;
   const LANES = 8;
   const LANE_W = GW / LANES;
-  const JUDGE_Y = 486;           /* 判定线：音符停在这里等你射 */
+  const JUDGE_Y = 640;           /* 判定线：音符停在这里等你射 */
   const GAP = 36;                /* 队列里相邻音符的间距 */
   const ARCHER_Y = GH - 28;      /* 弓箭手脚下（与判定线留出大间距，音符/角色不挤） */
   function laneX(i) { return LANE_W * i + LANE_W / 2; }

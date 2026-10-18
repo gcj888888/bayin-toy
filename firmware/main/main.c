@@ -125,6 +125,23 @@ static feedback_gate_t s_drop_gate;
 static int64_t s_drop_flash_until_us;
 #define DROP_FLASH_US 300000 /* D3+D2 快闪 300ms（更明显，用户一眼可辨） */
 
+/* ★ 游戏模式的按键点灯（用户 2026-10-17 明确要求，2026-10-18 口径确认）：
+ *   8 个音符对 5 颗灯本来就不够分，所以**固定只亮 D3 一颗灯当"显示器"**，
+ *   用**颜色**来区分是哪个音（8 个音 8 种颜色）。其它 4 颗保持不亮。
+ *   原口径是"游戏：由网页呈现，板子不点灯"，于是按键后唯一能看见的只有
+ *   「按键被丢弃」的 D3+D2 白闪 —— 与用户反馈"按了键灯不亮、只有 D3 亮"一致。 */
+static int64_t s_game_led_until_us;
+static uint8_t s_game_led_note = MUSIC_NOTE_DO;
+#define GAME_LED_US 320000 /* 按下后亮 ~320ms，够看清 */
+
+#define GAME_LED_INDEX 2 /* ★ 固定 D3（0 基索引 2）；颜色随音符变 */
+
+static int note_to_led_index(uint8_t note)
+{
+    (void)note; /* 音高不改变灯位：永远 D3 */
+    return GAME_LED_INDEX;
+}
+
 /* 语音提示：素材见 prompt_format.h，资源在 rec 分区 slot5+。
  * ★ 所有播报都经 piano_fsm 的"一次性语音闩锁"：main 每轮回调 piano_take_voice()
  *   取走待播句（取走即清，绝不重复），再交给 prompt_play 播放。 */
@@ -506,6 +523,17 @@ static void play_note(uint8_t note)
         }
     }
     s_last_play_note = note;
+
+    /* ★ 游戏模式：按下即点灯 —— 亮对应 D_N、颜色取该音符的颜色；并落一条串口日志便于自证
+     *   （{"t":"log","tag":"led","msg":"game note=N -> Dk rgb=r,g,b"}）。
+     * 只对游戏模式生效：自弹"未记谱不亮音色灯"的既有口径不变。 */
+    if (piano_get_mode() == PIANO_MODE_GAME) {
+        const music_color_t c = music_note_color((music_note_t)note);
+        s_game_led_note = note;
+        s_game_led_until_us = esp_timer_get_time() + GAME_LED_US;
+        RLOG("led", "game note=%u -> D%d rgb=%u,%u,%u", (unsigned)note,
+             note_to_led_index(note) + 1, c.r, c.g, c.b);
+    }
 }
 
 /* 起播核心：试听池/回放池共用（缓存事件并预约首音延时） */
@@ -953,8 +981,15 @@ static void refresh_leds(void)
             frame_one(frame, playpool_next_slot(), c.r, c.g, c.b);
         }
         /* 未记谱：不亮音色灯 */
+    } else if (mode == PIANO_MODE_GAME) {
+        /* ★ 游戏：按下音符键 → **只亮 D3**，颜色 = 该音符的颜色（用户 2026-10-17 要求）。
+           固定一颗灯当显示器是因为「8 个音 / 5 颗灯」不够分；颜色负责区分音高。
+           亮 GAME_LED_US(~320ms) 后自动灭；下一次按键重新计时。 */
+        if (esp_timer_get_time() < s_game_led_until_us) {
+            const music_color_t c = music_note_color((music_note_t)s_game_led_note);
+            frame_one(frame, note_to_led_index(s_game_led_note), c.r, c.g, c.b);
+        }
     }
-    /* PIANO_MODE_GAME：由网页呈现，板子不点灯 */
 
     /* 「按键因语音忙被丢弃」反馈：窗口内把 D3+D2 同时覆盖成亮白快闪一次（~300ms） */
     if (esp_timer_get_time() < s_drop_flash_until_us) {

@@ -19,6 +19,7 @@ idf_component_register(
         "seq/pattern.c"
         "seq/sequencer.c"
         "host/host_link.c"
+        "host/host_ble.c"
         "host/json_field.c"
     INCLUDE_DIRS
         "."
@@ -36,6 +37,7 @@ idf_component_register(
         esp_timer
         nvs_flash
         esp_partition
+        bt
         heap
     EMBED_FILES
         "audio/samples/kick.raw"

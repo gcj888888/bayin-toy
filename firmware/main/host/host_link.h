@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdbool.h>
+#include <stddef.h>
 #include <stdint.h>
 
 #include "esp_err.h"
@@ -98,6 +99,10 @@ typedef void (*host_on_song_play_fn)(uint8_t slot);
 typedef void (*host_on_rec_inject_fn)(const song_ev_t *ev, int count);
 /** pb_play：直接起播回放池第 slot 槽（等价回放模式按 S1）。 */
 typedef void (*host_on_pb_play_fn)(uint8_t slot);
+/** pad_key：从串口**注入一路按键**（走与物理按键完全相同的 handle_pads 路径，台架自测用）。
+ *  为什么需要：固件只"往外发" key 事件、没有任何"收 key"的命令，
+ *  所以电脑端无法自动按板子的键去验证「游戏模式按键 → 只亮 D3、颜色随音符变」。 */
+typedef void (*host_on_pad_key_fn)(uint8_t index, bool down);
 
 typedef struct {
     host_on_transport_fn on_transport;
@@ -134,10 +139,18 @@ typedef struct {
     /* 台架自测诊断命令（BAYIN_ENABLE_DIAG） */
     host_on_rec_inject_fn on_rec_inject;
     host_on_pb_play_fn on_pb_play;
+    host_on_pad_key_fn on_pad_key;
 } host_link_handlers_t;
 
 void host_link_set_handlers(const host_link_handlers_t *handlers);
 void host_link_poll_rx(void);
+
+/* ---- 多链路支持（USB + BLE 走同一套换行 JSON 协议）----
+ * sink：host_write（板子 → 电脑的每一行）在 printf 之后额外回调一次（BLE 用来 notify）；
+ * feed_rx：把别的链路（BLE）收到的字节喂进**同一套**换行 JSON 解析器。 */
+typedef void (*host_line_sink_fn)(const char *line);
+void host_link_set_sink(host_line_sink_fn fn);
+void host_link_feed_rx(const char *data, size_t n);
 
 /* 解析并执行一行 JSON 命令（host_link_poll_rx 内部调用）。
  * 暴露出来仅用于宿主测试，正常固件请勿直接调用。 */

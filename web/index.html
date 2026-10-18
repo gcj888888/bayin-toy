@@ -245,21 +245,22 @@
       <button id="drawerClose" class="iconbtn" aria-label="关闭菜单">✕</button>
     </div>
     <p class="hint">
-      用 <b>Chrome 或 Edge</b> 打开本页（须经 http://localhost 或 https 访问）。点“连接键盘”，在弹窗里选
-      <b>USB 串行设备</b>；连上后拖滑块可改灯亮度 / 音量，断电也记住。<br>
+      用 <b>Chrome 或 Edge</b> 打开本页（须经 http://localhost 或 https 访问）。想插数据线就用「连接键盘（数据线）」，
+      在弹窗里选 <b>USB 串行设备</b>；不想插线就用「蓝牙连接」，在弹窗里选 <b>EasyInput-Piano</b>。连上后拖滑块可改灯亮度 / 音量，断电也记住。<br>
       开始游戏前可在主界面选择「简单模式 / 专家模式」，玩法见下方「📖 游戏说明」。
     </p>
 
     <div class="warnbar" id="warnbar">
       ⚠️ <b>检测到你是用“双击文件”直接打开本页</b>（网址以 <code>file://</code> 开头）。
-      Chrome 的 Web Serial（连键盘用的）在 <code>file://</code> 下经常连不上，滑块就会“没反应”。<br>
+      Chrome 的 Web Serial / Web Bluetooth（连键盘用的）在 <code>file://</code> 下经常连不上，滑块就会“没反应”。<br>
       请改为通过本地服务器打开：在终端里 <code>python -m http.server 8765</code>，
-      然后浏览器访问 <b>http://127.0.0.1:8765/index.html</b> 再点“连接键盘”。
+      然后浏览器访问 <b>http://127.0.0.1:8765/index.html</b> 再点连接。
     </div>
 
     <div class="group-title">🔌 连接</div>
     <div class="bar">
-      <button id="connect">连接键盘</button>
+      <button id="connect">连接键盘（数据线）</button>
+      <button id="connectBt">蓝牙连接（不用数据线）</button>
       <span id="status">未连接</span>
     </div>
 
@@ -478,6 +479,7 @@
   const statusEl = $("status");
   const logEl = $("log");
   const connectBtn = $("connect");
+  const connectBtBtn = $("connectBt");
 
   /* 双击文件打开时 file:// 下 Web Serial 基本连不上 → 弹警告教用户用本地服务器 */
   if (location.protocol === "file:") {
@@ -821,7 +823,7 @@
     if (writer) { try { writer.releaseLock(); } catch (e) {} writer = null; }
     port = null;
     setStatus("键盘已断开，请重新连接", false);
-    connectBtn.textContent = "连接键盘";
+    connectBtn.textContent = "连接键盘（数据线）";
     gQuit("⚠️ 串口断开：已回到初始状态，请重新连接键盘");
   }
 
@@ -1742,21 +1744,26 @@
    * 筛选口径（硬条件，缺一不可）：① 旋律里**没有升降号**（8 个键按不出黑键音）；
    *   ② 音域**不超过一个八度**（允许整体移调后落进 1~8，8 = 高哆）。
    * 数据来源：jianpu.space 的**文本简谱**（人工录入版），以音高顺序为准、节奏做了简化。
+   * ★ 时长要求（用户 2026-10-18）：**每首 ≥110 拍**（板子按 300ms/拍 ≈ **33 秒**）、**≥40 个音**
+   *   —— 已在自测里做成硬断言（R1），谁把曲子改短了自测会红。
+   * 诚实的边界：生日歌 / 小蜜蜂 / 茉莉花 / 青春舞曲 **天生就短**（本体 8~29 秒），
+   *   为达到 30 秒是**按原曲结构把段落重复**；《夜空中最亮的星》的高音副歌（2'/3'/6'）与
+   *   《想見你》的副歌后半段**超出 8 键**，只取了能弹的部分（主歌重复）。
    * 反例（弹不了，别试）：青花瓷 / 告白氣球 / 小蘋果 / 送別（音域超一个八度）；
    *   後來 / 遇見 / 魯冰花（含黑键音 #4 / b7 之类）。
    */
   const PRESET_SCORES = [
-    ["稻香（周杰倫）", "5 5 5 - 5 5 - 5 5 5 3 2 1 1 3 3 - 3 3 - 3 3 3 3 1 6 6 1 1 - 1 1 2 2 2 2 1 3"],
-    ["想見你想見你想見你（八三夭）", "1 7 1 3 2 3 - 5 2 1 2 - 7 7 1 1 - 3 5 1 7 1 8"],
-    ["寧夏（梁靜茹）", "3 5 6 1 1 3 3 3 3 2 1 1 5 5 3 5 6 1 1 6 6 1 6 5"],
-    ["夜空中最亮的星（主歌）", "6 5 6 5 6 8 8 - 1 4 5 4 - 4 5 6 4 1 4 5 6 4 1 5 6 - 1"],
-    ["萍聚", "1 2 3 5 5 6 5 3 2 3 2 1 1 1 6 6 1 2"],
-    ["茉莉花", "3 3 5 6 8 8 6 5 5 6 5"],
-    ["生日歌", "5 5 6 5 1 7 - 5 5 6 5 2 1 - 5 5 5 3 1 7 6 - 4 4 3 1 2 1 -"],
-    ["Da Da Da（王心凌）", "3 3 3 5 4 5 4 3 2 1 1 1"],
-    ["捉泥鰍", "6 6 5 6 5 3 5 3 3 2 3 2 2 1 2 2 5 5 3 3 2 3"],
-    ["青春舞曲", "5 4 2 3 5 4 3 2 1 1 6 5"],
-    ["小蜜蜂（练习曲）", "5 3 3 - 4 2 2 - 1 2 3 4 5 5 5 - 5 3 3 - 4 2 2 - 1 3 5 5 1 - - -"]
+    ["稻香（周杰倫）", "5 5 5 - 5 5 - 5 5 5 3 2 1 1 3 3 - 3 3 - 3 3 3 3 1 6 6 1 1 - 1 1 2 2 2 2 1 3 3 - 3 5 1 1 6 1 6 1 - 1 1 2 2 2 2 3 1 1 6 1 - 1 1 2 2 2 2 3 1 1 6 1 - 1 1 2 2 2 2 1 3 3 1 - 1 1 6 1 1 1 6 1 6 1 - 1 1 2 2 2 2 3 1 1 1 6 1 - 1 1 2 2 2 2 3 1 1 4 3 2 2 1 2 1 2 3 1 - 3 5 5 5 5 - 5 5 - 5 5 5 3 2 1 1 3 3 - 3 3 - 3 3 3 3 1 6 6 1 1 - 1 1 2 2 2 2 1 3"],
+    ["想見你想見你想見你（八三夭）", "1 7 1 3 2 3 - 5 2 1 2 - 7 7 1 1 - 3 5 1 7 1 8 3 2 3 - 5 2 1 2 - 7 7 8 8 - 3 5 - 8 7 8 6 5 6 - 8 5 8 5 - 3 4 6 5 - 6 2 3 2 - 8 7 8 3 2 3 - 5 2 1 2 - 7 7 8 8 - 3 5 - 8 7 8 6 5 6 - 8 5 8 5 - 3 4 6 5 - 6 2 3 2 - 8 7 8 3 2 3 - 5 2 1 2 - 7 7 8 8 - 3 5 -"],
+    ["寧夏（梁靜茹）", "3 5 6 1 1 3 3 3 3 2 1 1 5 5 3 5 6 1 1 6 6 1 6 5 5 - 3 3 2 1 2 3 6 5 5 5 5 5 6 1 1 6 2 - 5 6 1 2 3 5 5 6 3 2 - 2 6 1 - - - 3 5 5 2 5 1 1 2 3 5 5 4 5 6 7 1 6 7 1 2 2 - 3 5 5 2 5 1 1 2 3 5 5 - - 4 5 6 7 1 - 6 7 1 2 1 1 - - -"],
+    ["夜空中最亮的星（主歌）", "6 5 6 5 6 8 8 - 1 4 5 4 - 4 5 6 4 1 4 5 6 4 1 5 6 - 1 6 5 6 5 6 8 8 - 1 4 5 4 - 4 4 5 6 4 1 4 5 6 4 8 5 6 8 8 8 6 5 6 5 6 8 8 - 1 4 5 4 - 4 5 6 4 1 4 5 6 4 1 5 6 - 1 6 5 6 5 6 8 8 - 1 4 5 4 - 4 4 5 6 4 1 4 5 6 4 8 5 6 8 8 8"],
+    ["萍聚", "1 2 3 5 5 6 5 3 2 3 2 1 1 1 6 6 1 2 1 2 3 5 5 6 5 3 3 2 1 1 1 6 6 5 1 - 1 1 2 1 2 3 4 5 6 5 3 5 6 6 6 5 3 2 1 2 5 6 1 2 3 5 5 6 5 3 3 2 1 1 1 6 6 5 1 - 1 2 3 5 5 6 5 3 2 3 2 1 1 1 6 6 1 2 1 2 3 5 5 6 5 3 3 2 1 1 1 6 6 5 1 - 1 1 2 1 2 3 4 5 6 5 3 5 6 6 6 5 3 2 1 2 5 6 1 2 3 5 5 6 5 3 3 2 1 1 1 6 6 5 1 -"],
+    ["茉莉花", "3 - 3 5 6 8 8 6 5 - 5 6 5 - - - 3 - 2 3 5 - 3 2 1 - 1 2 1 - - - 3 - 3 5 6 8 8 6 5 - 5 6 5 - - - 3 - 3 5 6 8 8 6 5 - 5 6 5 - - - 5 - 5 5 5 - 3 5 6 - 6 6 5 - - - 3 - 2 3 5 - 3 2 1 - 1 2 1 - - - 3 - 3 5 6 8 8 6 5 - 5 6 5 - - -"],
+    ["生日歌", "5 5 6 5 1 7 - 5 5 6 5 2 1 - 5 5 5 3 1 7 6 - 4 4 3 1 2 1 - 5 5 6 5 1 7 - 5 5 6 5 2 1 - 5 5 5 3 1 7 6 - 4 4 3 1 2 1 - 5 5 6 5 1 7 - 5 5 6 5 2 1 - 5 5 5 3 1 7 6 - 4 4 3 1 2 1 - 5 5 6 5 1 7 - 5 5 6 5 2 1 - 5 5 5 3 1 7 6 - 4 4 3 1 2 1 -"],
+    ["Da Da Da（王心凌）", "3 3 3 5 4 5 4 3 2 1 1 1 5 5 5 5 4 3 4 3 3 - 3 3 3 3 3 3 5 4 4 - 4 5 3 3 3 5 4 5 4 3 2 1 1 1 3 3 3 5 4 5 4 3 2 1 1 1 5 5 5 5 4 3 4 3 3 - 3 3 3 3 3 3 5 4 4 - 4 5 3 3 3 5 4 5 4 3 2 1 1 1 3 3 3 5 4 5 4 3 2 1 1 1 5 5 5 5 4 3 4 3 3 - 3 3 3 3 3 3 5 4 4 - 4 5 3 3 3 5 4 5 4 3 2 1 1 1 3 3 3 5 4 5 4 3 2 1 1 1"],
+    ["捉泥鰍", "6 6 5 6 5 3 5 3 3 2 3 - 2 2 1 2 2 5 5 3 3 2 3 - 6 6 5 6 5 3 4 4 4 3 2 3 - 5 5 5 5 5 7 6 6 6 6 5 6 - 8 8 8 7 6 5 6 6 6 6 5 6 5 3 5 5 5 5 5 7 6 6 6 6 5 6 - 6 6 5 6 5 3 5 3 3 2 3 - 2 2 1 2 2 5 5 3 3 2 3 - 6 6 5 6 5 3 4 4 4 3 2 3 - 5 5 5 5 5 7 6 6 6 6 5 6 - 8 8 8 7 6 5 6 6 6 6 5 6 5 3 5 5 5 5 5 7 6 6 6 6 5 6 -"],
+    ["青春舞曲", "5 4 2 3 5 4 3 2 1 1 6 5 - 5 4 2 3 5 4 3 2 1 1 1 1 - 1 1 4 6 5 8 4 5 5 4 5 - 5 4 2 3 5 4 3 2 1 1 6 5 - 5 4 2 3 5 4 3 2 1 1 1 1 - 1 3 3 3 3 2 1 3 2 1 2 - 2 3 4 6 5 4 3 2 1 1 1 - 1 3 3 3 3 2 1 3 2 1 2 - 2 3 4 6 5 4 3 2 1 1 1 -"],
+    ["小蜜蜂（练习曲）", "5 3 3 - 4 2 2 - 1 2 3 4 5 5 5 - 5 3 3 - 4 2 2 - 1 3 5 5 1 - - - 5 3 3 - 4 2 2 - 1 3 5 5 3 - - - 2 2 2 2 2 3 4 - 3 3 3 3 3 4 5 - 5 3 3 - 4 2 2 - 1 3 5 5 1 - - - 5 3 3 - 4 2 2 - 1 2 3 4 5 5 5 - 5 3 3 - 4 2 2 - 1 3 5 5 3 - - - 2 2 2 2 2 3 4 - 3 3 3 3 3 4 5 - 5 3 3 - 4 2 2 - 1 3 5 5 1 - - -"]
   ];
   const PRESET_SONGS = PRESET_SCORES.map(function (p) {
     const s = userSongToGame({ name: p[0], notes: parseScore(p[1]).notes, score: p[1] });
@@ -2080,6 +2087,20 @@
       $("myPresets").click();
       ok("Q4 一键加入推荐歌单 → 落进「我的歌单」（之后可载入并存入板子槽位）",
          loadMySongs().length === PRESET_SONGS.length, "n=" + loadMySongs().length);
+
+      /* ---------- R. 时长契约（用户要求"每首至少 30 秒"） ---------- */
+      const beatsOf = function (p) {
+        return parseScore(p[1]).notes.reduce(function (a, n) { return a + n[1]; }, 0) / MY_BEAT_MS;
+      };
+      const shortList = PRESET_SCORES.filter(function (p) {
+        return beatsOf(p) < 110 || parseScore(p[1]).notes.length < 40;
+      });
+      ok("R1 每首推荐歌都 ≥110 拍（板子按 300ms/拍 ≈33 秒）且 ≥40 个音",
+         shortList.length === 0,
+         shortList.length
+           ? shortList.map(function (p) { return p[0] + "=" + beatsOf(p).toFixed(0) + "拍"; }).join(" | ")
+           : "最短 " + Math.min.apply(null, PRESET_SCORES.map(function (p) { return beatsOf(p); })).toFixed(0)
+             + " 拍 / 最少 " + Math.min.apply(null, PRESET_SCORES.map(function (p) { return parseScore(p[1]).notes.length; })) + " 音");
     } finally {
       myStopLocal();                       /* 别让自测留下的试听定时器在页面上继续响 */
       gQuit();
@@ -2108,17 +2129,107 @@
     }, 300);   /* 等页面初始化完 */
   }
 
+  /* ================= 🔗 蓝牙（Web Bluetooth · BLE NUS）=================
+   * 不想插数据线时用这个：板子广播名以 "EasyInput" 开头，服务/特征用 Nordic UART
+   * 那套 UUID（板子固件里也是这套）。收发仍是"换行 JSON"，与 USB 完全同协议 ——
+   * 所以连上后只把 writer 换成一个"假 writer"（只有 .write/.releaseLock），
+   * 下行链路（sendObj 等）其余代码一行都不用改。 */
+  const BLE_NAME_PREFIX = "EasyInput";
+  const BLE_SVC = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
+  const BLE_RX  = "6e400002-b5a3-f393-e0a9-e50e24dcca9e";  /* 电脑 → 板子（写） */
+  const BLE_TX  = "6e400003-b5a3-f393-e0a9-e50e24dcca9e";  /* 板子 → 电脑（通知） */
+  const BLE_CHUNK = 20;   /* 保守值：即使只协商成功最小 MTU(23) 也放得下（20 = MTU-3） */
+  let btDevice = null, btRxChar = null, btTxChar = null, btBuf = "";
+
+  /* 一行文本按 20 字节切片写出去（BLE 单包上限就这么点） */
+  async function writeBT(msg) {
+    if (!btRxChar) return;
+    const bytes = new TextEncoder().encode(msg);
+    for (let i = 0; i < bytes.length; i += BLE_CHUNK) {
+      const chunk = bytes.slice(i, i + BLE_CHUNK);
+      if (btRxChar.properties && btRxChar.properties.writeWithoutResponse) {
+        await btRxChar.writeValueWithoutResponse(chunk);
+      } else {
+        await btRxChar.writeValue(chunk);
+      }
+    }
+  }
+
+  /* 板子的 notify 是切片来的：按 '\n' 重组，凑成完整一行再交给 handleLine */
+  function onBTData(e) {
+    const v = e.target.value;
+    if (!v) return;
+    btBuf += new TextDecoder().decode(v);
+    let nl;
+    while ((nl = btBuf.indexOf("\n")) >= 0) {
+      const line = btBuf.slice(0, nl).trim();
+      btBuf = btBuf.slice(nl + 1);
+      if (line) handleLine(line);
+    }
+  }
+
+  function onBTLost() {
+    if (!btDevice) return;
+    btDevice = null; btRxChar = null; btTxChar = null; btBuf = "";
+    writer = null;
+    setStatus("蓝牙已断开，请重新连接", false);
+    connectBtn.textContent = "连接键盘（数据线）";
+    connectBtBtn.textContent = "蓝牙连接（不用数据线）";
+    gQuit("⚠️ 蓝牙断开：已回到初始状态，请重新连接");
+  }
+
+  async function connectBT() {
+    if (!("bluetooth" in navigator)) {
+      setStatus("这个浏览器不支持 Web Bluetooth，请用 Chrome / Edge", false);
+      return;
+    }
+    if (port) disconnect();
+    try {
+      setStatus("正在搜索蓝牙…", false);
+      const device = await navigator.bluetooth.requestDevice({
+        filters: [{ namePrefix: BLE_NAME_PREFIX }],
+        optionalServices: [BLE_SVC]
+      });
+      device.addEventListener("gattserverdisconnected", onBTLost);
+      const server = await device.gatt.connect();
+      const svc = await server.getPrimaryService(BLE_SVC);
+      btRxChar = await svc.getCharacteristic(BLE_RX);
+      btTxChar = await svc.getCharacteristic(BLE_TX);
+      if (btTxChar.properties && btTxChar.properties.notify) {
+        await btTxChar.startNotifications();
+        btTxChar.addEventListener("characteristicvaluechanged", onBTData);
+      }
+      btDevice = device;
+      btBuf = "";
+      /* ★ 假 writer：让整个下行链路（sendObj 等）原样复用，无需任何分支 */
+      writer = { write: function (m) { return writeBT(m); }, releaseLock: function () {} };
+      setStatus("已连接（蓝牙）✅", true);
+      connectBtn.textContent = "连接键盘（数据线）";
+      connectBtBtn.textContent = "断开蓝牙";
+      $("brightnessVal").textContent = brightness.value;
+      $("volumeVal").textContent = volume.value;
+      /* 与 USB 一致：连上先要一次真实状态（回 hello + state + 曲库清单） */
+      sendCmd("ping", 1);
+      sendObj({ v: 2, cmd: "song_list" });
+      log("🔗 已通过蓝牙连接板子（" + (device.name || "EasyInput-Piano") + "）：正在同步状态…");
+    } catch (e) {
+      setStatus("蓝牙连接失败：" + e, false);
+      btDevice = null;
+    }
+  }
+
   async function connect() {
     if (!("serial" in navigator)) {
       setStatus("这个浏览器不支持 Web Serial，请用 Chrome / Edge", false);
       return;
     }
+    if (btDevice) disconnect();   /* 蓝牙已连着就先断开，避免两条链路打架 */
     try {
       port = await navigator.serial.requestPort();
       await port.open({ baudRate: 115200 });
       writer = port.writable.getWriter();
       setStatus("已连接 ✅", true);
-      connectBtn.textContent = "断开";
+      connectBtn.textContent = "断开（数据线）";
       $("brightnessVal").textContent = brightness.value;
       $("volumeVal").textContent = volume.value;
       readLoop();
@@ -2137,12 +2248,22 @@
     reading = false;
     if (writer) { try { writer.releaseLock(); } catch (e) {} writer = null; }
     if (port) { try { await port.close(); } catch (e) {} port = null; }
+    /* 蓝牙也一并断开（用户点"断开"就是把两条链路都断了） */
+    if (btDevice) {
+      const d = btDevice;
+      btDevice = null; btRxChar = null; btTxChar = null; btBuf = "";
+      try { if (d.gatt && d.gatt.connected) d.gatt.disconnect(); } catch (e) {}
+    }
     setStatus("未连接", false);
-    connectBtn.textContent = "连接键盘";
+    connectBtn.textContent = "连接键盘（数据线）";
+    connectBtBtn.textContent = "蓝牙连接（不用数据线）";
   }
 
   connectBtn.addEventListener("click", function () {
     if (port) disconnect(); else connect();
+  });
+  connectBtBtn.addEventListener("click", function () {
+    if (btDevice) disconnect(); else connectBT();
   });
 })();
 </script>

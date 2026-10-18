@@ -11,6 +11,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "gesture.h"
+#include "host_ble.h"
 #include "host_link.h"
 #include "led_status.h"
 #include "math.h"
@@ -725,6 +726,23 @@ static void on_host_playback(void)
 
 #if BAYIN_ENABLE_DIAG
 /* ★ 台架自测命令（关 BAYIN_ENABLE_DIAG 即整体移除，见 diag_config.h） */
+
+/* 从串口注入按键：{"t":"pad_key","i":0~7,"v":1|0"}
+ * 注入的键会并进 board_keys_poll() 的那份快照 → 与**物理按键走完全相同的路由**
+ * （含 host_link_send_key 回报、piano_pad_event 分发、play_note 发声与点灯）。
+ * 存在的理由：固件只"往外发" key 事件，没有"收 key"的命令，
+ *   于是电脑端无法自动按板子的键去自证「游戏模式按键 → 只亮 D3、颜色随音符变」。 */
+static bool s_diag_key[8];
+
+static void on_host_pad_key(uint8_t index, bool down)
+{
+    if (index >= 8) {
+        return;
+    }
+    s_diag_key[index] = down;
+    RLOG("diag", "pad_key i=%u v=%u", (unsigned)index, down ? 1u : 0u);
+}
+
 static void on_host_rec_inject(const song_ev_t *ev, int count)
 {
     /* rec_inject：等价自弹记谱产物 → 注入回放池（RAM） */
@@ -1104,6 +1122,10 @@ void app_main(void)
     ESP_ERROR_CHECK(board_power_enable_peripherals());
     ESP_ERROR_CHECK(pattern_init());
     ESP_ERROR_CHECK(host_link_init());
+    /* ★ 蓝牙链路：与 USB 走同一套换行 JSON 协议。失败只警告，不影响 USB。 */
+    if (host_ble_init() != ESP_OK) {
+        ESP_LOGW(TAG, "BLE init failed; USB link still works");
+    }
 
     const host_link_handlers_t handlers = {
         .on_transport = on_host_transport,
@@ -1140,6 +1162,7 @@ void app_main(void)
 #if BAYIN_ENABLE_DIAG
         .on_rec_inject = on_host_rec_inject,
         .on_pb_play = on_host_pb_play,
+        .on_pad_key = on_host_pad_key,
 #endif
     };
     host_link_set_handlers(&handlers);
@@ -1222,6 +1245,14 @@ void app_main(void)
     while (true) {
         board_input_snapshot_t in = {0};
         ESP_ERROR_CHECK(board_keys_poll(&in));
+#if BAYIN_ENABLE_DIAG
+        /* 把串口注入的按键并进同一份快照 → 与真按键走完全相同的路由（台架自测） */
+        for (int di = 0; di < 8; ++di) {
+            if (s_diag_key[di]) {
+                in.s[di] = true;
+            }
+        }
+#endif
         const int64_t now = esp_timer_get_time();
 
         /* 旋钮始终可用（主目录=亮度 / 其它=音量 / 短按上下文 / 长按≥5s回主目录） */
@@ -1247,6 +1278,7 @@ void app_main(void)
         }
 
         host_link_poll_rx();
+        host_ble_poll(); /* 蓝牙收到的命令也在主循环里解析（与 USB 同一上下文） */
 #if BAYIN_ENABLE_DIAG
         drain_snd_log(); /* 台架自测：把音频层 snd 事件落成 JSON 日志 */
 #endif

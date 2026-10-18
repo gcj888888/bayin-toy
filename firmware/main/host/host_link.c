@@ -25,6 +25,9 @@ static char s_rx_buf[768];
 static size_t s_rx_len;
 static int s_stdin_flags_set;
 
+/* 额外的输出落点（BLE)：每写一行 JSON，除 USB 外再回调一次 */
+static host_line_sink_fn s_sink;
+
 static void host_write(const char *line)
 {
     if (!s_ready || line == NULL) {
@@ -32,6 +35,9 @@ static void host_write(const char *line)
     }
     printf("%s\n", line);
     fflush(stdout);
+    if (s_sink) {
+        s_sink(line);
+    }
 }
 
 esp_err_t host_link_init(void)
@@ -191,6 +197,43 @@ void host_link_set_handlers(const host_link_handlers_t *handlers)
     } else {
         memset(&s_handlers, 0, sizeof(s_handlers));
     }
+}
+
+void host_link_set_sink(host_line_sink_fn fn)
+{
+    s_sink = fn;
+}
+
+/* 按 '\n' 切行 → 交给 host_link_handle_line。USB 与 BLE 共用这一套切行逻辑。 */
+static void rx_push(const char *data, size_t n)
+{
+    for (size_t i = 0; i < n; ++i) {
+        const char c = data[i];
+        if (c == '\r') {
+            continue;
+        }
+        if (c == '\n') {
+            if (s_rx_len > 0) {
+                s_rx_buf[s_rx_len] = '\0';
+                host_link_handle_line(s_rx_buf);
+                s_rx_len = 0;
+            }
+            continue;
+        }
+        if (s_rx_len + 1 < sizeof(s_rx_buf)) {
+            s_rx_buf[s_rx_len++] = c;
+        } else {
+            s_rx_len = 0; /* 超长行：丢弃，避免污染后续解析 */
+        }
+    }
+}
+
+void host_link_feed_rx(const char *data, size_t n)
+{
+    if (data == NULL || n == 0) {
+        return;
+    }
+    rx_push(data, n);
 }
 
 void host_link_handle_line(const char *line)
@@ -458,6 +501,16 @@ void host_link_handle_line(const char *line)
         }
         return;
     }
+    if (strcmp(type, "pad_key") == 0 && s_handlers.on_pad_key) {
+        /* 注入一路按键：{"t":"pad_key","i":0~7,"v":1|0}（与物理按键同路径） */
+        long idx = -1;
+        long down = 1;
+        if (extract_int_field(line, "i", &idx) && extract_int_field(line, "v", &down) &&
+            idx >= 0 && idx < 8) {
+            s_handlers.on_pad_key((uint8_t)idx, down != 0);
+        }
+        return;
+    }
 #endif
 }
 
@@ -479,26 +532,7 @@ void host_link_poll_rx(void)
         if (n == 0) {
             break;
         }
-
-        for (ssize_t i = 0; i < n; ++i) {
-            const char c = chunk[i];
-            if (c == '\r') {
-                continue;
-            }
-            if (c == '\n') {
-                if (s_rx_len > 0) {
-                    s_rx_buf[s_rx_len] = '\0';
-                    host_link_handle_line(s_rx_buf);
-                    s_rx_len = 0;
-                }
-                continue;
-            }
-            if (s_rx_len + 1 < sizeof(s_rx_buf)) {
-                s_rx_buf[s_rx_len++] = c;
-            } else {
-                s_rx_len = 0;
-            }
-        }
+        rx_push(chunk, (size_t)n);
     }
 
     (void)s_stdin_flags_set;
